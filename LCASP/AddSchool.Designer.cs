@@ -39,8 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.zipBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.sButton = new LCASP.PulseButton();
             this.cButton = new LCASP.PulseButton();
+            this.sButton = new LCASP.PulseButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,6 +71,7 @@
             // 
             // addBox
             // 
+            this.addBox.Enabled = false;
             this.addBox.Location = new System.Drawing.Point(30, 156);
             this.addBox.Name = "addBox";
             this.addBox.Size = new System.Drawing.Size(496, 31);
@@ -87,6 +88,7 @@
             // 
             // cityBox
             // 
+            this.cityBox.Enabled = false;
             this.cityBox.Location = new System.Drawing.Point(30, 247);
             this.cityBox.Name = "cityBox";
             this.cityBox.Size = new System.Drawing.Size(243, 31);
@@ -103,6 +105,7 @@
             // 
             // stateBox
             // 
+            this.stateBox.Enabled = false;
             this.stateBox.Location = new System.Drawing.Point(302, 247);
             this.stateBox.Name = "stateBox";
             this.stateBox.Size = new System.Drawing.Size(81, 31);
@@ -119,6 +122,7 @@
             // 
             // zipBox
             // 
+            this.zipBox.Enabled = false;
             this.zipBox.Location = new System.Drawing.Point(412, 247);
             this.zipBox.Name = "zipBox";
             this.zipBox.Size = new System.Drawing.Size(114, 31);
@@ -144,6 +148,22 @@
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
+            // cButton
+            // 
+            this.cButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
+            this.cButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.cButton.FocusColor = System.Drawing.Color.SpringGreen;
+            this.cButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cButton.Location = new System.Drawing.Point(296, 301);
+            this.cButton.Name = "cButton";
+            this.cButton.PulseSpeed = 0.2F;
+            this.cButton.Size = new System.Drawing.Size(230, 101);
+            this.cButton.TabIndex = 14;
+            this.cButton.Text = "Close";
+            this.cButton.UseVisualStyleBackColor = true;
+            this.cButton.Click += new System.EventHandler(this.cButton_Click);
+            // 
             // sButton
             // 
             this.sButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
@@ -159,22 +179,6 @@
             this.sButton.Text = "Save";
             this.sButton.UseVisualStyleBackColor = true;
             this.sButton.Click += new System.EventHandler(this.sButton_Click);
-            // 
-            // cButton
-            // 
-            this.cButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
-            this.cButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
-            this.cButton.FocusColor = System.Drawing.Color.SpringGreen;
-            this.cButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cButton.Location = new System.Drawing.Point(296, 301);
-            this.cButton.Name = "cButton";
-            this.cButton.PulseSpeed = 0.2F;
-            this.cButton.Size = new System.Drawing.Size(230, 101);
-            this.cButton.TabIndex = 14;
-            this.cButton.Text = "Cancel";
-            this.cButton.UseVisualStyleBackColor = true;
-            this.cButton.Click += new System.EventHandler(this.cButton_Click);
             // 
             // AddSchool
             // 

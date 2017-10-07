@@ -29,7 +29,11 @@ namespace LCASP
         private void saveButton_Click(object sender, EventArgs e)
         {
             new DatabaseQueries().AddArcher(nameBox.Text, sexBox.Text, school_id);
-            this.Close();
+
+            nameBox.Text = "";
+            sexBox.Text = "";
+
+            nameBox.Focus();
         }
     }
 }

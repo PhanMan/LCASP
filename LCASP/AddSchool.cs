@@ -31,7 +31,9 @@ namespace LCASP
         private void sButton_Click(object sender, EventArgs e)
         {
             new DatabaseQueries().AddSchool(nameBox.Text);
-            this.Close();
+
+            nameBox.Text = "";
+            nameBox.Focus();
         }
 
         private void cButton_Click(object sender, EventArgs e)

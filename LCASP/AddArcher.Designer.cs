@@ -96,7 +96,7 @@
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
             this.cancelButton.TabIndex = 23;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "Close";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 

@@ -6,11 +6,14 @@ using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace LCASP
 {
     public class DatabaseQueries
     {
+        string connectionString = Properties.Settings.Default.SqlServerExpress;// .lcasp_dataConnectionString
+
         public void ClearDatabase()
         {
             List<KeyValuePair<int, string>> myList = GetSchoolList();
@@ -25,15 +28,15 @@ namespace LCASP
         {
             List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
 
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
            theConnection.Open();
 
             string cmd = "Select school_id, school_name from schools order by school_name asc";
 
-            MySqlCommand theCmd = new MySqlCommand(cmd, theConnection);
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 
-            MySqlDataReader theReader = theCmd.ExecuteReader();
+            SqlDataReader theReader = theCmd.ExecuteReader();
 
             if(theReader.HasRows)
             {
@@ -54,11 +57,11 @@ namespace LCASP
 
         public void DeleteSchool(int s_id)
         {
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
-            MySqlCommand theCmd = new MySqlCommand("delete from schools where school_id = " + s_id , theConnection);
+            SqlCommand theCmd = new SqlCommand("delete from schools where school_id = " + s_id , theConnection);
 
             int result = (int)theCmd.ExecuteNonQuery();
 
@@ -71,15 +74,15 @@ namespace LCASP
         {
             List<Archer> theList = new List<Archer>();
 
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
             string cmd = "Select * from archers where school_id = " + s_id + " order by archer_id asc";
 
-            MySqlCommand theCmd = new MySqlCommand(cmd, theConnection);
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 
-            MySqlDataReader theReader = theCmd.ExecuteReader();
+            SqlDataReader theReader = theCmd.ExecuteReader();
 
             if (theReader.HasRows)
             {
@@ -105,11 +108,11 @@ namespace LCASP
 
         public ArcherData SetArcherData(ArcherData scoreData)
         {
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
-            MySqlCommand theCmd = new MySqlCommand(scoreData.GetSqlInsert(), theConnection);
+            SqlCommand theCmd = new SqlCommand(scoreData.GetSqlInsert(), theConnection);
 
             int result = (int)theCmd.ExecuteNonQuery();
 
@@ -125,6 +128,7 @@ namespace LCASP
                 scoreData.archer_data_id = -1;
             }
 
+            theConnection.Close();
             return scoreData;
         }
 
@@ -134,13 +138,15 @@ namespace LCASP
                          " values " +
                          "('" + s_name + "')";
 
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
-            MySqlCommand theCmd = new MySqlCommand(sql, theConnection);
+            SqlCommand theCmd = new SqlCommand(sql, theConnection);
 
             int result = (int)theCmd.ExecuteNonQuery();
+
+            theConnection.Close();
         }
 
         public void AddArcher(string a_name, string a_sex, int s_id)
@@ -149,28 +155,30 @@ namespace LCASP
              " values " +
              "(" + s_id + ", '" + a_name + "', '" + a_sex + "')";
 
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
-            MySqlCommand theCmd = new MySqlCommand(sql, theConnection);
+            SqlCommand theCmd = new SqlCommand(sql, theConnection);
 
             int result = (int)theCmd.ExecuteNonQuery();
+
+            theConnection.Close();
         }
 
         public void GetArcherData(int a_id)
         {
             string sql = "Select * from archer_data where archer_id = " + a_id;
 
-            MySqlConnection theConnection = new MySqlConnection(Properties.Settings.Default.lcasp_dataConnectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
             string cmd = "Select * from archers where school_id = " + a_id + " order by archer_id asc";
 
-            MySqlCommand theCmd = new MySqlCommand(cmd, theConnection);
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 
-            MySqlDataReader theReader = theCmd.ExecuteReader();
+            SqlDataReader theReader = theCmd.ExecuteReader();
 
             if (theReader.HasRows)
             {
@@ -178,6 +186,38 @@ namespace LCASP
                 {
                 }
             }
+        }
+
+        public void CreateDatabase()
+        {
+            string line = "";
+
+            SqlConnection theConnection = new SqlConnection("Data Source = localhost\\sqlexpress; initial catalog=master; Integrated Security = True");
+        
+            theConnection.Open();
+
+            string sqlCheck = "select count(name) from [lcasp].sys.tables where name='schools'";
+
+            SqlCommand theCmd = new SqlCommand(sqlCheck, theConnection);
+
+            int result = (int)theCmd.ExecuteScalar();
+
+            if (result == 1)
+                return;
+
+            System.IO.StreamReader file = new System.IO.StreamReader("script.sql");
+            while ((line = file.ReadLine()) != null)
+            {
+                if (line.Length > 0)
+                {
+                    theCmd.CommandText = line;
+                    theCmd.ExecuteNonQuery();
+                }
+            }
+
+            theConnection.Close();
+            file.Close();
+
         }
     }
 }

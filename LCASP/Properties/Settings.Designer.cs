@@ -33,5 +33,25 @@ namespace LCASP.Properties {
                 return ((string)(this["lcasp_dataConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=LCASP;Integrated Security=True")]
+        public string SqlServerExpress {
+            get {
+                return ((string)(this["SqlServerExpress"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\sqlexpress;Initial Catalog=master;Integrated Security=True")]
+        public string SqlServerExpressMaster {
+            get {
+                return ((string)(this["SqlServerExpressMaster"]));
+            }
+        }
     }
 }
