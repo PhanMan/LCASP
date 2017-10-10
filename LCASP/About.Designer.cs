@@ -96,7 +96,7 @@
             this.cancelButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(179, 496);
+            this.cancelButton.Location = new System.Drawing.Point(188, 486);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
