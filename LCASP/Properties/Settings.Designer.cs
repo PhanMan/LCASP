@@ -53,5 +53,23 @@ namespace LCASP.Properties {
                 return ((string)(this["SqlServerExpressMaster"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM2")]
+        public string COM {
+            get {
+                return ((string)(this["COM"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrintDialog {
+            get {
+                return ((bool)(this["PrintDialog"]));
+            }
+        }
     }
 }

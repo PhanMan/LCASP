@@ -28,7 +28,7 @@
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -92,35 +92,50 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddArcher.cs">
+    <Compile Include="Archer\ArcherAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddArcher.Designer.cs">
-      <DependentUpon>AddArcher.cs</DependentUpon>
+    <Compile Include="Archer\ArcherAdd.Designer.cs">
+      <DependentUpon>ArcherAdd.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddSchool.cs">
+    <Compile Include="PrintScannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddSchool.Designer.cs">
-      <DependentUpon>AddSchool.cs</DependentUpon>
+    <Compile Include="PrintScannerForm.Designer.cs">
+      <DependentUpon>PrintScannerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Archer.cs" />
-    <Compile Include="ArcherData.cs" />
-    <Compile Include="ArcherEndData.cs" />
-    <Compile Include="ArcherMaintain.cs">
+    <Compile Include="Reports\PrintScanForms.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="School\SchoolAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ArcherMaintain.Designer.cs">
+    <Compile Include="School\SchoolAdd.Designer.cs">
+      <DependentUpon>SchoolAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Archer\Archer.cs" />
+    <Compile Include="Archer\ArcherData.cs" />
+    <Compile Include="Archer\ArcherEndData.cs" />
+    <Compile Include="Archer\ArcherMaintain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Archer\ArcherMaintain.Designer.cs">
       <DependentUpon>ArcherMaintain.cs</DependentUpon>
     </Compile>
-    <Compile Include="CommQueue.cs" />
-    <Compile Include="confirm.cs">
+    <Compile Include="Communication\CommQueue.cs" />
+    <Compile Include="Database\ClearDatabaseConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="confirm.Designer.cs">
-      <DependentUpon>confirm.cs</DependentUpon>
+    <Compile Include="Database\ClearDatabaseConfirm.Designer.cs">
+      <DependentUpon>ClearDatabaseConfirm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseQueries.cs" />
+    <Compile Include="Database\DatabaseQueries.cs" />
+    <Compile Include="Archer\ArcherImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Archer\ArcherImport.Designer.cs">
+      <DependentUpon>ArcherImport.cs</DependentUpon>
+    </Compile>
     <Compile Include="LCASPMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,27 +150,33 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScannerComm.cs" />
-    <Compile Include="SchoolMaintain.cs">
+    <Compile Include="Communication\ScannerComm.cs" />
+    <Compile Include="School\SchoolMaintain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SchoolMaintain.Designer.cs">
+    <Compile Include="School\SchoolMaintain.Designer.cs">
       <DependentUpon>SchoolMaintain.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddArcher.resx">
-      <DependentUpon>AddArcher.cs</DependentUpon>
+    <EmbeddedResource Include="Archer\ArcherAdd.resx">
+      <DependentUpon>ArcherAdd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddSchool.resx">
-      <DependentUpon>AddSchool.cs</DependentUpon>
+    <EmbeddedResource Include="PrintScannerForm.resx">
+      <DependentUpon>PrintScannerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ArcherMaintain.resx">
+    <EmbeddedResource Include="School\SchoolAdd.resx">
+      <DependentUpon>SchoolAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Archer\ArcherMaintain.resx">
       <DependentUpon>ArcherMaintain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="confirm.resx">
-      <DependentUpon>confirm.cs</DependentUpon>
+    <EmbeddedResource Include="Database\ClearDatabaseConfirm.resx">
+      <DependentUpon>ClearDatabaseConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Archer\ArcherImport.resx">
+      <DependentUpon>ArcherImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LCASPMain.resx">
       <DependentUpon>LCASPMain.cs</DependentUpon>
@@ -173,7 +194,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SchoolMaintain.resx">
+    <EmbeddedResource Include="School\SchoolMaintain.resx">
       <DependentUpon>SchoolMaintain.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="LCASP_TemporaryKey.pfx" />
@@ -226,6 +247,9 @@
     <None Include="Resources\lcasp.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\images.jpg" />
+    <None Include="Resources\score.bmp" />
+    <None Include="score.png" />
     <Content Include="script.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

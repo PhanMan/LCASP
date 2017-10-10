@@ -72,5 +72,17 @@ namespace LCASP
         {
             new Confirm().ShowDialog();
         }
+
+        private void meetButton_Click(object sender, EventArgs e)
+        {
+            new DatabaseQueries().StartNewMeet();
+
+            new MatchScore().ShowDialog();
+        }
+
+        private void psButton_Click(object sender, EventArgs e)
+        {
+            new PrintScannerForm().ShowDialog();
+        }
     }
 }
