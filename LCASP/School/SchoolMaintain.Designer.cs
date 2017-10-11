@@ -65,7 +65,6 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "School Information";
-
             // 
             // cButton
             // 
@@ -123,6 +122,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Name = "SchoolMaintain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SchoolMaintain";
             this.Load += new System.EventHandler(this.SchoolMaintain_Load);
             this.groupBox1.ResumeLayout(false);

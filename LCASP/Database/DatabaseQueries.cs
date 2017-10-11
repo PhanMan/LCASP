@@ -55,6 +55,22 @@ namespace LCASP
             return theList;
         }
 
+        public void DeleteArcher(int a_id)
+        {
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            SqlCommand theCmd = new SqlCommand("delete from archers where archer_id = " + a_id, theConnection);
+
+            int result = (int)theCmd.ExecuteNonQuery();
+
+            theCmd.Dispose();
+            theConnection.Close();
+            theConnection.Dispose();
+        }
+
+
         public void DeleteSchool(int s_id)
         {
             SqlConnection theConnection = new SqlConnection(connectionString);
@@ -171,7 +187,7 @@ namespace LCASP
 
             if (result == 1)
             {
-                theCmd.CommandText = "select top 1 * from archer_data where archer_id = " + scoreData.archer_id + " order by archer_data_id desc";
+                theCmd.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.archer_id + " order by archer_data_id desc";
 
                 int id = (int)theCmd.ExecuteScalar();
 
@@ -220,17 +236,17 @@ namespace LCASP
             theConnection.Close();
         }
 
-        public void GetArcherData(int a_id)
+        public ArcherData GetArcherData(int a_id)
         {
-            string sql = "Select * from archer_data where archer_id = " + a_id;
+            ArcherData retData = null;
+            string sql = "select top 1 archer_data_id, archer_raw_data from archer_data where archer_id = " + a_id + " order by archer_data_id desc";
 
+            
             SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
-            string cmd = "Select * from archers where school_id = " + a_id + " order by archer_id asc";
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+            SqlCommand theCmd = new SqlCommand(sql, theConnection);
 
             SqlDataReader theReader = theCmd.ExecuteReader();
 
@@ -238,8 +254,13 @@ namespace LCASP
             {
                 while (theReader.Read())
                 {
+                    retData = new ArcherData(theReader["archer_raw_data"].ToString());
+
+                    retData.archer_data_id = Convert.ToInt32(theReader["archer_data_id"].ToString());
+
                 }
             }
+            return retData;
         }
 
         public void CreateDatabase()

@@ -111,6 +111,7 @@
             // 
             this.dButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
             this.dButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.dButton.Enabled = false;
             this.dButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.dButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dButton.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -136,6 +137,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sCombo);
             this.Name = "ArcherMaintain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ArcherMaintain";
             this.Load += new System.EventHandler(this.ArcherMaintain_Load);
             this.ResumeLayout(false);

@@ -15,6 +15,7 @@ namespace LCASP
         ScannerComm sc = null;
         Timer aTimer = new Timer();
         public CommQueue theQueue = null;
+        List<SchoolStanding> standingList = new List<SchoolStanding>();
 
         public MatchScore()
         {
@@ -52,7 +53,7 @@ namespace LCASP
         {
             string dataLine = null;
 
-            while((dataLine = theQueue.DeQueue())!=null)
+            while ((dataLine = theQueue.DeQueue()) != null)
             {
                 ArcherData ad = new ArcherData(dataLine);
                 Archer a = new DatabaseQueries().GetArcher(ad.archer_id);
@@ -62,5 +63,36 @@ namespace LCASP
             }
         }
 
+        private void scoreMatch_Button(object sender, EventArgs e)
+        {
+            
+            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetSchoolList();
+
+            foreach(KeyValuePair<int,string> kvp in schoolList)
+            {
+                SchoolStanding theStanding = new SchoolStanding(Convert.ToInt32(kvp.Key));
+
+                List<Archer> schoolArchers = new DatabaseQueries().GetSchoolArchers(Convert.ToInt32(kvp.Key));
+
+                foreach(Archer theArcher in schoolArchers)
+                {
+                    ArcherData theData = new DatabaseQueries().GetArcherData(theArcher.ArcherID);
+
+                    theStanding.overall.Add(theData.archer_score, theArcher.ArcherID);
+
+                    if(theArcher.ArcherSex.CompareTo("M")==0)
+                    {
+                        theStanding.male.Add(theData.archer_score, theArcher.ArcherID);
+                    }
+                    else if(theArcher.ArcherSex.CompareTo("F")==0)
+                    {
+                        theStanding.female.Add(theData.archer_score, theArcher.ArcherID);
+                    }
+                }
+                standingList.Add(theStanding);
+            }
+
+
+        }
     }
 }

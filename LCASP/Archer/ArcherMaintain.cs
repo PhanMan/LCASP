@@ -51,7 +51,7 @@ namespace LCASP
 
             foreach (Archer archer in theList)
             {
-                aCombo.Items.Add(new { Text = archer.ArcherName, Value = archer.ArcherName });
+                aCombo.Items.Add(new { Text = archer.ArcherName, Value = archer.ArcherID });
             }
 
             aCombo.SelectedIndex = -1;
@@ -71,6 +71,7 @@ namespace LCASP
 
             aCombo.Enabled = true;
             aButton.Enabled = true;
+
         }
 
         private void aButton_Click(object sender, EventArgs e)
@@ -82,12 +83,19 @@ namespace LCASP
 
         private void dButton_Click(object sender, EventArgs e)
         {
-            
+            new DatabaseQueries().DeleteArcher((int)aCombo.SelectedItem.GetType().GetProperty("Value").GetValue(aCombo.SelectedItem));
+
+            reloadArcherBox();
+
+            aCombo.SelectedIndex = -1;
+            aCombo.ResetText();
+
+            dButton.Enabled = false;
         }
 
         private void aCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            dButton.Enabled = true;
         }
     }
 }

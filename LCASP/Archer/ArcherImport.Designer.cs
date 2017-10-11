@@ -101,7 +101,7 @@
             this.cButton.UseVisualStyleBackColor = true;
             this.cButton.Click += new System.EventHandler(this.cButton_Click);
             // 
-            // importForm
+            // ArcherImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,7 +111,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chooseButton);
             this.Controls.Add(this.fileNameBox);
-            this.Name = "importForm";
+            this.Name = "ArcherImport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "importForm";
             this.ResumeLayout(false);
             this.PerformLayout();

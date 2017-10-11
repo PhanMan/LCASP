@@ -88,6 +88,7 @@
             this.Controls.Add(this.yesButton);
             this.Controls.Add(this.label1);
             this.Name = "Confirm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Clear Database Confirm";
             this.ResumeLayout(false);
             this.PerformLayout();

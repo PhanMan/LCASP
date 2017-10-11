@@ -31,6 +31,7 @@
             this.cancelButton = new LCASP.PulseButton();
             this.dataList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.smButton = new LCASP.PulseButton();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -40,7 +41,7 @@
             this.cancelButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(1118, 920);
+            this.cancelButton.Location = new System.Drawing.Point(840, 920);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
@@ -69,11 +70,28 @@
             this.label1.Text = "Archer Name       Score      10\'s      9\'s       8\'s      7\'s       6\'s       5\'s" +
     "      4\'s      3\'s       2\'s       1\'s      0\'s";
             // 
+            // smButton
+            // 
+            this.smButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
+            this.smButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.smButton.FocusColor = System.Drawing.Color.SpringGreen;
+            this.smButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.smButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.smButton.Location = new System.Drawing.Point(322, 920);
+            this.smButton.Name = "smButton";
+            this.smButton.PulseSpeed = 0.2F;
+            this.smButton.Size = new System.Drawing.Size(230, 101);
+            this.smButton.TabIndex = 27;
+            this.smButton.Text = "Score Match";
+            this.smButton.UseVisualStyleBackColor = true;
+            this.smButton.Click += new System.EventHandler(this.scoreMatch_Button);
+            // 
             // MatchScore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1510, 1047);
+            this.Controls.Add(this.smButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataList);
             this.Controls.Add(this.cancelButton);
@@ -90,5 +108,6 @@
         private PulseButton cancelButton;
         private System.Windows.Forms.ListBox dataList;
         private System.Windows.Forms.Label label1;
+        private PulseButton smButton;
     }
 }

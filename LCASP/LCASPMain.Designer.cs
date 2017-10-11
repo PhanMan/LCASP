@@ -57,7 +57,7 @@
             this.aSchoolButton.TabIndex = 1;
             this.aSchoolButton.Text = "Add / Delete Schools";
             this.aSchoolButton.UseVisualStyleBackColor = false;
-            this.aSchoolButton.Click += new System.EventHandler(this.pulseButton1_Click);
+            this.aSchoolButton.Click += new System.EventHandler(this.aSchool_Button);
             // 
             // exitButton
             // 

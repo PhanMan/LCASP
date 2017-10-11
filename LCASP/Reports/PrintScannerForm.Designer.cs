@@ -95,7 +95,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sCombo);
             this.Name = "PrintScannerForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Print Scanner Form";
             this.Load += new System.EventHandler(this.PrintScannerForm_Load);
             this.ResumeLayout(false);

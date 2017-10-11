@@ -180,13 +180,14 @@
             this.sButton.UseVisualStyleBackColor = true;
             this.sButton.Click += new System.EventHandler(this.sButton_Click);
             // 
-            // AddSchool
+            // SchoolAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(631, 527);
             this.Controls.Add(this.groupBox1);
-            this.Name = "AddSchool";
+            this.Name = "SchoolAdd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddSchool";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

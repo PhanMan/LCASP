@@ -117,7 +117,7 @@
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
-            // AddArcher
+            // ArcherAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -129,7 +129,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.sexBox);
             this.Controls.Add(this.nameBox);
-            this.Name = "AddArcher";
+            this.Name = "ArcherAdd";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddArcher";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -62,8 +62,6 @@ namespace LCASP
 
                     new DatabaseQueries().SetArcherData(a1);
                 }
-
-                int x = 0;
             }
         }
 
