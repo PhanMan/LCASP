@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class ArcherMaintain
     {
@@ -30,11 +30,11 @@
         {
             this.sCombo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cButton = new LCASP.PulseButton();
+            this.cButton = new Lcasp.PulseButton();
             this.aCombo = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.aButton = new LCASP.PulseButton();
-            this.dButton = new LCASP.PulseButton();
+            this.aButton = new Lcasp.PulseButton();
+            this.dButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // sCombo
@@ -149,10 +149,10 @@
 
         private System.Windows.Forms.ComboBox sCombo;
         private System.Windows.Forms.Label label1;
-        private LCASP.PulseButton cButton;
+        private Lcasp.PulseButton cButton;
         private System.Windows.Forms.ComboBox aCombo;
         private System.Windows.Forms.Label label2;
-        private LCASP.PulseButton aButton;
-        private LCASP.PulseButton dButton;
+        private Lcasp.PulseButton aButton;
+        private Lcasp.PulseButton dButton;
     }
 }

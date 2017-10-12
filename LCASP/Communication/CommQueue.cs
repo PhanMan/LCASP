@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LCASP
+namespace Lcasp
 {
     public class CommQueue
     {
@@ -22,12 +22,6 @@ namespace LCASP
             usedData = new int[QBUF];
 
             ClearQueue();
-        }
-
-        ~CommQueue()
-        {
-            sendData = null;
-            usedData = null;
         }
 
         public void ClearQueue()

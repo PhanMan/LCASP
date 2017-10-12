@@ -8,16 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LCASP
+namespace Lcasp
 {
     public partial class MatchScore : Form
     {
         ScannerComm sc = null;
         Timer aTimer = new Timer();
         public CommQueue theQueue = null;
-        List<SchoolStanding> standingList = new List<SchoolStanding>();
-        
-        SortedList<int, int> overallList = new SortedList<int, int>(new ScoreComparer<int>());
 
         public MatchScore()
         {
@@ -86,59 +83,7 @@ namespace LCASP
 
         private void scoreMatch_Button(object sender, EventArgs e)
         {
-
-            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetSchoolList();
-
-            foreach (KeyValuePair<int, string> kvp in schoolList)
-            {
-                SchoolStanding theStanding = new SchoolStanding(Convert.ToInt32(kvp.Key));
-
-                List<Archer> schoolArchers = new DatabaseQueries().GetSchoolArchers(Convert.ToInt32(kvp.Key));
-
-                foreach (Archer theArcher in schoolArchers)
-                {
-                    ArcherData theData = new DatabaseQueries().GetArcherData(theArcher.ArcherID);
-
-                    overallList.Add(theData.archer_score, theArcher.ArcherID);
-
-                    if (theArcher.ArcherSex.CompareTo("M") == 0)
-                    {
-                        theStanding.male.Add(theData.archer_score, theArcher.ArcherID);
-                    }
-                    else if (theArcher.ArcherSex.CompareTo("F") == 0)
-                    {
-                        theStanding.female.Add(theData.archer_score, theArcher.ArcherID);
-                    }
-                }
-                standingList.Add(theStanding);
-            }
-
-            foreach (SchoolStanding ss in standingList)
-            {
-                if (ss.female.Count > 4)
-                {
-                    for (int count = 4; count < ss.female.Count; count++)
-                    {
-                        int keyVal = ss.female.Keys[count];
-                        int valVal = ss.female.Values[count];
-
-                        ss.overall.Add(keyVal, valVal);
-
-                        ss.female.RemoveAt(count);
-                    }
-
-                    for (int count = 4; count < ss.male.Count; count++)
-                    {
-                        int keyVal = ss.male.Keys[count];
-                        int valVal = ss.male.Values[count];
-
-                        ss.overall.Add(keyVal, valVal);
-
-                        ss.male.RemoveAt(count);
-                    }
-                }
-            }
-            int x = 0;
+            Scoring theScore = new Scoring();
         }
     }
 }

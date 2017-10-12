@@ -1,4 +1,4 @@
-﻿using LCASP.Properties;
+﻿using Lcasp.Properties;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LCASP
+namespace Lcasp
 {
     class PrintScanForms : System.Drawing.Printing.PrintDocument
     {

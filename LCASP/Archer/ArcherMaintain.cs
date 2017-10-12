@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LCASP
+namespace Lcasp
 {
     public partial class ArcherMaintain : Form
     {

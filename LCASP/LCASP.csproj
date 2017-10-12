@@ -100,6 +100,7 @@
     <Compile Include="Archer\ArcherAdd.Designer.cs">
       <DependentUpon>ArcherAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Reports\PrintScannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +162,7 @@
       <DependentUpon>SchoolMaintain.cs</DependentUpon>
     </Compile>
     <Compile Include="ScoreComparer.cs" />
+    <Compile Include="Scoring.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>

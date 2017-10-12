@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class MatchScore
     {
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cancelButton = new LCASP.PulseButton();
+            this.cancelButton = new Lcasp.PulseButton();
             this.dataList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.smButton = new LCASP.PulseButton();
+            this.smButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // cancelButton

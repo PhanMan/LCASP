@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LCASP.Properties {
+namespace Lcasp.Properties {
     using System;
     
     

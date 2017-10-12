@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class SchoolMaintain
     {
@@ -31,9 +31,9 @@
             this.schoolCombo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cButton = new LCASP.PulseButton();
-            this.dButton = new LCASP.PulseButton();
-            this.aButton = new LCASP.PulseButton();
+            this.cButton = new Lcasp.PulseButton();
+            this.dButton = new Lcasp.PulseButton();
+            this.aButton = new Lcasp.PulseButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,8 +136,8 @@
         private System.Windows.Forms.ComboBox schoolCombo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private LCASP.PulseButton cButton;
-        private LCASP.PulseButton dButton;
-        private LCASP.PulseButton aButton;
+        private Lcasp.PulseButton cButton;
+        private Lcasp.PulseButton dButton;
+        private Lcasp.PulseButton aButton;
     }
 }

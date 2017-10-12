@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace LCASP
+namespace Lcasp
 {
     partial class PulseButton : Button
     {

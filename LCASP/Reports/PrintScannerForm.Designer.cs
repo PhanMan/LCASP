@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class PrintScannerForm
     {
@@ -30,8 +30,8 @@
         {
             this.sCombo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cButton = new LCASP.PulseButton();
-            this.printButton = new LCASP.PulseButton();
+            this.cButton = new Lcasp.PulseButton();
+            this.printButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // sCombo

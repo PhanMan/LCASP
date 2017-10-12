@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LCASP
+namespace Lcasp
 {
     public class ScannerComm
     {
@@ -40,12 +40,6 @@ namespace LCASP
         public void Close()
         {
             _serialPort.Close();
-        }
-
-        ~ScannerComm()
-        {
-            _serialPort.Dispose();
-            _serialPort = null;
         }
 
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -97,7 +91,7 @@ namespace LCASP
 
         public void InitializeScanner()
         {
-            int checkCounter = 200;
+            int checkCounter = 100;
 
             Write("V" + "\r\n");
             //System.Threading.Thread.Sleep(1000);
@@ -120,7 +114,7 @@ namespace LCASP
             Write("N8M8M0I2K5K4" + "\r\n");
             //System.Threading.Thread.Sleep(1000);
 
-            while (theQueue.GetQueueBytes() < 17 && (checkCounter--)>0)
+            while (theQueue.GetQueueBytes() < 17 && (checkCounter--) > 0)
                 System.Threading.Thread.Sleep(25);
 
             theQueue.ClearQueue();

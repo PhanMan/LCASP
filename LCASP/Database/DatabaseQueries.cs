@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.IO;
 
-namespace LCASP
+namespace Lcasp
 {
     public class DatabaseQueries
     {
@@ -49,10 +49,7 @@ namespace LCASP
             }
 
             theReader.Close();
-            theReader.Dispose();
-            theCmd.Dispose();
             theConnection.Close();
-            theConnection.Dispose();
 
             return theList;
         }
@@ -67,9 +64,7 @@ namespace LCASP
 
             int result = (int)theCmd.ExecuteNonQuery();
 
-            theCmd.Dispose();
             theConnection.Close();
-            theConnection.Dispose();
         }
 
 
@@ -83,9 +78,7 @@ namespace LCASP
 
             int result = (int)theCmd.ExecuteNonQuery();
 
-            theCmd.Dispose();
             theConnection.Close();
-            theConnection.Dispose();
         }
 
         public List<Archer> GetSchoolArchers(int s_id)
@@ -116,10 +109,7 @@ namespace LCASP
             }
 
             theReader.Close();
-            theReader.Dispose();
-            theCmd.Dispose();
             theConnection.Close();
-            theConnection.Dispose();
 
             return theList;
         }
@@ -153,10 +143,7 @@ namespace LCASP
             }
 
             theReader.Close();
-            theReader.Dispose();
-            theCmd.Dispose();
             theConnection.Close();
-            theConnection.Dispose();
 
             return retArcher;
         }
@@ -173,7 +160,6 @@ namespace LCASP
             int result = (int)theCmd.ExecuteNonQuery();
 
             theConnection.Close();
-            theCmd = null;
         }
 
 

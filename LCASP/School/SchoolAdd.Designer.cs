@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class SchoolAdd
     {
@@ -39,8 +39,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.zipBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cButton = new LCASP.PulseButton();
-            this.sButton = new LCASP.PulseButton();
+            this.cButton = new Lcasp.PulseButton();
+            this.sButton = new Lcasp.PulseButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -208,7 +208,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox zipBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private LCASP.PulseButton cButton;
-        private LCASP.PulseButton sButton;
+        private Lcasp.PulseButton cButton;
+        private Lcasp.PulseButton sButton;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class Confirm
     {
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.yesButton = new LCASP.PulseButton();
-            this.noButton = new LCASP.PulseButton();
+            this.yesButton = new Lcasp.PulseButton();
+            this.noButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // label1

@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class About
     {
@@ -33,7 +33,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cancelButton = new LCASP.PulseButton();
+            this.cancelButton = new Lcasp.PulseButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -51,7 +51,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::LCASP.Properties.Resources.mc;
+            this.pictureBox1.BackgroundImage = global::Lcasp.Properties.Resources.mc;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(29, 129);
             this.pictureBox1.Name = "pictureBox1";
@@ -61,7 +61,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackgroundImage = global::LCASP.Properties.Resources.lcasp;
+            this.pictureBox2.BackgroundImage = global::Lcasp.Properties.Resources.lcasp;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(46, 208);
             this.pictureBox2.Name = "pictureBox2";
@@ -71,7 +71,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.BackgroundImage = global::LCASP.Properties.Resources.download;
+            this.pictureBox3.BackgroundImage = global::Lcasp.Properties.Resources.download;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.Location = new System.Drawing.Point(209, 29);
             this.pictureBox3.Name = "pictureBox3";

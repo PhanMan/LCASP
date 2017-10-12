@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class ArcherImport
     {
@@ -32,8 +32,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.chooseButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.iButton = new LCASP.PulseButton();
-            this.cButton = new LCASP.PulseButton();
+            this.iButton = new Lcasp.PulseButton();
+            this.cButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // fileNameBox
@@ -50,7 +50,7 @@
             // 
             // chooseButton
             // 
-            this.chooseButton.BackgroundImage = global::LCASP.Properties.Resources.images;
+            this.chooseButton.BackgroundImage = global::Lcasp.Properties.Resources.images;
             this.chooseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.chooseButton.Location = new System.Drawing.Point(866, 66);
             this.chooseButton.Name = "chooseButton";

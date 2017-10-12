@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class ArcherAdd
     {
@@ -32,9 +32,9 @@
             this.sexBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.saveButton = new LCASP.PulseButton();
-            this.cancelButton = new LCASP.PulseButton();
-            this.importButton = new LCASP.PulseButton();
+            this.saveButton = new Lcasp.PulseButton();
+            this.cancelButton = new Lcasp.PulseButton();
+            this.importButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // nameBox

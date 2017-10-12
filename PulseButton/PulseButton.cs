@@ -5,12 +5,14 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
-namespace LCASP
+[assembly: CLSCompliant(true)]
+namespace Lcasp
 {
     /// <summary>
     /// PulseButton control
     /// <remarks>By Niel M. Thomas 2009</remarks>
     /// </summary>
+
     public partial class PulseButton : Button
     {
         #region -- Members --
@@ -107,8 +109,8 @@ namespace LCASP
         [Category("Appearance")]
         public new Color ForeColor
         {
-            get { return base.ForeColor; } 
-            set{ base.ForeColor = value; }
+            get { return base.ForeColor; }
+            set { base.ForeColor = value; }
         }
 
         /// <summary>
@@ -237,7 +239,7 @@ namespace LCASP
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            if (e.Button != MouseButtons.Left) return;
+            if (e != null && e.Button != MouseButtons.Left) return;
             pressed = false;
         }
 
@@ -248,7 +250,7 @@ namespace LCASP
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            if (e.Button != MouseButtons.Left) return;
+            if (e != null && e.Button != MouseButtons.Left) return;
             pressed = true;
         }
 
@@ -258,6 +260,9 @@ namespace LCASP
         /// <param name="mevent">A <see cref="T:System.Windows.Forms.MouseEventArgs"/> that contains the event data.</param>
         protected override void OnMouseMove(MouseEventArgs mevent)
         {
+            if (mevent == null)
+                return;
+
             base.OnMouseMove(mevent);
             mouseOver = centerRect.Contains(mevent.Location);
         }
@@ -302,6 +307,8 @@ namespace LCASP
         /// <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs"/> that contains the event data.</param>
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (e == null)
+                return;
             //base.OnPaint(e);
             base.OnPaintBackground(e);
             // Set Graphics interpolation and smoothing
@@ -324,7 +331,7 @@ namespace LCASP
 
             // Draw highlight
             if (mouseOver)
-                DrawHighLight(g);
+                DrawHighlight(g);
             // Reflex
             if (!pressed) DrawReflex(g);
             // Text
@@ -338,31 +345,31 @@ namespace LCASP
         /// <summary>
         /// Draws the border.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        protected virtual void DrawBorder(Graphics g)
+        /// <param name="theGraphics">The graphics object</param>
+        protected virtual void DrawBorder(Graphics theGraphics)
         {
             using (var pen = new Pen(!Focused ? Color.FromArgb(60, Color.Black) : FocusColor, 2))
-                PaintShape(g, pen, centerRect);
+                PaintShape(theGraphics, pen, centerRect);
         }
 
         /// <summary>
         /// Draws the center.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        protected virtual void DrawCenter(Graphics g)
+        /// <param name="theGraphics">The graphics object</param>
+        protected virtual void DrawCenter(Graphics theGraphics)
         {
             if (Enabled)
             {
                 using (var lgb = new LinearGradientBrush(centerRect, ButtonColorTop, ButtonColorBottom,
                                                       LinearGradientMode.Vertical))
                 {
-                    PaintShape(g, lgb, centerRect);
+                    PaintShape(theGraphics, lgb, centerRect);
                 }
             }
             else
             {
                 using (var lgb = new SolidBrush(Color.Gray))
-                    PaintShape(g, lgb, centerRect);
+                    PaintShape(theGraphics, lgb, centerRect);
 
             }
         }
@@ -370,15 +377,15 @@ namespace LCASP
         /// <summary>
         /// Draws the pulses.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        protected virtual void DrawPulses(Graphics g)
+        /// <param name="theGraphics">The graphics object</param>
+        protected virtual void DrawPulses(Graphics theGraphics)
         {
             if (!Enabled) return;
             for (var i = 0; i < pulses.Length; i++)
             {
                 using (var sb = new SolidBrush(pulseColors[i]))
                 {
-                    PaintShape(g, sb, pulses[i]);
+                    PaintShape(theGraphics, sb, pulses[i]);
                 }
             }
         }
@@ -386,25 +393,32 @@ namespace LCASP
         /// <summary>
         /// Draws the text.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        protected virtual void DrawText(Graphics g)
+        /// <param name="theGraphics">The graphics object</param>
+        protected virtual void DrawText(Graphics theGraphics)
         {
-            var format = new StringFormat(StringFormat.GenericDefault) {Trimming = StringTrimming.EllipsisCharacter};
+            if (theGraphics == null)
+                return;
+
+            var format = new StringFormat(StringFormat.GenericDefault) { Trimming = StringTrimming.EllipsisCharacter };
             format.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces;
             format.FormatFlags ^= StringFormatFlags.LineLimit;
             format.HotkeyPrefix = HotkeyPrefix.Show;
-            SizeF size = g.MeasureString(Text, Font, new SizeF(centerRect.Width, centerRect.Height), format);
+            SizeF size = theGraphics.MeasureString(Text, Font, new SizeF(centerRect.Width, centerRect.Height), format);
             RectangleF textRect = GetAlignPlacement(TextAlign, centerRect, size);
             using (var sb = new SolidBrush(ForeColor))
-                g.DrawString(Text, Font, sb, textRect, format);
+                theGraphics.DrawString(Text, Font, sb, textRect, format);
+            format.Dispose();
         }
 
         /// <summary>
         /// Draws the reflex.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        protected virtual void DrawReflex(Graphics g)
+        /// <param name="theGraphics">The graphics object</param>
+        protected virtual void DrawReflex(Graphics theGraphics)
         {
+            if (theGraphics == null)
+                return;
+
             using (var path = new GraphicsPath())
             {
                 RectangleF rect = centerRect;
@@ -427,7 +441,7 @@ namespace LCASP
                 using (var lgb = new LinearGradientBrush(area, Color.FromArgb(30, Color.White),
                                                       Color.FromArgb(60, Color.White), -90))
                 {
-                    g.FillPath(lgb, path);
+                    theGraphics.FillPath(lgb, path);
                 }
             }
         }
@@ -435,48 +449,57 @@ namespace LCASP
         /// <summary>
         /// Draws the high light.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        protected virtual void DrawHighLight(Graphics g)
+        /// <param name="theGraphics">The graphics object</param>
+        protected virtual void DrawHighlight(Graphics theGraphics)
         {
+            if (theGraphics == null)
+                return;
+
             RectangleF highlightRect = centerRect;
             highlightRect.Inflate(-2, -2);
             using (var pen = new Pen(Color.FromArgb(60, Color.White), 4))
             {
                 if (ShapeType == Shape.Round)
-                    g.DrawEllipse(pen, highlightRect);
+                    theGraphics.DrawEllipse(pen, highlightRect);
                 else
-                    g.DrawPath(pen, GetRoundRect(g, highlightRect, CornerRadius));
+                    theGraphics.DrawPath(pen, GetRoundRect(theGraphics, highlightRect, CornerRadius));
             }
         }
 
         /// <summary>
         /// Paints the shape.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        /// <param name="p">The pen</param>
+        /// <param name="theGraphics">The graphics object</param>
+        /// <param name="thePen">The pen</param>
         /// <param name="rectangle">The rectangle.</param>
-        protected virtual void PaintShape(Graphics g, Pen p, RectangleF rectangle)
+        protected virtual void PaintShape(Graphics theGraphics, Pen thePen, RectangleF rectangle)
         {
+            if (theGraphics == null)
+                return;
+
             if (ShapeType == Shape.Round)
-                g.DrawEllipse(p, rectangle);
+                theGraphics.DrawEllipse(thePen, rectangle);
             else
-                using (var path = GetRoundRect(g, rectangle, CornerRadius))
-                    g.DrawPath(p, path);
+                using (var path = GetRoundRect(theGraphics, rectangle, CornerRadius))
+                    theGraphics.DrawPath(thePen, path);
         }
 
         /// <summary>
         /// Paints the shape.
         /// </summary>
-        /// <param name="g">The graphics object</param>
-        /// <param name="b">The brush</param>
+        /// <param name="theGraphics">The graphics object</param>
+        /// <param name="theBrush">The brush</param>
         /// <param name="rectangle">The rectangle.</param>
-        protected virtual void PaintShape(Graphics g, Brush b, RectangleF rectangle)
+        protected virtual void PaintShape(Graphics theGraphics, Brush theBrush, RectangleF rectangle)
         {
+            if (theGraphics == null)
+                return;
+
             if (ShapeType == Shape.Round)
-                g.FillEllipse(b, rectangle);
+                theGraphics.FillEllipse(theBrush, rectangle);
             else
-                using (var path = GetRoundRect(g, rectangle, CornerRadius))
-                    g.FillPath(b, path);
+                using (var path = GetRoundRect(theGraphics, rectangle, CornerRadius))
+                    theGraphics.FillPath(theBrush, path);
         }
 
         #endregion
@@ -486,11 +509,11 @@ namespace LCASP
         /// <summary>
         /// Gets a path of a rectangle with round corners.
         /// </summary>
-        /// <param name="g">The graphics object</param>
+        /// <param name="theGraphics">The graphics object</param>
         /// <param name="rect">The rectangle</param>
         /// <param name="radius">The corner radius</param>
         /// <returns></returns>
-        public static GraphicsPath GetRoundRect(Graphics g, RectangleF rect, float radius)
+        public static GraphicsPath GetRoundRect(Graphics theGraphics, RectangleF rect, float radius)
         {
             var gp = new GraphicsPath();
             var diameter = radius * 2;
@@ -566,7 +589,7 @@ namespace LCASP
             }
         }
 
-       
+
         #endregion
 
     }

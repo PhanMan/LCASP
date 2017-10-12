@@ -1,4 +1,4 @@
-﻿namespace LCASP
+﻿namespace Lcasp
 {
     partial class LCASPMain
     {
@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.aSchoolButton = new LCASP.PulseButton();
-            this.exitButton = new LCASP.PulseButton();
-            this.aArcherButton = new LCASP.PulseButton();
+            this.aSchoolButton = new Lcasp.PulseButton();
+            this.exitButton = new Lcasp.PulseButton();
+            this.aArcherButton = new Lcasp.PulseButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.meetButton = new LCASP.PulseButton();
-            this.psButton = new LCASP.PulseButton();
+            this.meetButton = new Lcasp.PulseButton();
+            this.psButton = new Lcasp.PulseButton();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -196,9 +196,9 @@
         }
 
         #endregion
-        private LCASP.PulseButton aSchoolButton;
-        private LCASP.PulseButton exitButton;
-        private LCASP.PulseButton aArcherButton;
+        private Lcasp.PulseButton aSchoolButton;
+        private Lcasp.PulseButton exitButton;
+        private Lcasp.PulseButton aArcherButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
