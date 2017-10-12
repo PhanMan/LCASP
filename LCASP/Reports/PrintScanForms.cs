@@ -16,8 +16,8 @@ namespace LCASP
         //private int[] yDim = { 760, 780, 800, 820, 840 }; //840, 820, 800, 780, 760 };
 
         // Laserjet
-        private int[] xDim = { 74, 104, 134, 164, 194, 224, 254, 284, 314, 344 }; //{ 355, 325, 295, 265, 235, 205, 175, 145, 115, 85 };
-        private int[] yDim = { 757, 777, 797, 817, 837 }; //840, 820, 800, 780, 760 };
+        private int[] xDim = { 80, 110, 140, 170, 200, 230, 260, 290, 320, 350 }; //{ 355, 325, 295, 265, 235, 205, 175, 145, 115, 85 };
+        private int[] yDim = { 755, 775, 795, 815, 835 }; //840, 820, 800, 780, 760 };
 
         private List<Archer> printArchers = null;
         private IEnumerator printItems = null;
@@ -83,8 +83,8 @@ namespace LCASP
                 }
                 Pen thePen = new Pen(myBrush);
 
-                myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, new Point(65, 910));
-                myGraphics.DrawString(theItem.ArcherID.ToString("00000"), PrinterFont, myBrush, new Point(360, 910));
+                myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, new Point(65, 905));
+                myGraphics.DrawString(theItem.ArcherID.ToString("00000"), PrinterFont, myBrush, new Point(360, 902));
 
                 myBrush.Dispose();
                 myGraphics.Dispose();

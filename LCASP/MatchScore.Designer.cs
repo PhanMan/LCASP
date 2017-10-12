@@ -41,7 +41,7 @@
             this.cancelButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(840, 920);
+            this.cancelButton.Location = new System.Drawing.Point(1228, 920);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
@@ -56,7 +56,7 @@
             this.dataList.ItemHeight = 25;
             this.dataList.Location = new System.Drawing.Point(39, 75);
             this.dataList.Name = "dataList";
-            this.dataList.Size = new System.Drawing.Size(1428, 829);
+            this.dataList.Size = new System.Drawing.Size(1821, 829);
             this.dataList.TabIndex = 25;
             this.dataList.SelectedIndexChanged += new System.EventHandler(this.dataList_SelectedIndexChanged);
             // 
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1510, 1047);
+            this.ClientSize = new System.Drawing.Size(1899, 1047);
             this.Controls.Add(this.smButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataList);

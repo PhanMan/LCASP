@@ -63,6 +63,7 @@ namespace LCASP
             PrintDialog printDlg = null;
 
             PrintScanForms scp = new PrintScanForms(theArchers);
+            scp.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom", 500, 1100);
 
             if (Properties.Settings.Default.PrintDialog)
             {

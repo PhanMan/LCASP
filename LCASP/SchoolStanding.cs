@@ -17,9 +17,10 @@ namespace LCASP
         {
             school_id = s_id;
 
-            overall = new SortedList<int, int>();
-            male = new SortedList<int, int>();
-            female = new SortedList<int, int>();
+            overall = new SortedList<int, int>(new ScoreComparer<int>());
+            male = new SortedList<int, int>(new ScoreComparer<int>());
+            female = new SortedList<int, int>(new ScoreComparer<int>());
+
         }
     }
 }

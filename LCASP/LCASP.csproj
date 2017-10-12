@@ -12,9 +12,9 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>\\ORION\C\Repositories\LCASPUpdate\</PublishUrl>
+    <PublishUrl>Y:\Repositories\LCASPUpdate\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Unc</InstallFrom>
+    <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -27,8 +27,7 @@
     <PublisherName>Mississippi Computer Craft</PublisherName>
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>22</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -67,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>lcasp.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -158,6 +160,7 @@
     <Compile Include="School\SchoolMaintain.Designer.cs">
       <DependentUpon>SchoolMaintain.cs</DependentUpon>
     </Compile>
+    <Compile Include="ScoreComparer.cs" />
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +254,7 @@
     <None Include="Resources\images.jpg" />
     <None Include="Resources\score.bmp" />
     <None Include="score.png" />
+    <Content Include="lcasp.ico" />
     <Content Include="script.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

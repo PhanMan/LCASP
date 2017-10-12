@@ -37,7 +37,7 @@ namespace LCASP
 
             // ArcherData s22 = new DatabaseQueries().SetArcherData(a2);
 
-            //new DatabaseQueries().CreateDatabase();
+            new DatabaseQueries().CreateDatabase();
         }
 
         private void aSchoolButton_Click(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace LCASP
 
         private void meetButton_Click(object sender, EventArgs e)
         {
-            new DatabaseQueries().StartNewMeet();
+            //new DatabaseQueries().StartNewMeet();
 
             new MatchScore().ShowDialog();
         }

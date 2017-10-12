@@ -50,6 +50,7 @@
             this.sexBox.Name = "sexBox";
             this.sexBox.Size = new System.Drawing.Size(170, 31);
             this.sexBox.TabIndex = 1;
+            this.sexBox.TextChanged += new System.EventHandler(this.sexBox_TextChanged);
             // 
             // label1
             // 

@@ -28,7 +28,17 @@ namespace LCASP
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            new DatabaseQueries().AddArcher(nameBox.Text, sexBox.Text, school_id);
+            if (sexBox.Text.ToUpper().CompareTo("M") == 0 || sexBox.Text.ToUpper().CompareTo("F") == 0)
+            {
+                new DatabaseQueries().AddArcher(nameBox.Text, sexBox.Text.ToUpper(), school_id);
+            }
+            else
+            {
+                MessageBox.Show("Archer Sex must be M or F!");
+                sexBox.Text = "";
+                sexBox.Focus();
+                return;
+            }
 
             nameBox.Text = "";
             sexBox.Text = "";
@@ -40,6 +50,11 @@ namespace LCASP
         {
             new ArcherImport(school_id).ShowDialog();
             this.Close();
+        }
+
+        private void sexBox_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }

@@ -11,7 +11,7 @@ namespace LCASP
         public Archer()
         { }
 
-        public Archer(int s_id, int a_id, string a_name, char a_sex)
+        public Archer(int s_id, int a_id, string a_name, string a_sex)
         {
             SchoolID = s_id;
             ArcherID = a_id;
@@ -22,6 +22,6 @@ namespace LCASP
         public int SchoolID { get; set; }
         public int ArcherID { get; set; }
         public string ArcherName { get; set; }
-        public char ArcherSex { get; set; }
+        public string ArcherSex { get; set; }
     }
 }

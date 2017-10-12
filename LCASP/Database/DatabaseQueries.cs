@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
+using System.IO;
 
 namespace LCASP
 {
@@ -107,7 +109,7 @@ namespace LCASP
                     Archer theArcher = new Archer(s_id,
                                                   Convert.ToInt32(theReader["archer_id"].ToString()),
                                                   theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString()[0]);
+                                                  theReader["archer_sex"].ToString());
 
                     theList.Add(theArcher);
                 }
@@ -144,7 +146,7 @@ namespace LCASP
                     Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
                                                   a_id,
                                                   theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString()[0]);
+                                                  theReader["archer_sex"].ToString());
 
                     retArcher = theArcher;
                 }
@@ -241,7 +243,7 @@ namespace LCASP
             ArcherData retData = null;
             string sql = "select top 1 archer_data_id, archer_raw_data from archer_data where archer_id = " + a_id + " order by archer_data_id desc";
 
-            
+
             SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
@@ -265,34 +267,39 @@ namespace LCASP
 
         public void CreateDatabase()
         {
-            string line = "";
-
-            SqlConnection theConnection = new SqlConnection("Data Source = localhost\\sqlexpress; initial catalog=master; Integrated Security = True");
-
-            theConnection.Open();
-
-            string sqlCheck = "select count(name) from [lcasp].sys.tables where name='schools'";
-
-            SqlCommand theCmd = new SqlCommand(sqlCheck, theConnection);
-
-            int result = (int)theCmd.ExecuteScalar();
-
-            if (result == 1)
-                return;
-
-            System.IO.StreamReader file = new System.IO.StreamReader("script.sql");
-            while ((line = file.ReadLine()) != null)
+            try
             {
-                if (line.Length > 0)
+                SqlConnection theConnection = new SqlConnection("Data Source = localhost\\sqlexpress; initial catalog=master; Integrated Security = True");
+                theConnection.Open();
+                SqlCommand checkCmd = new SqlCommand("select count(*) from sysdatabases where name = 'lcasp'",theConnection);
+                int num = (int)checkCmd.ExecuteScalar();
+
+                if (num == 0)
                 {
-                    theCmd.CommandText = line;
-                    theCmd.ExecuteNonQuery();
+                    string script = File.ReadAllText(@"script.sql");
+
+                    // split script on GO command
+                    IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
+                                             System.Text.RegularExpressions.RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+
+                    foreach (string commandString in commandStrings)
+                    {
+                        if (commandString.Trim() != "")
+                        {
+                            using (var command = new SqlCommand(commandString, theConnection))
+                            {
+                                command.ExecuteNonQuery();
+                            }
+                        }
+                    }
                 }
+                theConnection.Close();
             }
+            catch (Exception)
+            {
 
-            theConnection.Close();
-            file.Close();
-
+            }
         }
     }
 }
