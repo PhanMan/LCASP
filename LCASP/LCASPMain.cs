@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,6 +40,8 @@ namespace Lcasp
             // ArcherData s22 = new DatabaseQueries().SetArcherData(a2);
 
             new DatabaseQueries().CreateDatabase();
+
+            this.Text = "Lamar Christian Archery " + CurrentVersion;
         }
 
         private void aSchoolButton_Click(object sender, EventArgs e)
@@ -85,6 +89,15 @@ namespace Lcasp
         private void psButton_Click(object sender, EventArgs e)
         {
             new PrintScannerForm().ShowDialog();
+        }
+        public string CurrentVersion
+        {
+            get
+            {
+                return ApplicationDeployment.IsNetworkDeployed
+                       ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
+                       : Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
         }
     }
 }
