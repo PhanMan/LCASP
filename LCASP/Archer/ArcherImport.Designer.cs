@@ -1,4 +1,6 @@
-﻿namespace Lcasp
+﻿using LCASP.Properties;
+
+namespace Lcasp
 {
     partial class ArcherImport
     {
@@ -50,7 +52,7 @@
             // 
             // chooseButton
             // 
-            this.chooseButton.BackgroundImage = global::Lcasp.Properties.Resources.images;
+            this.chooseButton.BackgroundImage = Resources.images;
             this.chooseButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.chooseButton.Location = new System.Drawing.Point(866, 66);
             this.chooseButton.Name = "chooseButton";

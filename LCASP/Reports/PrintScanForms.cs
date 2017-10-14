@@ -1,4 +1,5 @@
 ﻿using Lcasp.Properties;
+using LCASP.Properties;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace Lcasp
                 Graphics myGraphics = e.Graphics;
 
                 // Draw background
-                //myGraphics.DrawImage(Resources.score1, 0.0f,0.0f);
+                myGraphics.DrawImage(Resources._003, 0f, 0f, 500f, 1100f);
 
                 SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
 

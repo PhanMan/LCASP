@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using MySql.Data.MySqlClient;
-
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -242,10 +236,10 @@ namespace Lcasp
             {
                 while (theReader.Read())
                 {
-                    retData = new ArcherData(theReader["archer_raw_data"].ToString());
-
-                    retData.archer_data_id = Convert.ToInt32(theReader["archer_data_id"].ToString());
-
+                    retData = new ArcherData(theReader["archer_raw_data"].ToString())
+                    {
+                        archer_data_id = Convert.ToInt32(theReader["archer_data_id"].ToString())
+                    };
                 }
             }
             return retData;
@@ -257,7 +251,7 @@ namespace Lcasp
             {
                 SqlConnection theConnection = new SqlConnection("Data Source = localhost\\sqlexpress; initial catalog=master; Integrated Security = True");
                 theConnection.Open();
-                SqlCommand checkCmd = new SqlCommand("select count(*) from sysdatabases where name = 'lcasp'",theConnection);
+                SqlCommand checkCmd = new SqlCommand("select count(*) from sysdatabases where name = 'lcasp'", theConnection);
                 int num = (int)checkCmd.ExecuteScalar();
 
                 if (num == 0)
