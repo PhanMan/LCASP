@@ -1,4 +1,4 @@
-﻿using LCASP.Properties;
+﻿using Lcasp.Properties;
 
 namespace Lcasp
 {

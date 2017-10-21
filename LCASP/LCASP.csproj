@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AB7F9D59-203B-420B-ABD0-165281E67A7D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>LCASP</RootNamespace>
+    <RootNamespace>Lcasp</RootNamespace>
     <AssemblyName>LCASP</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -85,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="ScoreReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="System\About.cs">
       <SubType>Form</SubType>
     </Compile>

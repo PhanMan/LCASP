@@ -43,7 +43,7 @@
             this.sCombo.Name = "sCombo";
             this.sCombo.Size = new System.Drawing.Size(708, 33);
             this.sCombo.TabIndex = 0;
-            this.sCombo.SelectedIndexChanged += new System.EventHandler(this.sCombo_SelectedIndexChanged);
+            this.sCombo.SelectedIndexChanged += new System.EventHandler(this.SCombo_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -68,7 +68,7 @@
             this.cButton.TabIndex = 18;
             this.cButton.Text = "Close";
             this.cButton.UseVisualStyleBackColor = true;
-            this.cButton.Click += new System.EventHandler(this.cButton_Click);
+            this.cButton.Click += new System.EventHandler(this.CButton_Click);
             // 
             // printButton
             // 
@@ -85,7 +85,7 @@
             this.printButton.TabIndex = 19;
             this.printButton.Text = "Print";
             this.printButton.UseVisualStyleBackColor = true;
-            this.printButton.Click += new System.EventHandler(this.printButton_Click);
+            this.printButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
             // scanFormBox
             // 
@@ -94,7 +94,7 @@
             this.scanFormBox.Name = "scanFormBox";
             this.scanFormBox.Size = new System.Drawing.Size(708, 33);
             this.scanFormBox.TabIndex = 20;
-            this.scanFormBox.SelectedIndexChanged += new System.EventHandler(this.scanFormBox_SelectedIndexChanged);
+            this.scanFormBox.SelectedIndexChanged += new System.EventHandler(this.ScanFormBox_SelectedIndexChanged);
             // 
             // label2
             // 

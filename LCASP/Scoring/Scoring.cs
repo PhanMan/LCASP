@@ -8,8 +8,8 @@ namespace Lcasp
 {
     public class Scoring
     {
-        List<SchoolStanding> StandingList { get; set; }
-        SortedList<int, int> OverallList { get; set; }
+        public List<SchoolStanding> StandingList { get; set; }
+        public SortedList<int, int> OverallList { get; set; }
 
         public Scoring()
         {
@@ -21,14 +21,14 @@ namespace Lcasp
 
         private void ScoreMatch()
         {
-            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetSchoolList();
+            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetParticipatingSchoolList();
 
             foreach (KeyValuePair<int, string> kvp in schoolList)
             {
 
                 SchoolStanding theStanding = new SchoolStanding(Convert.ToInt32(kvp.Key), kvp.Value);
 
-                List<Archer> schoolArchers = new DatabaseQueries().GetSchoolArchers(Convert.ToInt32(kvp.Key), "XXXX");
+                List<Archer> schoolArchers = new DatabaseQueries().GetParticipatingSchoolArchers(Convert.ToInt32(kvp.Key), "XXXX");
 
                 foreach (Archer theArcher in schoolArchers)
                 {
@@ -70,7 +70,7 @@ namespace Lcasp
                 }
                 else if (ss.Female.Count < 4)
                 {
-                    for (int count = ss.Female.Count; count <= 4; count++)
+                    for (int count = ss.Female.Count; count < 4; count++)
                         ss.Female.Add(0, 0);
                 }
 
@@ -90,8 +90,23 @@ namespace Lcasp
                 }
                 else if (ss.Male.Count < 4)
                 {
-                    for (int count = ss.Male.Count; count <= 4; count++)
+                    for (int count = ss.Male.Count; count < 4; count++)
                         ss.Male.Add(0, 0);
+                }
+
+                if (ss.Overall.Count > 4)
+                {
+                    int mCount = ss.Overall.Count - 1;
+
+                    for (int count = mCount; count >= 4; count--)
+                    {
+                        ss.Overall.RemoveAt(count);
+                    }
+                }
+                else if (ss.Overall.Count < 4)
+                {
+                    for (int count = ss.Overall.Count; count < 4; count++)
+                        ss.Overall.Add(0, 0);
                 }
             }
         }

@@ -31,10 +31,10 @@ namespace Lcasp
 
         private void PrintScannerForm_Load(object sender, EventArgs e)
         {
-            reloadSchoolBox();
+            ReloadSchoolBox();
         }
 
-        private void reloadSchoolBox()
+        private void ReloadSchoolBox()
         {
             sCombo.Items.Clear();
 
@@ -50,17 +50,17 @@ namespace Lcasp
         }
 
 
-        private void sCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void SCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             printButton.Enabled = true;
         }
 
-        private void cButton_Click(object sender, EventArgs e)
+        private void CButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void printButton_Click(object sender, EventArgs e)
+        private void PrintButton_Click(object sender, EventArgs e)
         {
             if (scanFormBox.SelectedIndex != -1 && sCombo.SelectedIndex != -1)
             {
@@ -85,10 +85,12 @@ namespace Lcasp
             if (Properties.Settings.Default.PrintDialog)
             {
                 printDlg = new PrintDialog();
-                PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
+                PrintPreviewDialog printPrvDlg = new PrintPreviewDialog()
+                {
 
-                // preview the assigned document or you can create a different previewButton for it
-                printPrvDlg.Document = scp;
+                    // preview the assigned document or you can create a different previewButton for it
+                    Document = scp
+                };
                 printPrvDlg.ShowDialog(); // this shows the preview and then show the Printer Dlg below
             }
 
@@ -101,7 +103,7 @@ namespace Lcasp
             scp.Print();
         }
 
-        private void scanFormBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ScanFormBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

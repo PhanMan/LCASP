@@ -48,7 +48,7 @@
             this.cancelButton.TabIndex = 24;
             this.cancelButton.Text = "Close";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // dataList
             // 
@@ -58,7 +58,7 @@
             this.dataList.Name = "dataList";
             this.dataList.Size = new System.Drawing.Size(1821, 829);
             this.dataList.TabIndex = 25;
-            this.dataList.SelectedIndexChanged += new System.EventHandler(this.dataList_SelectedIndexChanged);
+            this.dataList.SelectedIndexChanged += new System.EventHandler(this.DataList_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -84,7 +84,7 @@
             this.smButton.TabIndex = 27;
             this.smButton.Text = "Score Match";
             this.smButton.UseVisualStyleBackColor = true;
-            this.smButton.Click += new System.EventHandler(this.scoreMatch_Button);
+            this.smButton.Click += new System.EventHandler(this.ScoreMatch_Button);
             // 
             // MatchScore
             // 

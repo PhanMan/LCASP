@@ -48,6 +48,34 @@ namespace Lcasp
             return theList;
         }
 
+        public List<KeyValuePair<int, string>> GetParticipatingSchoolList()
+        {
+            List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
+
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            string cmd = "Select school_id, school_name from schools where school_id in (select distinct (a.school_id) from archers a, archer_data ad where a.archer_id = ad.archer_id)";
+
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+
+            SqlDataReader theReader = theCmd.ExecuteReader();
+
+            if (theReader.HasRows)
+            {
+                while (theReader.Read())
+                {
+                    theList.Add(new KeyValuePair<int, string>(Convert.ToInt32(theReader["school_id"].ToString()), theReader["school_name"].ToString()));
+                }
+            }
+
+            theReader.Close();
+            theConnection.Close();
+
+            return theList;
+        }
+
         public int GetArcherID(int a_aims_id)
         {
             SqlConnection theConnection = new SqlConnection(connectionString);
@@ -98,6 +126,41 @@ namespace Lcasp
             theConnection.Open();
 
             string cmd = "Select * from archers where school_id = " + s_id + " order by archer_id asc";
+
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+
+            SqlDataReader theReader = theCmd.ExecuteReader();
+
+            if (theReader.HasRows)
+            {
+                while (theReader.Read())
+                {
+                    Archer theArcher = new Archer(s_id,
+                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                  theReader["archer_name"].ToString(),
+                                                  theReader["archer_sex"].ToString(),
+                                                  form);
+
+                    theList.Add(theArcher);
+                }
+            }
+
+            theReader.Close();
+            theConnection.Close();
+
+            return theList;
+        }
+
+        public List<Archer> GetParticipatingSchoolArchers(int s_id, string form)
+        {
+            List<Archer> theList = new List<Archer>();
+
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            string cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a, archer_data ad where a.archer_id = ad.archer_id and school_id = " + s_id + " order by a.archer_id asc";
 
             SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 

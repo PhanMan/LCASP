@@ -27,13 +27,13 @@ namespace Lcasp
             sc.InitializeScanner();
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             sc.Close();
             this.Close();
         }
 
-        private void dataList_SelectedIndexChanged(object sender, EventArgs e)
+        private void DataList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -42,13 +42,13 @@ namespace Lcasp
         {
 
 
-            aTimer.Tick += new EventHandler(timer_Tick); // Everytime timer ticks, timer_Tick will be called
+            aTimer.Tick += new EventHandler(Timer_Tick); // Everytime timer ticks, timer_Tick will be called
             aTimer.Interval = 250;          // Timer will tick evert 10 seconds
             aTimer.Enabled = true;                       // Enable the timer
             aTimer.Start();                              // Start the timer
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        void Timer_Tick(object sender, EventArgs e)
         {
             string dataLine = null;
             string sep = "   ";
@@ -81,9 +81,14 @@ namespace Lcasp
             }
         }
 
-        private void scoreMatch_Button(object sender, EventArgs e)
+        private void ScoreMatch_Button(object sender, EventArgs e)
         {
             Scoring theScore = new Scoring();
+
+            int score = theScore.StandingList[0].TeamMatchScore;
+
+            ScoreReport theReport = new ScoreReport(theScore);
+
         }
     }
 }

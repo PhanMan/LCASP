@@ -1,5 +1,4 @@
 ﻿using Lcasp.Properties;
-using LCASP.Properties;
 using System;
 using System.Collections;
 using System.Collections.Generic;
