@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lcasp
 {
-
-
     public class ArcherData
     {
         private static int EndOffset = 10;
@@ -16,11 +14,11 @@ namespace Lcasp
         {
             int[] sData = { 0, 0, 0, 0, 0 };
 
-            string[] items = archer_raw_data.Split(',');
+            string[] items = ArcherRawData.Split(',');
 
-            int itemOffset = EndOffset + (end_no-1) * 5;
+            int itemOffset = EndOffset + (end_no - 1) * 5;
 
-            for(int count=0; count<5; count++)
+            for (int count = 0; count < 5; count++)
             {
                 sData[count] = Convert.ToInt32(items[itemOffset + count]);
             }
@@ -32,35 +30,33 @@ namespace Lcasp
 
         private void ProcessScoreData()
         {
-            bool aimsCard = false;
 
-            string[] dataItems = archer_raw_data.Split(',');
+            string[] dataItems = ArcherRawData.Split(',');
 
-            if(dataItems[8].Substring(0,1).CompareTo("M")==0 || dataItems[8].Substring(0, 1).CompareTo("F") == 0)
+            if (dataItems[8].Substring(0, 1).CompareTo("M") == 0 || dataItems[8].Substring(0, 1).CompareTo("F") == 0)
             {
-                archer_id = new DatabaseQueries().GetArcherID(Convert.ToInt32(dataItems[0]));
-                aimsCard = true;
+                ArcherID = new DatabaseQueries().GetArcherID(Convert.ToInt32(dataItems[0]));
             }
             else
             {
-                archer_id = Convert.ToInt32(dataItems[0]);
+                ArcherID = Convert.ToInt32(dataItems[0]);
             }
 
             string[] scoreItems = dataItems[8].Substring(1).Split(' ');
-           
-            archer_score = Convert.ToInt32(dataItems[1]);
 
-            archer_tens = Convert.ToInt32(scoreItems[10]);
-            archer_nines = Convert.ToInt32(scoreItems[9]);
-            archer_eights = Convert.ToInt32(scoreItems[8]);
-            archer_sevens = Convert.ToInt32(scoreItems[7]);
-            archer_sixes = Convert.ToInt32(scoreItems[6]);
-            archer_fives = Convert.ToInt32(scoreItems[5]);
-            archer_fours = Convert.ToInt32(scoreItems[4]);
-            archer_threes = Convert.ToInt32(scoreItems[3]);
-            archer_twos = Convert.ToInt32(scoreItems[2]);
-            archer_ones = Convert.ToInt32(scoreItems[1]);
-            archer_zeros = Convert.ToInt32(scoreItems[0]);
+            ArcherScore = Convert.ToInt32(dataItems[1]);
+
+            ArcherTens = Convert.ToInt32(scoreItems[10]);
+            ArcherNines = Convert.ToInt32(scoreItems[9]);
+            ArcherEights = Convert.ToInt32(scoreItems[8]);
+            ArcherSevens = Convert.ToInt32(scoreItems[7]);
+            ArcherSixes = Convert.ToInt32(scoreItems[6]);
+            ArcherFives = Convert.ToInt32(scoreItems[5]);
+            ArcherFours = Convert.ToInt32(scoreItems[4]);
+            ArcherThrees = Convert.ToInt32(scoreItems[3]);
+            ArcherTwos = Convert.ToInt32(scoreItems[2]);
+            ArcherOnes = Convert.ToInt32(scoreItems[1]);
+            ArcherZeros = Convert.ToInt32(scoreItems[0]);
 
             EndOne = ProcessEndSection(1);
             EndTwo = ProcessEndSection(2);
@@ -72,28 +68,28 @@ namespace Lcasp
 
         public ArcherData(string inData)
         {
-            archer_raw_data = inData;
+            ArcherRawData = inData;
 
             ProcessScoreData();
         }
 
-        public int archer_data_id { get; set; }
-        public int archer_id { get; set; }
+        public int ArcherDataID { get; set; }
+        public int ArcherID { get; set; }
 
         // Received Data from scanner
-        public string archer_raw_data { get; set; }
-        public int archer_score { get; set; }
-        public int archer_tens { get; set; }
-        public int archer_nines { get; set; }
-        public int archer_eights { get; set; }
-        public int archer_sevens { get; set; }
-        public int archer_sixes { get; set; }
-        public int archer_fives { get; set; }
-        public int archer_fours { get; set; }
-        public int archer_threes { get; set; }
-        public int archer_twos { get; set; }
-        public int archer_ones { get; set; }
-        public int archer_zeros { get; set; }
+        public string ArcherRawData { get; set; }
+        public int ArcherScore { get; set; }
+        public int ArcherTens { get; set; }
+        public int ArcherNines { get; set; }
+        public int ArcherEights { get; set; }
+        public int ArcherSevens { get; set; }
+        public int ArcherSixes { get; set; }
+        public int ArcherFives { get; set; }
+        public int ArcherFours { get; set; }
+        public int ArcherThrees { get; set; }
+        public int ArcherTwos { get; set; }
+        public int ArcherOnes { get; set; }
+        public int ArcherZeros { get; set; }
 
         // Derived data
         public ArcherEndData EndOne { get; set; }
@@ -110,9 +106,9 @@ namespace Lcasp
                          "archer_sixes,archer_fives,archer_fours,archer_threes,archer_twos,archer_ones,archer_zeros,archer_end_1,archer_end_2, " +
                          "archer_end_3,archer_end_4,archer_end_5,archer_end_6) " +
                          " VALUES " +
-                         "(" + archer_id + ", '" + archer_raw_data + "', " + archer_score + ", " + archer_tens + ", " + archer_nines + ", " + archer_eights + ", " +
-                          archer_sevens + ", " + archer_sixes + ", " + archer_fives + ", " + archer_fours + ", " + archer_threes + ", " + archer_twos + ", " +
-                          archer_ones + ", " + archer_zeros + ", " + EndOne.Score() + ", " + EndTwo.Score() + ", " + EndThree.Score() + ", " +
+                         "(" + ArcherID + ", '" + ArcherRawData + "', " + ArcherScore + ", " + ArcherTens + ", " + ArcherNines + ", " + ArcherEights + ", " +
+                          ArcherSevens + ", " + ArcherSixes + ", " + ArcherFives + ", " + ArcherFours + ", " + ArcherThrees + ", " + ArcherTwos + ", " +
+                          ArcherOnes + ", " + ArcherZeros + ", " + EndOne.Score() + ", " + EndTwo.Score() + ", " + EndThree.Score() + ", " +
                           EndFour.Score() + ", " + EndFive.Score() + ", " + EndSix.Score() + ")";
             return sql;
         }

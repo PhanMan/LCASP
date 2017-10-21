@@ -138,7 +138,7 @@
             this.Controls.Add(this.sCombo);
             this.Name = "ArcherMaintain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ArcherMaintain";
+            this.Text = "Maintain Archers";
             this.Load += new System.EventHandler(this.ArcherMaintain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

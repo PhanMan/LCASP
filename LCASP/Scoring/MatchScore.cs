@@ -56,7 +56,7 @@ namespace Lcasp
             while ((dataLine = theQueue.DeQueue()) != null)
             {
                 ArcherData ad = new ArcherData(dataLine);
-                Archer a = new DatabaseQueries().GetArcher(ad.archer_id);
+                Archer a = new DatabaseQueries().GetArcher(ad.ArcherID);
 
                 label1.Font = new Font("Courier new", 10);
                 dataList.Font = new Font("Courier new", 10, FontStyle.Bold);
@@ -64,18 +64,18 @@ namespace Lcasp
 
                 string lstr = "Archer Name".PadRight(20) + "          " + "SCORE" + sep + "10s" + sep + "9s" + sep + "8s" + sep + "7s" + sep + "6s" + sep + "5s" + sep + "4s" + sep + "3s" + sep + "2s" + sep + "1s" + sep + "0s";
                 label1.Text = lstr;
-                string str = a.ArcherName.PadRight(20).Substring(0, 20) + "           " + ad.archer_score.ToString("000 ") + sep +
-                                                                                       ad.archer_tens.ToString(" 00") + sep +
-                                                                                       ad.archer_nines.ToString("00") + sep +
-                                                                                       ad.archer_eights.ToString("00") + sep +
-                                                                                       ad.archer_sevens.ToString("00") + sep +
-                                                                                       ad.archer_sixes.ToString("00") + sep +
-                                                                                       ad.archer_fives.ToString("00") + sep +
-                                                                                       ad.archer_fours.ToString("00") + sep +
-                                                                                       ad.archer_threes.ToString("00") + sep +
-                                                                                       ad.archer_twos.ToString("00") + sep +
-                                                                                       ad.archer_ones.ToString("00") + sep +
-                                                                                       ad.archer_zeros.ToString("00");
+                string str = a.ArcherName.PadRight(20).Substring(0, 20) + "           " + ad.ArcherScore.ToString("000 ") + sep +
+                                                                                       ad.ArcherTens.ToString(" 00") + sep +
+                                                                                       ad.ArcherNines.ToString("00") + sep +
+                                                                                       ad.ArcherEights.ToString("00") + sep +
+                                                                                       ad.ArcherSevens.ToString("00") + sep +
+                                                                                       ad.ArcherSixes.ToString("00") + sep +
+                                                                                       ad.ArcherFives.ToString("00") + sep +
+                                                                                       ad.ArcherFours.ToString("00") + sep +
+                                                                                       ad.ArcherThrees.ToString("00") + sep +
+                                                                                       ad.ArcherTwos.ToString("00") + sep +
+                                                                                       ad.ArcherOnes.ToString("00") + sep +
+                                                                                       ad.ArcherZeros.ToString("00");
 
                 dataList.Items.Add(str);
             }

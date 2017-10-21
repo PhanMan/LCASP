@@ -36,16 +36,16 @@ namespace Lcasp
 
                     if (theData != null)
                     {
-                        OverallList.Add(theData.archer_score, theArcher.ArcherID);
-                        theStanding.TeamWide.Add(theData.archer_score, theArcher.ArcherID);
+                        OverallList.Add(theData.ArcherScore, theArcher.ArcherID);
+                        theStanding.TeamWide.Add(theData.ArcherScore, theArcher.ArcherID);
 
                         if (theArcher.ArcherSex.CompareTo("M") == 0)
                         {
-                            theStanding.Male.Add(theData.archer_score, theArcher.ArcherID);
+                            theStanding.Male.Add(theData.ArcherScore, theArcher.ArcherID);
                         }
                         else if (theArcher.ArcherSex.CompareTo("F") == 0)
                         {
-                            theStanding.Female.Add(theData.archer_score, theArcher.ArcherID);
+                            theStanding.Female.Add(theData.ArcherScore, theArcher.ArcherID);
                         }
                     }
                 }
@@ -94,8 +94,6 @@ namespace Lcasp
                         ss.Male.Add(0, 0);
                 }
             }
-
-            int x = 0;
         }
     }
 }

@@ -48,11 +48,15 @@ namespace Lcasp
                 return;
             }
 
+            this.Close();
+
+            /*
             NameBox.Text = "";
             SexBox.Text = "";
             StateIDBox.Text = "";
 
             NameBox.Focus();
+            */
         }
 
         private void importButton_Click(object sender, EventArgs e)

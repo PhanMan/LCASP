@@ -187,15 +187,15 @@ namespace Lcasp
 
             if (result == 1)
             {
-                theCmd.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.archer_id + " order by archer_data_id desc";
+                theCmd.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.ArcherID + " order by archer_data_id desc";
 
                 int id = (int)theCmd.ExecuteScalar();
 
-                scoreData.archer_data_id = id;
+                scoreData.ArcherDataID = id;
             }
             else
             {
-                scoreData.archer_data_id = -1;
+                scoreData.ArcherDataID = -1;
             }
 
             theConnection.Close();
@@ -256,7 +256,7 @@ namespace Lcasp
                 {
                     retData = new ArcherData(theReader["archer_raw_data"].ToString())
                     {
-                        archer_data_id = Convert.ToInt32(theReader["archer_data_id"].ToString())
+                        ArcherDataID = Convert.ToInt32(theReader["archer_data_id"].ToString())
                     };
                 }
             }
@@ -294,9 +294,8 @@ namespace Lcasp
                 }
                 theConnection.Close();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                int xxx = 0;
             }
         }
     }

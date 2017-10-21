@@ -17,23 +17,15 @@ namespace Lcasp
             InitializeComponent();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            new DatabaseQueries().AddSchool(nameBox.Text);
-            this.Close();
-        }
-
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void sButton_Click(object sender, EventArgs e)
         {
             new DatabaseQueries().AddSchool(nameBox.Text);
 
+            this.Close();
+            /*
             nameBox.Text = "";
             nameBox.Focus();
+            */
         }
 
         private void cButton_Click(object sender, EventArgs e)
