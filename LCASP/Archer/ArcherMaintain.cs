@@ -25,10 +25,10 @@ namespace Lcasp
 
         private void ArcherMaintain_Load(object sender, EventArgs e)
         {
-            reloadSchoolBox();
+            ReloadSchoolBox();
         }
 
-        private void reloadSchoolBox()
+        private void ReloadSchoolBox()
         {
             sCombo.Items.Clear();
 
@@ -43,11 +43,11 @@ namespace Lcasp
             sCombo.ResetText();
         }
 
-        private void reloadArcherBox()
+        private void ReloadArcherBox()
         {
             aCombo.Items.Clear();
 
-            List<Archer> theList = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem));
+            List<Archer> theList = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), "XXXX");
 
             foreach (Archer archer in theList)
             {
@@ -67,7 +67,7 @@ namespace Lcasp
         {
             ComboBox cb = (ComboBox)sender;
 
-            reloadArcherBox();
+            ReloadArcherBox();
 
             aCombo.Enabled = true;
             aButton.Enabled = true;
@@ -78,14 +78,14 @@ namespace Lcasp
         {
             new ArcherAdd((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem)).ShowDialog();
 
-            reloadArcherBox();
+            ReloadArcherBox();
         }
 
         private void dButton_Click(object sender, EventArgs e)
         {
             new DatabaseQueries().DeleteArcher((int)aCombo.SelectedItem.GetType().GetProperty("Value").GetValue(aCombo.SelectedItem));
 
-            reloadArcherBox();
+            ReloadArcherBox();
 
             aCombo.SelectedIndex = -1;
             aCombo.ResetText();

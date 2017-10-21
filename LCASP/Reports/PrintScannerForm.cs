@@ -12,12 +12,21 @@ namespace Lcasp
 {
     public partial class PrintScannerForm : Form
     {
+        private List<KeyValuePair<string, string>> ScanFormPair = new List<KeyValuePair<string, string>>();
+
         public PrintScannerForm()
         {
             InitializeComponent();
 
             sCombo.DisplayMember = "Text";
             sCombo.ValueMember = "Value";
+
+            scanFormBox.DisplayMember = "Text";
+            scanFormBox.ValueMember = "Value";
+
+
+            scanFormBox.Items.Add(new KeyValuePair<string, string>("NASP", "NASP"));
+            scanFormBox.Items.Add(new KeyValuePair<string, string>("AIMS", "AIMS"));
         }
 
         private void PrintScannerForm_Load(object sender, EventArgs e)
@@ -53,9 +62,17 @@ namespace Lcasp
 
         private void printButton_Click(object sender, EventArgs e)
         {
-            List<Archer> theArchers = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem));
+            if (scanFormBox.SelectedIndex != -1 && sCombo.SelectedIndex != -1)
+            {
+                List<Archer> theArchers = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), (string)scanFormBox.SelectedItem.GetType().GetProperty("Value").GetValue(scanFormBox.SelectedItem));
 
-            PrintDocument(theArchers);
+                PrintDocument(theArchers);
+            }
+            else
+            {
+                MessageBox.Show("Please select a school and a form first!");
+            }
+
         }
 
         private void PrintDocument(List<Archer> theArchers)
@@ -82,6 +99,11 @@ namespace Lcasp
 
 
             scp.Print();
+        }
+
+        private void scanFormBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

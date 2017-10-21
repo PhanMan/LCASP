@@ -16,9 +16,19 @@ namespace Lcasp
         //private int[] xDim = { 85, 115, 145, 175, 205, 235, 265, 295, 325, 355 }; //{ 355, 325, 295, 265, 235, 205, 175, 145, 115, 85 };
         //private int[] yDim = { 760, 780, 800, 820, 840 }; //840, 820, 800, 780, 760 };
 
-        // Laserjet
+        // Form 980
         private int[] xDim = { 80, 110, 140, 170, 200, 230, 260, 290, 320, 350 }; //{ 355, 325, 295, 265, 235, 205, 175, 145, 115, 85 };
         private int[] yDim = { 755, 775, 795, 815, 835 }; //840, 820, 800, 780, 760 };
+        private Point archerNamePoint = new Point(65, 905);
+        private Point archerIdPoint = new Point(360, 902);
+
+        // State Form
+        private int[] xDim1 = { 51, 81, 111, 141, 171, 201, 231, 261, 291 };
+        private int[] yDim1 = { 795, 815, 835, 855, 875, 895, 915, 935, 955, 975 };
+        private Point archerNamePoint1 = new Point(60, 1030);
+        private Point archerIdPoint1 = new Point(360, 1030);
+        private Point archerSexPointMale1 = new Point(380, 771);
+        private Point archerSexPointFemale1 = new Point(380, 796);
 
         private List<Archer> printArchers = null;
         private IEnumerator printItems = null;
@@ -44,7 +54,7 @@ namespace Lcasp
             {
                 //Create the font we need
                 PrinterFont = new Font("Courier New", 14, FontStyle.Bold);
-               
+
             }
         }
 
@@ -67,25 +77,58 @@ namespace Lcasp
                 base.OnPrintPage(e);
 
                 Graphics myGraphics = e.Graphics;
-
-                // Draw background
-                myGraphics.DrawImage(Resources._003, 0f, 0f, 500f, 1100f);
-
                 SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Black);
-
-                string idNo = theItem.ArcherID.ToString("00000");
-
-                for(int counter=0; counter<5; counter++)
-                {
-                    int digit = Convert.ToInt32(idNo[counter].ToString());
-
-                    myGraphics.FillEllipse(myBrush, xDim[digit], yDim[counter], 20, 15);
-
-                }
                 Pen thePen = new Pen(myBrush);
 
-                myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, new Point(65, 905));
-                myGraphics.DrawString(theItem.ArcherID.ToString("00000"), PrinterFont, myBrush, new Point(360, 902));
+                /*
+        for (int x = 0; x < 400; x += 10)
+        {
+            for (int y = 0; y < 900; y += 10)
+            {
+                myGraphics.FillEllipse(myBrush, x, y, 1f, 1f);
+            }
+        }
+        */
+
+                if (theItem.ScanForm.CompareTo("NASP") == 0)
+                {
+                    string idNo = theItem.ArcherID.ToString("00000");
+
+                    for (int counter = 0; counter < 5; counter++)
+                    {
+                        int digit = Convert.ToInt32(idNo[counter].ToString());
+
+                        myGraphics.FillEllipse(myBrush, xDim[digit], yDim[counter], 20, 15);
+                    }
+
+                    myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, archerNamePoint);
+                    myGraphics.DrawString(theItem.ArcherID.ToString("00000"), PrinterFont, myBrush, archerIdPoint);
+                }
+                else if (theItem.ScanForm.CompareTo("AIMS") == 0)
+                {
+                    PrinterFont = new Font("Courier New", 9, FontStyle.Bold);
+
+                    string idNo = theItem.ArcherAIMSID.ToString("000000000");
+
+                    for (int counter = 0; counter < 9; counter++)
+                    {
+                        int digit = Convert.ToInt32(idNo[counter].ToString());
+
+                        myGraphics.FillEllipse(myBrush, xDim1[counter], yDim1[digit], 20, 15);
+                    }
+
+                    if (theItem.ArcherSex.CompareTo("M") == 0)
+                    {
+                        myGraphics.FillEllipse(myBrush, archerSexPointMale1.X, archerSexPointMale1.Y, 20, 15);
+                    }
+                    else if (theItem.ArcherSex.CompareTo("F") == 0)
+                    {
+                        myGraphics.FillEllipse(myBrush, archerSexPointFemale1.X, archerSexPointFemale1.Y, 20, 15);
+                    }
+
+                    myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, archerNamePoint1);
+                    myGraphics.DrawString(theItem.ArcherAIMSID.ToString("000000000"), PrinterFont, myBrush, archerIdPoint1);
+                }
 
                 myBrush.Dispose();
                 myGraphics.Dispose();

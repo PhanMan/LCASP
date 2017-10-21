@@ -234,12 +234,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PulseButton\PulseButton.csproj">
-      <Project>{17a4d90e-2deb-4bd7-82b6-16860c90b4e9}</Project>
-      <Name>PulseButton</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\download.png" />
   </ItemGroup>
   <ItemGroup>
@@ -253,9 +247,15 @@
     <None Include="Resources\score.bmp" />
     <Content Include="System\lcasp.ico" />
     <None Include="Resources\003.bmp" />
-    <Content Include="System\script.sql">
+    <Content Include="script.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PulseButton\PulseButton.csproj">
+      <Project>{17a4d90e-2deb-4bd7-82b6-16860c90b4e9}</Project>
+      <Name>PulseButton</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

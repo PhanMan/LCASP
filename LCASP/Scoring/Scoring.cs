@@ -28,7 +28,7 @@ namespace Lcasp
 
                 SchoolStanding theStanding = new SchoolStanding(Convert.ToInt32(kvp.Key), kvp.Value);
 
-                List<Archer> schoolArchers = new DatabaseQueries().GetSchoolArchers(Convert.ToInt32(kvp.Key));
+                List<Archer> schoolArchers = new DatabaseQueries().GetSchoolArchers(Convert.ToInt32(kvp.Key), "XXXX");
 
                 foreach (Archer theArcher in schoolArchers)
                 {

@@ -26,24 +26,33 @@ namespace Lcasp
             this.Close();
         }
 
+        private bool IsNumeric(string text)
+        {
+            int test;
+            return int.TryParse(text, out test);
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
-            if (sexBox.Text.ToUpper().CompareTo("M") == 0 || sexBox.Text.ToUpper().CompareTo("F") == 0)
+            if (SexBox.Text.ToUpper().CompareTo("M") == 0 || SexBox.Text.ToUpper().CompareTo("F") == 0 && IsNumeric(StateIDBox.Text))
             {
-                new DatabaseQueries().AddArcher(nameBox.Text, sexBox.Text.ToUpper(), school_id);
+                int archer_state_id = Convert.ToInt32(StateIDBox.Text);
+
+                new DatabaseQueries().AddArcher(NameBox.Text, archer_state_id, SexBox.Text.ToUpper(), school_id);
             }
             else
             {
-                MessageBox.Show("Archer Sex must be M or F!");
-                sexBox.Text = "";
-                sexBox.Focus();
+                MessageBox.Show("Archer Sex must be M or F and AIMS Id must be numeric.");
+                SexBox.Text = "";
+                SexBox.Focus();
                 return;
             }
 
-            nameBox.Text = "";
-            sexBox.Text = "";
+            NameBox.Text = "";
+            SexBox.Text = "";
+            StateIDBox.Text = "";
 
-            nameBox.Focus();
+            NameBox.Focus();
         }
 
         private void importButton_Click(object sender, EventArgs e)
@@ -55,6 +64,11 @@ namespace Lcasp
         private void sexBox_TextChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void StateIDBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

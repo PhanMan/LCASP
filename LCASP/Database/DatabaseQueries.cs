@@ -48,6 +48,20 @@ namespace Lcasp
             return theList;
         }
 
+        public int GetArcherID(int a_aims_id)
+        {
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            SqlCommand theCmd = new SqlCommand("select archer_id from archers where archer_state_id = " + a_aims_id, theConnection);
+
+            int a_id = (int)theCmd.ExecuteScalar();
+
+            return a_id;
+
+        }
+
         public void DeleteArcher(int a_id)
         {
             SqlConnection theConnection = new SqlConnection(connectionString);
@@ -75,7 +89,7 @@ namespace Lcasp
             theConnection.Close();
         }
 
-        public List<Archer> GetSchoolArchers(int s_id)
+        public List<Archer> GetSchoolArchers(int s_id, string form)
         {
             List<Archer> theList = new List<Archer>();
 
@@ -95,8 +109,10 @@ namespace Lcasp
                 {
                     Archer theArcher = new Archer(s_id,
                                                   Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
                                                   theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString());
+                                                  theReader["archer_sex"].ToString(),
+                                                  form);
 
                     theList.Add(theArcher);
                 }
@@ -129,8 +145,10 @@ namespace Lcasp
                 {
                     Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
                                                   a_id,
+                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
                                                   theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString());
+                                                  theReader["archer_sex"].ToString(), 
+                                                  "XXXX");
 
                     retArcher = theArcher;
                 }
@@ -201,11 +219,11 @@ namespace Lcasp
             theConnection.Close();
         }
 
-        public void AddArcher(string a_name, string a_sex, int s_id)
+        public void AddArcher(string a_name, int aims_id, string a_sex, int s_id)
         {
-            string sql = "insert into archers (school_id, archer_name, archer_sex) " +
+            string sql = "insert into archers (school_id, archer_state_id, archer_name, archer_sex) " +
              " values " +
-             "(" + s_id + ", '" + a_name + "', '" + a_sex + "')";
+             "(" + s_id + ", " + aims_id + ", '" + a_name + "', '" + a_sex + "')";
 
             SqlConnection theConnection = new SqlConnection(connectionString);
 
@@ -276,9 +294,9 @@ namespace Lcasp
                 }
                 theConnection.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                int xxx = 0;
             }
         }
     }

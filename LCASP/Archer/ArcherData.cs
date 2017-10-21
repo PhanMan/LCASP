@@ -32,24 +32,35 @@ namespace Lcasp
 
         private void ProcessScoreData()
         {
+            bool aimsCard = false;
+
             string[] dataItems = archer_raw_data.Split(',');
 
-            string[] scoreItems = dataItems[8].Split(' ');
+            if(dataItems[8].Substring(0,1).CompareTo("M")==0 || dataItems[8].Substring(0, 1).CompareTo("F") == 0)
+            {
+                archer_id = new DatabaseQueries().GetArcherID(Convert.ToInt32(dataItems[0]));
+                aimsCard = true;
+            }
+            else
+            {
+                archer_id = Convert.ToInt32(dataItems[0]);
+            }
 
-            archer_id = Convert.ToInt32(dataItems[0]);
+            string[] scoreItems = dataItems[8].Substring(1).Split(' ');
+           
             archer_score = Convert.ToInt32(dataItems[1]);
 
-            archer_tens = Convert.ToInt32(scoreItems[11]);
-            archer_nines = Convert.ToInt32(scoreItems[10]);
-            archer_eights = Convert.ToInt32(scoreItems[9]);
-            archer_sevens = Convert.ToInt32(scoreItems[8]);
-            archer_sixes = Convert.ToInt32(scoreItems[7]);
-            archer_fives = Convert.ToInt32(scoreItems[6]);
-            archer_fours = Convert.ToInt32(scoreItems[5]);
-            archer_threes = Convert.ToInt32(scoreItems[4]);
-            archer_twos = Convert.ToInt32(scoreItems[3]);
-            archer_ones = Convert.ToInt32(scoreItems[2]);
-            archer_zeros = Convert.ToInt32(scoreItems[1]);
+            archer_tens = Convert.ToInt32(scoreItems[10]);
+            archer_nines = Convert.ToInt32(scoreItems[9]);
+            archer_eights = Convert.ToInt32(scoreItems[8]);
+            archer_sevens = Convert.ToInt32(scoreItems[7]);
+            archer_sixes = Convert.ToInt32(scoreItems[6]);
+            archer_fives = Convert.ToInt32(scoreItems[5]);
+            archer_fours = Convert.ToInt32(scoreItems[4]);
+            archer_threes = Convert.ToInt32(scoreItems[3]);
+            archer_twos = Convert.ToInt32(scoreItems[2]);
+            archer_ones = Convert.ToInt32(scoreItems[1]);
+            archer_zeros = Convert.ToInt32(scoreItems[0]);
 
             EndOne = ProcessEndSection(1);
             EndTwo = ProcessEndSection(2);

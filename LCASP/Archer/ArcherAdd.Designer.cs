@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.nameBox = new System.Windows.Forms.TextBox();
-            this.sexBox = new System.Windows.Forms.TextBox();
+            this.NameBox = new System.Windows.Forms.TextBox();
+            this.SexBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.saveButton = new Lcasp.PulseButton();
             this.cancelButton = new Lcasp.PulseButton();
             this.importButton = new Lcasp.PulseButton();
+            this.StateIDBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // nameBox
+            // NameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(54, 78);
-            this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(616, 31);
-            this.nameBox.TabIndex = 0;
+            this.NameBox.Location = new System.Drawing.Point(54, 78);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.Size = new System.Drawing.Size(616, 31);
+            this.NameBox.TabIndex = 0;
             // 
-            // sexBox
+            // SexBox
             // 
-            this.sexBox.Location = new System.Drawing.Point(713, 78);
-            this.sexBox.Name = "sexBox";
-            this.sexBox.Size = new System.Drawing.Size(170, 31);
-            this.sexBox.TabIndex = 1;
-            this.sexBox.TextChanged += new System.EventHandler(this.sexBox_TextChanged);
+            this.SexBox.Location = new System.Drawing.Point(885, 78);
+            this.SexBox.Name = "SexBox";
+            this.SexBox.Size = new System.Drawing.Size(170, 31);
+            this.SexBox.TabIndex = 1;
+            this.SexBox.TextChanged += new System.EventHandler(this.sexBox_TextChanged);
             // 
             // label1
             // 
@@ -64,7 +66,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(708, 29);
+            this.label2.Location = new System.Drawing.Point(880, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 25);
             this.label2.TabIndex = 3;
@@ -93,7 +95,7 @@
             this.cancelButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(575, 145);
+            this.cancelButton.Location = new System.Drawing.Point(793, 145);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
@@ -109,7 +111,7 @@
             this.importButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.importButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.importButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.importButton.Location = new System.Drawing.Point(325, 145);
+            this.importButton.Location = new System.Drawing.Point(440, 145);
             this.importButton.Name = "importButton";
             this.importButton.PulseSpeed = 0.2F;
             this.importButton.Size = new System.Drawing.Size(230, 101);
@@ -118,18 +120,37 @@
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
+            // StateIDBox
+            // 
+            this.StateIDBox.Location = new System.Drawing.Point(697, 78);
+            this.StateIDBox.Name = "StateIDBox";
+            this.StateIDBox.Size = new System.Drawing.Size(170, 31);
+            this.StateIDBox.TabIndex = 25;
+            this.StateIDBox.TextChanged += new System.EventHandler(this.StateIDBox_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(692, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 25);
+            this.label3.TabIndex = 26;
+            this.label3.Text = "AIMS ID";
+            // 
             // ArcherAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 285);
+            this.ClientSize = new System.Drawing.Size(1124, 285);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.StateIDBox);
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.sexBox);
-            this.Controls.Add(this.nameBox);
+            this.Controls.Add(this.SexBox);
+            this.Controls.Add(this.NameBox);
             this.Name = "ArcherAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddArcher";
@@ -140,12 +161,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.TextBox sexBox;
+        private System.Windows.Forms.TextBox NameBox;
+        private System.Windows.Forms.TextBox SexBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private PulseButton saveButton;
         private PulseButton cancelButton;
         private PulseButton importButton;
+        private System.Windows.Forms.TextBox StateIDBox;
+        private System.Windows.Forms.Label label3;
     }
 }

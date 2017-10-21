@@ -46,7 +46,7 @@ namespace Lcasp
             foreach(string s in lines)
             {
                 string[] items = s.Split(',');
-                dq.AddArcher(items[0], items[1], school_id);
+                dq.AddArcher(items[0], Convert.ToInt32(items[2]), items[1], school_id);
             }
 
             dq = null;
