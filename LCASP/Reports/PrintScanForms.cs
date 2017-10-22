@@ -26,7 +26,7 @@ namespace Lcasp
         private int[] yDim1 = { 795, 815, 835, 855, 875, 895, 915, 935, 955, 975 };
         private Point archerNamePoint1 = new Point(60, 1030);
         private Point archerIdPoint1 = new Point(360, 1030);
-        private Point archerSexPointMale1 = new Point(380, 771);
+        private Point archerSexPointMale1 = new Point(380, 772);
         private Point archerSexPointFemale1 = new Point(380, 796);
 
         private List<Archer> printArchers = null;

@@ -85,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="OverallScoreReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ScoreReport.cs">
       <SubType>Component</SubType>
     </Compile>

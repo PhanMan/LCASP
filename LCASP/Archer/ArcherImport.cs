@@ -39,7 +39,8 @@ namespace Lcasp
 
         private void iButton_Click(object sender, EventArgs e)
         {
-             string[] lines = System.IO.File.ReadAllLines(fileNameBox.Text);
+
+            string[] lines = System.IO.File.ReadAllLines(fileNameBox.Text);
 
             DatabaseQueries dq = new DatabaseQueries();
 

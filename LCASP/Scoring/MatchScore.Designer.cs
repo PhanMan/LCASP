@@ -32,6 +32,7 @@
             this.dataList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.smButton = new Lcasp.PulseButton();
+            this.ExportButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -86,11 +87,28 @@
             this.smButton.UseVisualStyleBackColor = true;
             this.smButton.Click += new System.EventHandler(this.ScoreMatch_Button);
             // 
+            // ExportButton
+            // 
+            this.ExportButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
+            this.ExportButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.ExportButton.FocusColor = System.Drawing.Color.SpringGreen;
+            this.ExportButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExportButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ExportButton.Location = new System.Drawing.Point(775, 920);
+            this.ExportButton.Name = "ExportButton";
+            this.ExportButton.PulseSpeed = 0.2F;
+            this.ExportButton.Size = new System.Drawing.Size(289, 101);
+            this.ExportButton.TabIndex = 28;
+            this.ExportButton.Text = "Export Results";
+            this.ExportButton.UseVisualStyleBackColor = true;
+            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
+            // 
             // MatchScore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1899, 1047);
+            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.smButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataList);
@@ -109,5 +127,6 @@
         private System.Windows.Forms.ListBox dataList;
         private System.Windows.Forms.Label label1;
         private PulseButton smButton;
+        private PulseButton ExportButton;
     }
 }

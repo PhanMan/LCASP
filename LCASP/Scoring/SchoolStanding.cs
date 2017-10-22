@@ -35,6 +35,7 @@ namespace Lcasp
         public SchoolStanding(int s_id, string school_name)
         {
             School_ID = s_id;
+            School_Name = school_name;
 
             Overall = new SortedList<int, int>(new ScoreComparer<int>());
             Male = new SortedList<int, int>(new ScoreComparer<int>());
