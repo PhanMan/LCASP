@@ -25,8 +25,8 @@ namespace Lcasp
             scanFormBox.ValueMember = "Value";
 
 
-            scanFormBox.Items.Add(new KeyValuePair<string, string>("NASP", "NASP"));
-            scanFormBox.Items.Add(new KeyValuePair<string, string>("AIMS", "AIMS"));
+            scanFormBox.Items.Add(new { Text = "NASP", Value = "NASP" });// new KeyValuePair<string, string>("NASP", "NASP"));
+            scanFormBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
         }
 
         private void PrintScannerForm_Load(object sender, EventArgs e)
