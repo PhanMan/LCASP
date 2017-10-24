@@ -8,7 +8,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Management;
 using System.Windows.Forms;
+
 
 namespace Lcasp
 {
@@ -55,6 +57,7 @@ namespace Lcasp
             this.Text = "Lamar Christian Archery " + CurrentVersion;
         }
 
+ 
         private void ASchoolButton_Click(object sender, EventArgs e)
         {
             new SchoolMaintain().ShowDialog();

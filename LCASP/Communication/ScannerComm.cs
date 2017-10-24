@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
+using System.Management;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,7 +21,10 @@ namespace Lcasp
         {
             theQueue = aQueue;
 
+            string com = getPorts("Silicon Labs");
 
+            if (com.Length > 0)
+                commPort = com;
 
             _serialPort.BaudRate = 38400;
             _serialPort.DataBits = 8;
@@ -30,6 +34,32 @@ namespace Lcasp
             _serialPort.StopBits = StopBits.One;
 
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(_serialPort_DataReceived);
+        }
+
+        private string getPorts(string usbDeviceName)
+        {
+            string retVal = "";
+
+            var searcher = new ManagementObjectSearcher(@"Select * From Win32_PnPEntity");
+            ManagementObjectCollection collection = searcher.Get();
+            foreach (var device in collection)
+            {
+                string deviceId = device["DeviceID"].ToString();
+                string port = device["Caption"].ToString();
+                string desc = device["Description"].ToString();
+                string name = device["Name"].ToString();
+
+                // "USB\\VID_10C4&PID_EA60\\1200"
+                // "Silicon Labs CP210x USB to UART Bridge (COM2)"
+
+                if (name.Contains(usbDeviceName))
+                {
+                    retVal = name.Substring(name.IndexOf("COM"), 4);
+                    return retVal;
+                }
+            }
+
+            return retVal;
         }
 
         public void Open()

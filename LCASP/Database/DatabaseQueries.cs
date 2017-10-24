@@ -210,7 +210,7 @@ namespace Lcasp
                                                   a_id,
                                                   Convert.ToInt32(theReader["archer_state_id"].ToString()),
                                                   theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString(), 
+                                                  theReader["archer_sex"].ToString(),
                                                   "XXXX");
 
                     retArcher = theArcher;
@@ -326,6 +326,70 @@ namespace Lcasp
             return retData;
         }
 
+        public void CheckDatabaseVersion()
+        {
+            string sql = "select database_version from lcasp_version";
+
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            SqlCommand theCmd = new SqlCommand(sql, theConnection);
+
+            int result = 0;
+
+            try
+            {
+                result = (int)theCmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                DropDatabase();
+                CreateDatabase();
+            }
+
+            theConnection.Close();
+
+            if(result != Properties.Settings.Default.DataVersion)
+            {
+                DropDatabase();
+
+                CreateDatabase();
+            }
+        }
+
+        public void DropDatabase()
+        {
+            try
+            {
+                SqlConnection theConnection = new SqlConnection("Data Source = localhost\\sqlexpress; initial catalog=master; Integrated Security = True");
+                theConnection.Open();
+
+                string script = File.ReadAllText(@"drop.sql");
+
+                // split script on GO command
+                IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
+                                         System.Text.RegularExpressions.RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+
+                foreach (string commandString in commandStrings)
+                {
+                    if (commandString.Trim() != "")
+                    {
+                        using (var command = new SqlCommand(commandString, theConnection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+
+                theConnection.Close();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         public void CreateDatabase()
         {
             try
@@ -357,7 +421,7 @@ namespace Lcasp
                 }
                 theConnection.Close();
             }
-            catch (Exception )
+            catch (Exception)
             {
             }
         }

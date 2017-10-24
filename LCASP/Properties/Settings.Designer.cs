@@ -71,5 +71,14 @@ namespace Lcasp.Properties {
                 return ((bool)(this["PrintDialog"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int DataVersion {
+            get {
+                return ((int)(this["DataVersion"]));
+            }
+        }
     }
 }
