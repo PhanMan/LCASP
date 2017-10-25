@@ -342,7 +342,7 @@ namespace Lcasp
             {
                 result = (int)theCmd.ExecuteScalar();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 DropDatabase();
                 CreateDatabase();

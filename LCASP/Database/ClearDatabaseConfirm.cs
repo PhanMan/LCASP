@@ -17,13 +17,13 @@ namespace Lcasp
             InitializeComponent();
         }
 
-        private void yesButton_Click(object sender, EventArgs e)
+        private void YesButtonClick(object sender, EventArgs e)
         {
             new DatabaseQueries().ClearDatabase();
             this.Close();
         }
 
-        private void noButton_Click(object sender, EventArgs e)
+        private void NoButtonClick(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -41,7 +41,6 @@ namespace Lcasp
 
         protected override void OnPrintPage(System.Drawing.Printing.PrintPageEventArgs e)
         {
-            bool noItems = false;
             string sepString = " ";
 
             KeyValuePair<int, int> theItem = new KeyValuePair<int, int>();

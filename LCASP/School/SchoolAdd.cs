@@ -17,9 +17,9 @@ namespace Lcasp
             InitializeComponent();
         }
 
-        private void sButton_Click(object sender, EventArgs e)
+        private void SButtonClick(object sender, EventArgs e)
         {
-            new DatabaseQueries().AddSchool(nameBox.Text);
+            new DatabaseQueries().AddSchool(NameBox.Text);
 
             this.Close();
             /*
@@ -28,9 +28,14 @@ namespace Lcasp
             */
         }
 
-        private void cButton_Click(object sender, EventArgs e)
+        private void CButtonClick(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void NameBoxChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

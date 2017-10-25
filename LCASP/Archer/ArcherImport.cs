@@ -52,6 +52,8 @@ namespace Lcasp
 
             dq = null;
 
+            MessageBox.Show("Archers Imported.");
+
             this.Close();
         }
     }

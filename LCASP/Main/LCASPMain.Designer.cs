@@ -49,13 +49,13 @@
             this.aSchoolButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.aSchoolButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aSchoolButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.aSchoolButton.Location = new System.Drawing.Point(35, 331);
+            this.aSchoolButton.Location = new System.Drawing.Point(30, 69);
             this.aSchoolButton.Name = "aSchoolButton";
-            this.aSchoolButton.PulseSpeed = 0.2F;
+            this.aSchoolButton.PulseSpeed = 0.5F;
             this.aSchoolButton.PulseWidth = 20;
             this.aSchoolButton.Size = new System.Drawing.Size(476, 233);
             this.aSchoolButton.TabIndex = 1;
-            this.aSchoolButton.Text = "Add / Delete Schools";
+            this.aSchoolButton.Text = "Maintain Schools";
             this.aSchoolButton.UseVisualStyleBackColor = false;
             this.aSchoolButton.Click += new System.EventHandler(this.ASchool_Button);
             // 
@@ -66,9 +66,9 @@
             this.exitButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.exitButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exitButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.exitButton.Location = new System.Drawing.Point(792, 92);
+            this.exitButton.Location = new System.Drawing.Point(795, 308);
             this.exitButton.Name = "exitButton";
-            this.exitButton.PulseSpeed = 0.2F;
+            this.exitButton.PulseSpeed = 0.5F;
             this.exitButton.PulseWidth = 20;
             this.exitButton.Size = new System.Drawing.Size(476, 233);
             this.exitButton.TabIndex = 2;
@@ -84,13 +84,13 @@
             this.aArcherButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.aArcherButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aArcherButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.aArcherButton.Location = new System.Drawing.Point(528, 331);
+            this.aArcherButton.Location = new System.Drawing.Point(524, 69);
             this.aArcherButton.Name = "aArcherButton";
-            this.aArcherButton.PulseSpeed = 0.2F;
+            this.aArcherButton.PulseSpeed = 0.5F;
             this.aArcherButton.PulseWidth = 20;
             this.aArcherButton.Size = new System.Drawing.Size(476, 233);
             this.aArcherButton.TabIndex = 3;
-            this.aArcherButton.Text = "Add / Delete Archers";
+            this.aArcherButton.Text = "Maintain Archers";
             this.aArcherButton.UseVisualStyleBackColor = false;
             this.aArcherButton.Click += new System.EventHandler(this.ArcherButton_CLick);
             // 
@@ -143,13 +143,13 @@
             this.meetButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.meetButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.meetButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.meetButton.Location = new System.Drawing.Point(254, 92);
+            this.meetButton.Location = new System.Drawing.Point(272, 308);
             this.meetButton.Name = "meetButton";
-            this.meetButton.PulseSpeed = 0.2F;
+            this.meetButton.PulseSpeed = 0.5F;
             this.meetButton.PulseWidth = 20;
             this.meetButton.Size = new System.Drawing.Size(476, 233);
             this.meetButton.TabIndex = 5;
-            this.meetButton.Text = "Start New Meet";
+            this.meetButton.Text = "Scan Results";
             this.meetButton.UseVisualStyleBackColor = true;
             this.meetButton.Click += new System.EventHandler(this.MeetButton_Click);
             // 
@@ -161,9 +161,9 @@
             this.psButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.psButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.psButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.psButton.Location = new System.Drawing.Point(1023, 331);
+            this.psButton.Location = new System.Drawing.Point(1018, 69);
             this.psButton.Name = "psButton";
-            this.psButton.PulseSpeed = 0.2F;
+            this.psButton.PulseSpeed = 0.5F;
             this.psButton.PulseWidth = 20;
             this.psButton.Size = new System.Drawing.Size(476, 233);
             this.psButton.TabIndex = 6;
@@ -176,7 +176,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1558, 618);
+            this.ClientSize = new System.Drawing.Size(1558, 571);
             this.Controls.Add(this.psButton);
             this.Controls.Add(this.meetButton);
             this.Controls.Add(this.aArcherButton);

@@ -51,6 +51,7 @@ namespace Lcasp
             //ArcherData a2 = new ArcherData(iData2);
 
             // ArcherData s22 = new DatabaseQueries().SetArcherData(a2);
+            //new DatabaseQueries().CheckDatabaseVersion();
 
             new DatabaseQueries().CreateDatabase();
 

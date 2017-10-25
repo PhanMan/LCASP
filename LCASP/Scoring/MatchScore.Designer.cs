@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.cancelButton = new Lcasp.PulseButton();
-            this.dataList = new System.Windows.Forms.ListBox();
+            this.DataListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.smButton = new Lcasp.PulseButton();
-            this.ExportButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -42,24 +41,25 @@
             this.cancelButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(1228, 920);
+            this.cancelButton.Location = new System.Drawing.Point(1153, 822);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.PulseSpeed = 0.2F;
-            this.cancelButton.Size = new System.Drawing.Size(289, 101);
+            this.cancelButton.PulseSpeed = 0.5F;
+            this.cancelButton.PulseWidth = 20;
+            this.cancelButton.Size = new System.Drawing.Size(368, 195);
             this.cancelButton.TabIndex = 24;
             this.cancelButton.Text = "Close";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
-            // dataList
+            // DataListBox
             // 
-            this.dataList.FormattingEnabled = true;
-            this.dataList.ItemHeight = 25;
-            this.dataList.Location = new System.Drawing.Point(39, 75);
-            this.dataList.Name = "dataList";
-            this.dataList.Size = new System.Drawing.Size(1821, 829);
-            this.dataList.TabIndex = 25;
-            this.dataList.SelectedIndexChanged += new System.EventHandler(this.DataList_SelectedIndexChanged);
+            this.DataListBox.FormattingEnabled = true;
+            this.DataListBox.ItemHeight = 25;
+            this.DataListBox.Location = new System.Drawing.Point(39, 75);
+            this.DataListBox.Name = "DataListBox";
+            this.DataListBox.Size = new System.Drawing.Size(1821, 729);
+            this.DataListBox.TabIndex = 25;
+            this.DataListBox.SelectedIndexChanged += new System.EventHandler(this.DataListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -78,43 +78,27 @@
             this.smButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.smButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.smButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.smButton.Location = new System.Drawing.Point(322, 920);
+            this.smButton.Location = new System.Drawing.Point(342, 822);
             this.smButton.Name = "smButton";
-            this.smButton.PulseSpeed = 0.2F;
-            this.smButton.Size = new System.Drawing.Size(289, 101);
+            this.smButton.PulseSpeed = 0.5F;
+            this.smButton.PulseWidth = 20;
+            this.smButton.Size = new System.Drawing.Size(368, 195);
             this.smButton.TabIndex = 27;
-            this.smButton.Text = "Score Match";
+            this.smButton.Text = "Process Match";
             this.smButton.UseVisualStyleBackColor = true;
             this.smButton.Click += new System.EventHandler(this.ScoreMatch_Button);
-            // 
-            // ExportButton
-            // 
-            this.ExportButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
-            this.ExportButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
-            this.ExportButton.FocusColor = System.Drawing.Color.SpringGreen;
-            this.ExportButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExportButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ExportButton.Location = new System.Drawing.Point(775, 920);
-            this.ExportButton.Name = "ExportButton";
-            this.ExportButton.PulseSpeed = 0.2F;
-            this.ExportButton.Size = new System.Drawing.Size(289, 101);
-            this.ExportButton.TabIndex = 28;
-            this.ExportButton.Text = "Export Results";
-            this.ExportButton.UseVisualStyleBackColor = true;
-            this.ExportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // MatchScore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1899, 1047);
-            this.Controls.Add(this.ExportButton);
             this.Controls.Add(this.smButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataList);
+            this.Controls.Add(this.DataListBox);
             this.Controls.Add(this.cancelButton);
             this.Name = "MatchScore";
-            this.Text = "MatchScore";
+            this.Text = "Match Scoring";
             this.Load += new System.EventHandler(this.MatchScore_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -124,9 +108,8 @@
         #endregion
 
         private PulseButton cancelButton;
-        private System.Windows.Forms.ListBox dataList;
+        private System.Windows.Forms.ListBox DataListBox;
         private System.Windows.Forms.Label label1;
         private PulseButton smButton;
-        private PulseButton ExportButton;
     }
 }

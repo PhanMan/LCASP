@@ -34,15 +34,12 @@ namespace Lcasp
             this.Close();
         }
 
-        private void DataList_SelectedIndexChanged(object sender, EventArgs e)
+        private void DataListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void MatchScore_Load(object sender, EventArgs e)
         {
-
-
             aTimer.Tick += new EventHandler(Timer_Tick); // Everytime timer ticks, timer_Tick will be called
             aTimer.Interval = 250;          // Timer will tick evert 10 seconds
             aTimer.Enabled = true;                       // Enable the timer
@@ -60,7 +57,7 @@ namespace Lcasp
                 Archer a = new DatabaseQueries().GetArcher(ad.ArcherID);
 
                 label1.Font = new Font("Courier new", 10);
-                dataList.Font = new Font("Courier new", 10, FontStyle.Bold);
+                DataListBox.Font = new Font("Courier new", 10, FontStyle.Bold);
 
 
                 string lstr = "Archer Name".PadRight(20) + "          " + "SCORE" + sep + "10s" + sep + "9s" + sep + "8s" + sep + "7s" + sep + "6s" + sep + "5s" + sep + "4s" + sep + "3s" + sep + "2s" + sep + "1s" + sep + "0s";
@@ -78,7 +75,9 @@ namespace Lcasp
                                                                                        ad.ArcherOnes.ToString("00") + sep +
                                                                                        ad.ArcherZeros.ToString("00");
 
-                dataList.Items.Add(str);
+                DataListBox.Items.Add(str);
+                DataListBox.SelectedIndex = DataListBox.Items.Count - 1;
+
             }
         }
 
@@ -94,13 +93,16 @@ namespace Lcasp
             osr.Print();
             //ScoreReport theReport = new ScoreReport(theScore);
 
+            ExportTeamData();
+
+            MessageBox.Show("Match Processed : Team Data Exported.");
         }
 
-        private void ExportButton_Click(object sender, EventArgs e)
+        private void ExportTeamData()
         {
             Scoring theScore = new Scoring();
 
-            foreach(SchoolStanding ss in theScore.StandingList)
+            foreach (SchoolStanding ss in theScore.StandingList)
             {
                 string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), ss.School_Name + ".csv");
 
@@ -108,19 +110,19 @@ namespace Lcasp
 
                 sw.WriteLine(ss.School_Name + "," + ss.TeamMatchScore);
 
-                foreach(KeyValuePair<int, int> male in ss.Male)
+                foreach (KeyValuePair<int, int> male in ss.Male)
                 {
-                     sw.WriteLine(GenerateCSVString(male));
+                    sw.WriteLine(GenerateCSVString("M", male));
                 }
 
                 foreach (KeyValuePair<int, int> female in ss.Female)
                 {
-                    sw.WriteLine(GenerateCSVString(female));
+                    sw.WriteLine(GenerateCSVString("F", female));
                 }
 
                 foreach (KeyValuePair<int, int> overall in ss.Overall)
                 {
-                    sw.WriteLine(GenerateCSVString(overall));
+                    sw.WriteLine(GenerateCSVString(" ", overall));
                 }
 
                 sw.WriteLine("");
@@ -128,31 +130,53 @@ namespace Lcasp
 
                 sw.WriteLine("Complete Team Listing");
 
-                foreach(KeyValuePair<int, int> entire in ss.TeamWide)
+                foreach (KeyValuePair<int, int> entire in ss.TeamWide)
                 {
-                    sw.WriteLine(GenerateCSVString(entire));
+                    sw.WriteLine(GenerateCSVString(" ", entire));
                 }
 
                 sw.Flush();
                 sw.Close();
+
+                MessageBox.Show("Team Score Files Saved!");
             }
         }
 
-        private string GenerateCSVString(KeyValuePair<int, int> archer)
+        private string GenerateCSVString(string sex, KeyValuePair<int, int> archer)
         {
             string retVal = "";
             string sepString = ",";
 
-            Archer theArcher = new DatabaseQueries().GetArcher(archer.Value);
-            ArcherData theArcherData = new DatabaseQueries().GetArcherData(archer.Value);
+            if (archer.Key == 0 && archer.Value == 0)
+            {
+                string s = " ";
 
-            retVal += theArcher.ArcherName + "," + theArcher.ArcherSex + "," + theArcher.ArcherAIMSID + "," + theArcherData.ArcherScore + ",";
-            retVal += theArcherData.EndOne.ShotOne + sepString + theArcherData.EndOne.ShotTwo + sepString + theArcherData.EndOne.ShotThree + sepString + theArcherData.EndOne.ShotFour + sepString + theArcherData.EndOne.ShotFive + sepString;
-            retVal += theArcherData.EndTwo.ShotOne + sepString + theArcherData.EndTwo.ShotTwo + sepString + theArcherData.EndTwo.ShotThree + sepString + theArcherData.EndTwo.ShotFour + sepString + theArcherData.EndTwo.ShotFive + sepString;
-            retVal += theArcherData.EndThree.ShotOne + sepString + theArcherData.EndThree.ShotTwo + sepString + theArcherData.EndThree.ShotThree + sepString + theArcherData.EndThree.ShotFour + sepString + theArcherData.EndThree.ShotFive + sepString;
-            retVal += theArcherData.EndFour.ShotOne + sepString + theArcherData.EndFour.ShotTwo + sepString + theArcherData.EndFour.ShotThree + sepString + theArcherData.EndFour.ShotFour + sepString + theArcherData.EndFour.ShotFive + sepString;
-            retVal += theArcherData.EndFive.ShotOne + sepString + theArcherData.EndFive.ShotTwo + sepString + theArcherData.EndFive.ShotThree + sepString + theArcherData.EndFive.ShotFour + sepString + theArcherData.EndFive.ShotFive + sepString;
-            retVal += theArcherData.EndSix.ShotOne + sepString + theArcherData.EndSix.ShotTwo + sepString + theArcherData.EndSix.ShotThree + sepString + theArcherData.EndSix.ShotFour + sepString + theArcherData.EndSix.ShotFive;
+                if (sex.CompareTo("M") == 0 || sex.CompareTo("F") == 0)
+                    s = "Gender Quota Violation";
+                else
+                    s = "Minimum Shooter Violation";
+
+                retVal += s + "," + sex + "," + 0 + "," + 0 + ",";
+                retVal += 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString;
+                retVal += 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString;
+                retVal += 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString;
+                retVal += 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString;
+                retVal += 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString;
+                retVal += 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString + 0 + sepString;
+            }
+            else
+            {
+                Archer theArcher = new DatabaseQueries().GetArcher(archer.Value);
+                ArcherData theArcherData = new DatabaseQueries().GetArcherData(archer.Value);
+
+                retVal += theArcher.ArcherName + "," + theArcher.ArcherSex + "," + theArcher.ArcherAIMSID + "," + theArcherData.ArcherScore + ",";
+                retVal += theArcherData.EndOne.ShotOne + sepString + theArcherData.EndOne.ShotTwo + sepString + theArcherData.EndOne.ShotThree + sepString + theArcherData.EndOne.ShotFour + sepString + theArcherData.EndOne.ShotFive + sepString;
+                retVal += theArcherData.EndTwo.ShotOne + sepString + theArcherData.EndTwo.ShotTwo + sepString + theArcherData.EndTwo.ShotThree + sepString + theArcherData.EndTwo.ShotFour + sepString + theArcherData.EndTwo.ShotFive + sepString;
+                retVal += theArcherData.EndThree.ShotOne + sepString + theArcherData.EndThree.ShotTwo + sepString + theArcherData.EndThree.ShotThree + sepString + theArcherData.EndThree.ShotFour + sepString + theArcherData.EndThree.ShotFive + sepString;
+                retVal += theArcherData.EndFour.ShotOne + sepString + theArcherData.EndFour.ShotTwo + sepString + theArcherData.EndFour.ShotThree + sepString + theArcherData.EndFour.ShotFour + sepString + theArcherData.EndFour.ShotFive + sepString;
+                retVal += theArcherData.EndFive.ShotOne + sepString + theArcherData.EndFive.ShotTwo + sepString + theArcherData.EndFive.ShotThree + sepString + theArcherData.EndFive.ShotFour + sepString + theArcherData.EndFive.ShotFive + sepString;
+                retVal += theArcherData.EndSix.ShotOne + sepString + theArcherData.EndSix.ShotTwo + sepString + theArcherData.EndSix.ShotThree + sepString + theArcherData.EndSix.ShotFour + sepString + theArcherData.EndSix.ShotFive;
+            }
 
             return retVal;
         }

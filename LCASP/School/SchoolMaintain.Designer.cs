@@ -123,7 +123,7 @@
             this.Controls.Add(this.label1);
             this.Name = "SchoolMaintain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SchoolMaintain";
+            this.Text = "Maintain Schools";
             this.Load += new System.EventHandler(this.SchoolMaintain_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

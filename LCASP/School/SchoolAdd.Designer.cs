@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.nameBox = new System.Windows.Forms.TextBox();
+            this.NameBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.addBox = new System.Windows.Forms.TextBox();
+            this.AddBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cityBox = new System.Windows.Forms.TextBox();
+            this.CityBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.stateBox = new System.Windows.Forms.TextBox();
+            this.StateBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.zipBox = new System.Windows.Forms.TextBox();
+            this.ZipBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cButton = new Lcasp.PulseButton();
-            this.sButton = new Lcasp.PulseButton();
+            this.CButton = new Lcasp.PulseButton();
+            this.SButton = new Lcasp.PulseButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,12 +53,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "School Name (Required)";
             // 
-            // nameBox
+            // NameBox
             // 
-            this.nameBox.Location = new System.Drawing.Point(30, 66);
-            this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(496, 31);
-            this.nameBox.TabIndex = 1;
+            this.NameBox.Location = new System.Drawing.Point(30, 66);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.Size = new System.Drawing.Size(496, 31);
+            this.NameBox.TabIndex = 1;
+            this.NameBox.TextChanged += new System.EventHandler(this.NameBoxChanged);
             // 
             // label2
             // 
@@ -69,13 +70,13 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "School Address";
             // 
-            // addBox
+            // AddBox
             // 
-            this.addBox.Enabled = false;
-            this.addBox.Location = new System.Drawing.Point(30, 156);
-            this.addBox.Name = "addBox";
-            this.addBox.Size = new System.Drawing.Size(496, 31);
-            this.addBox.TabIndex = 3;
+            this.AddBox.Enabled = false;
+            this.AddBox.Location = new System.Drawing.Point(30, 156);
+            this.AddBox.Name = "AddBox";
+            this.AddBox.Size = new System.Drawing.Size(496, 31);
+            this.AddBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -86,13 +87,13 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "City";
             // 
-            // cityBox
+            // CityBox
             // 
-            this.cityBox.Enabled = false;
-            this.cityBox.Location = new System.Drawing.Point(30, 247);
-            this.cityBox.Name = "cityBox";
-            this.cityBox.Size = new System.Drawing.Size(243, 31);
-            this.cityBox.TabIndex = 5;
+            this.CityBox.Enabled = false;
+            this.CityBox.Location = new System.Drawing.Point(30, 247);
+            this.CityBox.Name = "CityBox";
+            this.CityBox.Size = new System.Drawing.Size(243, 31);
+            this.CityBox.TabIndex = 5;
             // 
             // label4
             // 
@@ -103,13 +104,13 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "State";
             // 
-            // stateBox
+            // StateBox
             // 
-            this.stateBox.Enabled = false;
-            this.stateBox.Location = new System.Drawing.Point(302, 247);
-            this.stateBox.Name = "stateBox";
-            this.stateBox.Size = new System.Drawing.Size(81, 31);
-            this.stateBox.TabIndex = 7;
+            this.StateBox.Enabled = false;
+            this.StateBox.Location = new System.Drawing.Point(302, 247);
+            this.StateBox.Name = "StateBox";
+            this.StateBox.Size = new System.Drawing.Size(81, 31);
+            this.StateBox.TabIndex = 7;
             // 
             // label5
             // 
@@ -120,65 +121,65 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Zip";
             // 
-            // zipBox
+            // ZipBox
             // 
-            this.zipBox.Enabled = false;
-            this.zipBox.Location = new System.Drawing.Point(412, 247);
-            this.zipBox.Name = "zipBox";
-            this.zipBox.Size = new System.Drawing.Size(114, 31);
-            this.zipBox.TabIndex = 9;
+            this.ZipBox.Enabled = false;
+            this.ZipBox.Location = new System.Drawing.Point(412, 247);
+            this.ZipBox.Name = "ZipBox";
+            this.ZipBox.Size = new System.Drawing.Size(114, 31);
+            this.ZipBox.TabIndex = 9;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cButton);
+            this.groupBox1.Controls.Add(this.CButton);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.sButton);
-            this.groupBox1.Controls.Add(this.nameBox);
-            this.groupBox1.Controls.Add(this.zipBox);
+            this.groupBox1.Controls.Add(this.SButton);
+            this.groupBox1.Controls.Add(this.NameBox);
+            this.groupBox1.Controls.Add(this.ZipBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.addBox);
-            this.groupBox1.Controls.Add(this.stateBox);
+            this.groupBox1.Controls.Add(this.AddBox);
+            this.groupBox1.Controls.Add(this.StateBox);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.cityBox);
+            this.groupBox1.Controls.Add(this.CityBox);
             this.groupBox1.Location = new System.Drawing.Point(25, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(557, 454);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
-            // cButton
+            // CButton
             // 
-            this.cButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
-            this.cButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
-            this.cButton.FocusColor = System.Drawing.Color.SpringGreen;
-            this.cButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cButton.Location = new System.Drawing.Point(296, 301);
-            this.cButton.Name = "cButton";
-            this.cButton.PulseSpeed = 0.2F;
-            this.cButton.Size = new System.Drawing.Size(230, 101);
-            this.cButton.TabIndex = 14;
-            this.cButton.Text = "Close";
-            this.cButton.UseVisualStyleBackColor = true;
-            this.cButton.Click += new System.EventHandler(this.cButton_Click);
+            this.CButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
+            this.CButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.CButton.FocusColor = System.Drawing.Color.SpringGreen;
+            this.CButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.CButton.Location = new System.Drawing.Point(296, 301);
+            this.CButton.Name = "CButton";
+            this.CButton.PulseSpeed = 0.2F;
+            this.CButton.Size = new System.Drawing.Size(230, 101);
+            this.CButton.TabIndex = 14;
+            this.CButton.Text = "Close";
+            this.CButton.UseVisualStyleBackColor = true;
+            this.CButton.Click += new System.EventHandler(this.CButtonClick);
             // 
-            // sButton
+            // SButton
             // 
-            this.sButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
-            this.sButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
-            this.sButton.FocusColor = System.Drawing.Color.SpringGreen;
-            this.sButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.sButton.Location = new System.Drawing.Point(30, 301);
-            this.sButton.Name = "sButton";
-            this.sButton.PulseSpeed = 0.2F;
-            this.sButton.Size = new System.Drawing.Size(230, 101);
-            this.sButton.TabIndex = 13;
-            this.sButton.Text = "Save";
-            this.sButton.UseVisualStyleBackColor = true;
-            this.sButton.Click += new System.EventHandler(this.sButton_Click);
+            this.SButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
+            this.SButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.SButton.FocusColor = System.Drawing.Color.SpringGreen;
+            this.SButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.SButton.Location = new System.Drawing.Point(30, 301);
+            this.SButton.Name = "SButton";
+            this.SButton.PulseSpeed = 0.2F;
+            this.SButton.Size = new System.Drawing.Size(230, 101);
+            this.SButton.TabIndex = 13;
+            this.SButton.Text = "Save";
+            this.SButton.UseVisualStyleBackColor = true;
+            this.SButton.Click += new System.EventHandler(this.SButtonClick);
             // 
             // SchoolAdd
             // 
@@ -188,7 +189,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "SchoolAdd";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AddSchool";
+            this.Text = "Add School";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -198,17 +199,17 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox nameBox;
+        private System.Windows.Forms.TextBox NameBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox addBox;
+        private System.Windows.Forms.TextBox AddBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox cityBox;
+        private System.Windows.Forms.TextBox CityBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox stateBox;
+        private System.Windows.Forms.TextBox StateBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox zipBox;
+        private System.Windows.Forms.TextBox ZipBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private Lcasp.PulseButton cButton;
-        private Lcasp.PulseButton sButton;
+        private Lcasp.PulseButton CButton;
+        private Lcasp.PulseButton SButton;
     }
 }
