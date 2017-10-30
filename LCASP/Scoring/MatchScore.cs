@@ -30,6 +30,8 @@ namespace Lcasp
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            aTimer.Stop();
+            aTimer = null;
             sc.Close();
             this.Close();
         }
@@ -83,24 +85,72 @@ namespace Lcasp
 
         private void ScoreMatch_Button(object sender, EventArgs e)
         {
-            Scoring theScore = new Scoring();
+            //Scoring theScore = new Scoring();
 
-            int score = theScore.StandingList[0].TeamMatchScore;
+            //int score = theScore.StandingList[0].TeamMatchScore;
 
-            OverallScoreReport osr = new OverallScoreReport(theScore.OverallList);
-            osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+            //OverallScoreReport osr = new OverallScoreReport(theScore.OverallList);
+            //osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
 
-            osr.Print();
+            //osr.Print();
             //ScoreReport theReport = new ScoreReport(theScore);
 
-            ExportTeamData();
+            Scoring theScore = new Scoring();
 
-            MessageBox.Show("Match Processed : Team Data Exported.");
+            ExportMatchResult(theScore);
+
+            ExportTeamData(theScore);
+
+            MessageBox.Show("Match Processed : All Data Exported.");
         }
 
-        private void ExportTeamData()
+        private void ExportMatchResult(Scoring theScore)
         {
-            Scoring theScore = new Scoring();
+            //Scoring theScore = new Scoring();
+             
+            SortedList<int, int> theSortedList = new SortedList<int, int>(new ScoreComparer<int>());
+
+            for (int counter = 0; counter < theScore.StandingList.Count; counter++)
+            {
+                theSortedList.Add(theScore.StandingList[counter].TeamMatchScore, counter);
+            }
+
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "MatchResults.csv");
+            TextWriter sw = new StreamWriter(filePath, false, Encoding.UTF8);
+            sw.WriteLine("Overall Match Results");
+
+            foreach (KeyValuePair<int, int> kvp in theSortedList)
+            {
+                sw.WriteLine(theScore.StandingList[kvp.Value].School_Name + "," + theScore.StandingList[kvp.Value].TeamMatchScore);
+
+                foreach (KeyValuePair<int, int> male in theScore.StandingList[kvp.Value].Male)
+                {
+                    sw.WriteLine(GenerateCSVString("M", male));
+                }
+
+                foreach (KeyValuePair<int, int> female in theScore.StandingList[kvp.Value].Female)
+                {
+                    sw.WriteLine(GenerateCSVString("F", female));
+                }
+
+                foreach (KeyValuePair<int, int> overall in theScore.StandingList[kvp.Value].Overall)
+                {
+                    sw.WriteLine(GenerateCSVString(" ", overall));
+                }
+
+                sw.WriteLine("");
+                sw.WriteLine("");
+
+                sw.Flush();
+            }
+
+            sw.Close();
+        }
+
+
+        private void ExportTeamData(Scoring theScore)
+        {
+           // Scoring theScore = new Scoring();
 
             foreach (SchoolStanding ss in theScore.StandingList)
             {
@@ -137,8 +187,6 @@ namespace Lcasp
 
                 sw.Flush();
                 sw.Close();
-
-                MessageBox.Show("Team Score Files Saved!");
             }
         }
 
