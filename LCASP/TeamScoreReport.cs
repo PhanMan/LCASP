@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Lcasp
 {
-    public class OverallScoreReport : System.Drawing.Printing.PrintDocument
+    public class TeamScoreReport : System.Drawing.Printing.PrintDocument
     {
         private IEnumerator printItems = null;
         public Font PrinterFont { get; set; }
@@ -18,10 +18,13 @@ namespace Lcasp
         int archerCount = 1;
         int page = 1;
         private SortedList<int, int> printList = null;
+        private string printTeamName = "";
 
-        public OverallScoreReport(SortedList<int, int> theList)
+        public TeamScoreReport(string teamName, SortedList<int, int> theList)
         {
             printList = theList;
+            printTeamName = teamName;
+
             printItems = printList.GetEnumerator();
         }
 
@@ -46,6 +49,7 @@ namespace Lcasp
         {
             string sepString = " ";
 
+
             KeyValuePair<int, int> theItem = new KeyValuePair<int, int>();
             // Run base code
             base.OnPrintPage(e);
@@ -56,7 +60,7 @@ namespace Lcasp
             Pen thePen = new Pen(myBrush);
             txtheight = TextRenderer.MeasureText("x", PrinterFont).Height;
 
-            DrawPageHeader(myGraphics, myBrush, thePen, "Overall Archer Report / Page " + page++.ToString().PadLeft(2));
+            DrawPageHeader(myGraphics, myBrush, thePen, printTeamName + " Archer Report / Page " + page++.ToString().PadLeft(2));
 
 
             do
@@ -65,7 +69,7 @@ namespace Lcasp
 
                 Archer theArcher = new DatabaseQueries().GetArcher(theItem.Value);
                 ArcherData theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
-                
+
                 string printString = archerCount++.ToString().PadRight(3) + " " + theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
                                      theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +
                                      theArcher.ArcherAIMSID.ToString().PadLeft(10) + sepString +
@@ -144,4 +148,5 @@ namespace Lcasp
         }
     }
 }
+
 

@@ -26,7 +26,7 @@ namespace Lcasp
 
             SqlConnection theConnection = new SqlConnection(connectionString);
 
-            theConnection.Open();
+           theConnection.Open();
 
             string cmd = "Select school_id, school_name from schools order by school_name asc";
 
@@ -86,6 +86,7 @@ namespace Lcasp
 
             int a_id = (int)theCmd.ExecuteScalar();
 
+            theConnection.Close();
             return a_id;
 
         }
@@ -114,7 +115,7 @@ namespace Lcasp
 
             int result = (int)theCmd.ExecuteNonQuery();
 
-            theConnection.Close();
+           theConnection.Close();
         }
 
         public List<Archer> GetSchoolArchers(int s_id, string form)
@@ -182,7 +183,7 @@ namespace Lcasp
             }
 
             theReader.Close();
-            theConnection.Close();
+           theConnection.Close();
 
             return theList;
         }
@@ -261,7 +262,7 @@ namespace Lcasp
                 scoreData.ArcherDataID = -1;
             }
 
-            theConnection.Close();
+           theConnection.Close();
             return scoreData;
         }
 
@@ -273,7 +274,7 @@ namespace Lcasp
 
             SqlConnection theConnection = new SqlConnection(connectionString);
 
-            theConnection.Open();
+           theConnection.Open();
 
             SqlCommand theCmd = new SqlCommand(sql, theConnection);
 
@@ -323,6 +324,8 @@ namespace Lcasp
                     };
                 }
             }
+
+            theConnection.Close();
             return retData;
         }
 
@@ -330,7 +333,7 @@ namespace Lcasp
         {
             string sql = "select database_version from lcasp_version";
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
+           SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 

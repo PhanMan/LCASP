@@ -89,9 +89,6 @@
     <Compile Include="OverallScoreReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ScoreReport.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="System\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,6 +164,9 @@
     </Compile>
     <Compile Include="Scoring\ScoreComparer.cs" />
     <Compile Include="Scoring\Scoring.cs" />
+    <Compile Include="TeamScoreReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="System\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>

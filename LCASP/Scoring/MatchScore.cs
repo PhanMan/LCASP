@@ -16,10 +16,13 @@ namespace Lcasp
         ScannerComm sc = null;
         Timer aTimer = new Timer();
         public CommQueue theQueue = null;
+        private DatabaseQueries dQ = null;
 
         public MatchScore()
         {
             InitializeComponent();
+
+            dQ = new DatabaseQueries();
 
             theQueue = new CommQueue();
 
@@ -30,6 +33,7 @@ namespace Lcasp
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            dQ = null;
             aTimer.Stop();
             aTimer = null;
             sc.Close();
@@ -56,7 +60,7 @@ namespace Lcasp
             while ((dataLine = theQueue.DeQueue()) != null)
             {
                 ArcherData ad = new ArcherData(dataLine);
-                Archer a = new DatabaseQueries().GetArcher(ad.ArcherID);
+                Archer a = dQ.GetArcher(ad.ArcherID);
 
                 label1.Font = new Font("Courier new", 10);
                 DataListBox.Font = new Font("Courier new", 10, FontStyle.Bold);
@@ -85,29 +89,50 @@ namespace Lcasp
 
         private void ScoreMatch_Button(object sender, EventArgs e)
         {
-            //Scoring theScore = new Scoring();
 
-            //int score = theScore.StandingList[0].TeamMatchScore;
+            PrintOverallScoreReport();
 
-            //OverallScoreReport osr = new OverallScoreReport(theScore.OverallList);
-            //osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+            PrintTeamScoreReport();
 
-            //osr.Print();
-            //ScoreReport theReport = new ScoreReport(theScore);
+            ExportMatchResult();
 
-            Scoring theScore = new Scoring();
-
-            ExportMatchResult(theScore);
-
-            ExportTeamData(theScore);
+            ExportTeamData();
 
             MessageBox.Show("Match Processed : All Data Exported.");
         }
 
-        private void ExportMatchResult(Scoring theScore)
+        private void PrintTeamScoreReport()
         {
-            //Scoring theScore = new Scoring();
-             
+            Scoring theScore = new Scoring();
+            
+            foreach(SchoolStanding school in theScore.StandingList)
+            {
+                TeamScoreReport osr = new TeamScoreReport(school.School_Name, school.TeamWide);
+
+                osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+                osr.Print();
+
+                theScore = null;
+            }
+        }
+
+        private void PrintOverallScoreReport()
+        {
+            Scoring theScore = new Scoring();
+
+            OverallScoreReport osr = new OverallScoreReport(theScore.OverallList);
+            osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+            osr.Print();
+
+            theScore = null;
+        }
+
+        private void ExportMatchResult()
+        {
+            Scoring theScore = new Scoring();
+
             SortedList<int, int> theSortedList = new SortedList<int, int>(new ScoreComparer<int>());
 
             for (int counter = 0; counter < theScore.StandingList.Count; counter++)
@@ -145,12 +170,14 @@ namespace Lcasp
             }
 
             sw.Close();
+
+            GC.Collect();
         }
 
 
-        private void ExportTeamData(Scoring theScore)
+        private void ExportTeamData()
         {
-           // Scoring theScore = new Scoring();
+            Scoring theScore = new Scoring();
 
             foreach (SchoolStanding ss in theScore.StandingList)
             {
@@ -188,6 +215,8 @@ namespace Lcasp
                 sw.Flush();
                 sw.Close();
             }
+
+            GC.Collect();
         }
 
         private string GenerateCSVString(string sex, KeyValuePair<int, int> archer)
@@ -214,8 +243,8 @@ namespace Lcasp
             }
             else
             {
-                Archer theArcher = new DatabaseQueries().GetArcher(archer.Value);
-                ArcherData theArcherData = new DatabaseQueries().GetArcherData(archer.Value);
+                Archer theArcher = dQ.GetArcher(archer.Value);
+                ArcherData theArcherData = dQ.GetArcherData(archer.Value);
 
                 retVal += theArcher.ArcherName + "," + theArcher.ArcherSex + "," + theArcher.ArcherAIMSID + "," + theArcherData.ArcherScore + ",";
                 retVal += theArcherData.EndOne.ShotOne + sepString + theArcherData.EndOne.ShotTwo + sepString + theArcherData.EndOne.ShotThree + sepString + theArcherData.EndOne.ShotFour + sepString + theArcherData.EndOne.ShotFive + sepString;
