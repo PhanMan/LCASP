@@ -59,6 +59,10 @@ namespace Lcasp
             return 1;
         }
 
+        public string InspectQueue(int index)
+        {
+            return sendData[index];
+        }
 
         public string DeQueue()
         {

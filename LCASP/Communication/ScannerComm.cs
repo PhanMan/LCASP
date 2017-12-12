@@ -147,6 +147,11 @@ namespace Lcasp
             while (theQueue.GetQueueBytes() < 17 && (checkCounter--) > 0)
                 System.Threading.Thread.Sleep(25);
 
+            if(theQueue.InspectQueue(13).Substring(0,3).CompareTo("5.6") != 0)
+            {
+                MessageBox.Show("Scanner Firmware 5.6 Required! (Currently " + theQueue.InspectQueue(13).Substring(0,3) + ")");
+            }
+
             theQueue.ClearQueue();
 
             dataFlow = true;
