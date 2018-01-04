@@ -21,18 +21,17 @@ namespace Lcasp
             school_id = s_id;
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         private bool IsNumeric(string text)
         {
-            int test;
-            return int.TryParse(text, out test);
+            return int.TryParse(text, out int test);
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             if (SexBox.Text.ToUpper().CompareTo("M") == 0 || SexBox.Text.ToUpper().CompareTo("F") == 0 && IsNumeric(StateIDBox.Text))
             {
@@ -59,13 +58,13 @@ namespace Lcasp
             */
         }
 
-        private void importButton_Click(object sender, EventArgs e)
+        private void ImportButton_Click(object sender, EventArgs e)
         {
             new ArcherImport(school_id).ShowDialog();
             this.Close();
         }
 
-        private void sexBox_TextChanged(object sender, EventArgs e)
+        private void SexBox_TextChanged(object sender, EventArgs e)
         {
            
         }

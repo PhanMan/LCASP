@@ -28,7 +28,7 @@
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>36</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,6 +86,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archer\ImportType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Archer\ImportType.Designer.cs">
+      <DependentUpon>ImportType.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="OverallScoreReport.cs">
       <SubType>Component</SubType>
@@ -168,6 +174,9 @@
     <Compile Include="TeamScoreReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="Archer\ImportType.resx">
+      <DependentUpon>ImportType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>

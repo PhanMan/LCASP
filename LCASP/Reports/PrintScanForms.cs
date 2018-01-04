@@ -107,7 +107,16 @@ namespace Lcasp
                 {
                     PrinterFont = new Font("Courier New", 9, FontStyle.Bold);
 
-                    string idNo = theItem.ArcherAIMSID.ToString("000000000");
+                    string idNo = "";
+
+                    if (theItem.ArcherAIMSID == 0)
+                    {
+                        idNo = theItem.ArcherID.ToString("000000000");
+                    }
+                    else
+                    {
+                        idNo = theItem.ArcherAIMSID.ToString("000000000");
+                    }
 
                     for (int counter = 0; counter < 9; counter++)
                     {
@@ -126,7 +135,7 @@ namespace Lcasp
                     }
 
                     myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, archerNamePoint1);
-                    myGraphics.DrawString(theItem.ArcherAIMSID.ToString("000000000"), PrinterFont, myBrush, archerIdPoint1);
+                    myGraphics.DrawString(idNo, PrinterFont, myBrush, archerIdPoint1);
                 }
 
                 myBrush.Dispose();

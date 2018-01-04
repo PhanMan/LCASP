@@ -48,7 +48,7 @@ namespace Lcasp
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog1_FileOk);
             // 
             // chooseButton
             // 
@@ -59,7 +59,7 @@ namespace Lcasp
             this.chooseButton.Size = new System.Drawing.Size(62, 60);
             this.chooseButton.TabIndex = 1;
             this.chooseButton.UseVisualStyleBackColor = true;
-            this.chooseButton.Click += new System.EventHandler(this.button1_Click);
+            this.chooseButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label1
             // 
@@ -85,7 +85,7 @@ namespace Lcasp
             this.iButton.TabIndex = 24;
             this.iButton.Text = "Import";
             this.iButton.UseVisualStyleBackColor = true;
-            this.iButton.Click += new System.EventHandler(this.iButton_Click);
+            this.iButton.Click += new System.EventHandler(this.IButton_Click);
             // 
             // cButton
             // 
@@ -101,7 +101,7 @@ namespace Lcasp
             this.cButton.TabIndex = 25;
             this.cButton.Text = "Close";
             this.cButton.UseVisualStyleBackColor = true;
-            this.cButton.Click += new System.EventHandler(this.cButton_Click);
+            this.cButton.Click += new System.EventHandler(this.CButton_Click);
             // 
             // ArcherImport
             // 

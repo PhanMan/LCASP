@@ -20,40 +20,26 @@ namespace Lcasp
             school_id = s_id;
         }
 
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        private void OpenFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             fileNameBox.Text = openFileDialog1.FileName;
             iButton.Enabled = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.DefaultExt = ".csv";
             openFileDialog1.ShowDialog();
         }
 
-        private void cButton_Click(object sender, EventArgs e)
+        private void CButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void iButton_Click(object sender, EventArgs e)
+        private void IButton_Click(object sender, EventArgs e)
         {
-
-            string[] lines = System.IO.File.ReadAllLines(fileNameBox.Text);
-
-            DatabaseQueries dq = new DatabaseQueries();
-
-            foreach(string s in lines)
-            {
-                string[] items = s.Split(',');
-                //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
-                dq.AddArcher(items[0], Convert.ToInt32(items[2]), items[1], school_id);
-            }
-
-            dq = null;
-
-            MessageBox.Show("Archers Imported.");
+            new ImportType(fileNameBox.Text, school_id).ShowDialog();
 
             this.Close();
         }

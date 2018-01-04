@@ -52,7 +52,7 @@
             this.SexBox.Name = "SexBox";
             this.SexBox.Size = new System.Drawing.Size(170, 31);
             this.SexBox.TabIndex = 1;
-            this.SexBox.TextChanged += new System.EventHandler(this.sexBox_TextChanged);
+            this.SexBox.TextChanged += new System.EventHandler(this.SexBox_TextChanged);
             // 
             // label1
             // 
@@ -86,7 +86,7 @@
             this.saveButton.TabIndex = 22;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // cancelButton
             // 
@@ -102,7 +102,7 @@
             this.cancelButton.TabIndex = 23;
             this.cancelButton.Text = "Close";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // importButton
             // 
@@ -118,7 +118,7 @@
             this.importButton.TabIndex = 24;
             this.importButton.Text = "Import";
             this.importButton.UseVisualStyleBackColor = true;
-            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // StateIDBox
             // 
