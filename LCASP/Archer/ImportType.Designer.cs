@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.okButton = new Lcasp.PulseButton();
             this.cancelButton = new Lcasp.PulseButton();
+            this.InsButton = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,11 +65,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panel1.Controls.Add(this.InsButton);
             this.panel1.Controls.Add(this.nasButton);
             this.panel1.Controls.Add(this.nsButton);
             this.panel1.Location = new System.Drawing.Point(112, 78);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(312, 152);
+            this.panel1.Size = new System.Drawing.Size(312, 209);
             this.panel1.TabIndex = 3;
             // 
             // label1
@@ -88,7 +90,7 @@
             this.okButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.okButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.okButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.okButton.Location = new System.Drawing.Point(30, 255);
+            this.okButton.Location = new System.Drawing.Point(30, 314);
             this.okButton.Name = "okButton";
             this.okButton.PulseSpeed = 0.2F;
             this.okButton.Size = new System.Drawing.Size(230, 101);
@@ -104,7 +106,7 @@
             this.cancelButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(266, 255);
+            this.cancelButton.Location = new System.Drawing.Point(266, 314);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
@@ -113,16 +115,29 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // InsButton
+            // 
+            this.InsButton.AutoSize = true;
+            this.InsButton.Location = new System.Drawing.Point(41, 130);
+            this.InsButton.Name = "InsButton";
+            this.InsButton.Size = new System.Drawing.Size(237, 29);
+            this.InsButton.TabIndex = 2;
+            this.InsButton.TabStop = true;
+            this.InsButton.Text = "AIMS ID, Name, Sex";
+            this.InsButton.UseVisualStyleBackColor = true;
+            this.InsButton.CheckedChanged += new System.EventHandler(this.InsButton_CheckedChanged);
+            // 
             // ImportType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 393);
+            this.ClientSize = new System.Drawing.Size(556, 517);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Name = "ImportType";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ImportType";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -139,5 +154,6 @@
         private System.Windows.Forms.Label label1;
         private PulseButton okButton;
         private PulseButton cancelButton;
+        private System.Windows.Forms.RadioButton InsButton;
     }
 }

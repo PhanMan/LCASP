@@ -62,6 +62,20 @@ namespace Lcasp
 
                     }
                     break;
+                case 3:
+                    {
+                        lines = lines.Where(w => w != lines[0]).ToArray();
+
+                        foreach (string s in lines)
+                        {
+                            string[] items = s.Split(',');
+                            //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
+                            dq.AddArcher(items[1], Convert.ToInt32(items[0]), items[2], school_id);
+                        }
+
+                        MessageBox.Show("Archers Imported.");
+                    }
+                    break;
             }
 
             dq = null;
@@ -84,6 +98,12 @@ namespace Lcasp
         {
             okButton.Enabled = true;
             importType = 2;
+        }
+
+        private void InsButton_CheckedChanged(object sender, EventArgs e)
+        {
+            okButton.Enabled = true;
+            importType = 3;
         }
     }
 }
