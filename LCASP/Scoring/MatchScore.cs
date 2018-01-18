@@ -94,6 +94,8 @@ namespace Lcasp
 
             PrintTeamScoreReport();
 
+            PrintMatchResultsReport();
+
             ExportMatchResult();
 
             ExportTeamData();
@@ -116,6 +118,29 @@ namespace Lcasp
                 theScore = null;
             }
         }
+
+        private void PrintMatchResultsReport()
+        {
+            Scoring theScore = new Scoring();
+
+            SortedList<int, int> theSortedList = new SortedList<int, int>(new ScoreComparer<int>());
+
+            for (int counter = 0; counter < theScore.StandingList.Count; counter++)
+            {
+                theSortedList.Add(theScore.StandingList[counter].TeamMatchScore, counter);
+            }
+
+            MatchResultsReport osr = new MatchResultsReport(theScore, theSortedList);
+
+            osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+            osr.Print();
+
+            theScore = null;
+
+            GC.Collect();
+        }
+
 
         private void PrintOverallScoreReport()
         {

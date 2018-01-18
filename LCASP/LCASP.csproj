@@ -93,7 +93,10 @@
       <DependentUpon>ImportType.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="OverallScoreReport.cs">
+    <Compile Include="Reports\MatchResultsReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\OverallScoreReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="System\About.cs">
@@ -171,7 +174,7 @@
     </Compile>
     <Compile Include="Scoring\ScoreComparer.cs" />
     <Compile Include="Scoring\Scoring.cs" />
-    <Compile Include="TeamScoreReport.cs">
+    <Compile Include="Reports\TeamScoreReport.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="Archer\ImportType.resx">
