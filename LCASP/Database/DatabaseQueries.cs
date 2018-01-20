@@ -287,7 +287,7 @@ namespace Lcasp
         {
             string sql = "insert into archers (school_id, archer_state_id, archer_name, archer_sex) " +
              " values " +
-             "(" + s_id + ", " + aims_id + ", '" + a_name + "', '" + a_sex + "')";
+             "(" + s_id + ", " + aims_id + ", '" + a_name + "', '" + a_sex + "'); SELECT CAST(scope_identity() AS int);";
 
             SqlConnection theConnection = new SqlConnection(connectionString);
 
@@ -295,7 +295,17 @@ namespace Lcasp
 
             SqlCommand theCmd = new SqlCommand(sql, theConnection);
 
-            int result = (int)theCmd.ExecuteNonQuery();
+            int result = (int)theCmd.ExecuteScalar();
+
+
+            if(aims_id == 0 && result != 0)
+            {
+                string updateStr = "Update archers set archer_state_id = " + result.ToString() + " where archer_id = " + result.ToString();
+
+                SqlCommand cmd = new SqlCommand(updateStr, theConnection);
+
+                cmd.ExecuteNonQuery();
+            }
 
             theConnection.Close();
         }

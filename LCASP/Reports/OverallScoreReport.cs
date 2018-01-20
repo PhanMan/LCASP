@@ -15,7 +15,7 @@ namespace Lcasp
         public Font PrinterFont { get; set; }
         int offset = 0;
         int txtheight = 0;
-        int archerCount = 1;
+        int archerCount = 0;
         int page = 1;
         private SortedList<int, int> printList = null;
 
@@ -45,6 +45,7 @@ namespace Lcasp
         protected override void OnPrintPage(System.Drawing.Printing.PrintPageEventArgs e)
         {
             string sepString = " ";
+            int prevScore = 0;
 
             KeyValuePair<int, int> theItem = new KeyValuePair<int, int>();
             // Run base code
@@ -66,7 +67,13 @@ namespace Lcasp
                 Archer theArcher = new DatabaseQueries().GetArcher(theItem.Value);
                 ArcherData theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
                 
-                string printString = archerCount++.ToString().PadRight(3) + " " + theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
+                if(prevScore != theArcherData.ArcherScore)
+                {
+                    prevScore = theArcherData.ArcherScore;
+                    archerCount++;
+                }
+
+                string printString = archerCount.ToString().PadRight(3) + " " + theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
                                      theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +
                                      theArcher.ArcherAIMSID.ToString().PadLeft(10) + sepString +
                                      theArcherData.ArcherScore.ToString().PadLeft(3) + sepString +
