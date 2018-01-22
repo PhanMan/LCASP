@@ -44,7 +44,7 @@
             this.sCombo.Name = "sCombo";
             this.sCombo.Size = new System.Drawing.Size(702, 33);
             this.sCombo.TabIndex = 0;
-            this.sCombo.SelectedIndexChanged += new System.EventHandler(this.schoolCombo_SelectedIndexChanged);
+            this.sCombo.SelectedIndexChanged += new System.EventHandler(this.SchoolCombo_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -69,7 +69,7 @@
             this.cButton.TabIndex = 17;
             this.cButton.Text = "Close";
             this.cButton.UseVisualStyleBackColor = true;
-            this.cButton.Click += new System.EventHandler(this.cButton_Click);
+            this.cButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // aCombo
             // 
@@ -79,7 +79,7 @@
             this.aCombo.Name = "aCombo";
             this.aCombo.Size = new System.Drawing.Size(702, 33);
             this.aCombo.TabIndex = 18;
-            this.aCombo.SelectedIndexChanged += new System.EventHandler(this.aCombo_SelectedIndexChanged);
+            this.aCombo.SelectedIndexChanged += new System.EventHandler(this.ArcherCombo_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -105,7 +105,7 @@
             this.aButton.TabIndex = 20;
             this.aButton.Text = "Add";
             this.aButton.UseVisualStyleBackColor = true;
-            this.aButton.Click += new System.EventHandler(this.aButton_Click);
+            this.aButton.Click += new System.EventHandler(this.ArcherButton_Click);
             // 
             // dButton
             // 
@@ -122,7 +122,7 @@
             this.dButton.TabIndex = 21;
             this.dButton.Text = "Delete";
             this.dButton.UseVisualStyleBackColor = true;
-            this.dButton.Click += new System.EventHandler(this.dButton_Click);
+            this.dButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // ArcherMaintain
             // 

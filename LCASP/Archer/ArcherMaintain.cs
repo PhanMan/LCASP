@@ -58,12 +58,12 @@ namespace Lcasp
             aCombo.ResetText();
         }
 
-        private void cButton_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void schoolCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void SchoolCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBox cb = (ComboBox)sender;
 
@@ -74,14 +74,14 @@ namespace Lcasp
 
         }
 
-        private void aButton_Click(object sender, EventArgs e)
+        private void ArcherButton_Click(object sender, EventArgs e)
         {
             new ArcherAdd((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem)).ShowDialog();
 
             ReloadArcherBox();
         }
 
-        private void dButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             new DatabaseQueries().DeleteArcher((int)aCombo.SelectedItem.GetType().GetProperty("Value").GetValue(aCombo.SelectedItem));
 
@@ -93,7 +93,7 @@ namespace Lcasp
             dButton.Enabled = false;
         }
 
-        private void aCombo_SelectedIndexChanged(object sender, EventArgs e)
+        private void ArcherCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             dButton.Enabled = true;
         }
