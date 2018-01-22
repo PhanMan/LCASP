@@ -24,6 +24,9 @@ namespace Lcasp
             scanFormBox.DisplayMember = "Text";
             scanFormBox.ValueMember = "Value";
 
+            aCombo.DisplayMember = "Text";
+            aCombo.ValueMember = "Value";
+
 
             scanFormBox.Items.Add(new { Text = "NASP", Value = "NASP" });// new KeyValuePair<string, string>("NASP", "NASP"));
             scanFormBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
@@ -50,10 +53,27 @@ namespace Lcasp
             sCombo.ResetText();
         }
 
+        private void ReloadArcherBox()
+        {
+            aCombo.Items.Clear();
+
+            List<Archer> theList = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), "XXXX");
+
+            aCombo.Items.Add(new { Text = "All", Value = "All" });
+
+            foreach (Archer archer in theList)
+            {
+                aCombo.Items.Add(new { Text = archer.ArcherName, Value = archer.ArcherID });
+            }
+
+            aCombo.SelectedIndex = -1;
+            aCombo.ResetText();
+        }
+
 
         private void SCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            printButton.Enabled = true;
+            ReloadArcherBox();
         }
 
         private void CButton_Click(object sender, EventArgs e)
@@ -63,15 +83,24 @@ namespace Lcasp
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            if (scanFormBox.SelectedIndex != -1 && sCombo.SelectedIndex != -1)
+            if (scanFormBox.SelectedIndex != -1 && aCombo.SelectedIndex != -1 && sCombo.SelectedIndex != -1)
             {
-                List<Archer> theArchers = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), (string)scanFormBox.SelectedItem.GetType().GetProperty("Value").GetValue(scanFormBox.SelectedItem));
+                List<Archer> theArchers = null;
+
+                if(aCombo.SelectedItem.GetType().GetProperty("Text").GetValue(aCombo.SelectedItem).ToString().CompareTo("All")==0)
+                {
+                    theArchers = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), (string)scanFormBox.SelectedItem.GetType().GetProperty("Value").GetValue(scanFormBox.SelectedItem));
+                }
+                else
+                {
+                    theArchers = new DatabaseQueries().GetSchoolArcher((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), (int)aCombo.SelectedItem.GetType().GetProperty("Value").GetValue(aCombo.SelectedItem), (string)scanFormBox.SelectedItem.GetType().GetProperty("Value").GetValue(scanFormBox.SelectedItem));
+                }
 
                 PrintDocument(theArchers);
             }
             else
             {
-                MessageBox.Show("Please select a school and a form first!");
+                MessageBox.Show("Please select a school, archer, and a form first!");
             }
 
         }
@@ -105,6 +134,11 @@ namespace Lcasp
         }
 
         private void ScanFormBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            printButton.Enabled = true;
+        }
+
+        private void ArcherCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

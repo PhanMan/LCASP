@@ -34,6 +34,8 @@
             this.printButton = new Lcasp.PulseButton();
             this.scanFormBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.aCombo = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // sCombo
@@ -61,7 +63,7 @@
             this.cButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cButton.Location = new System.Drawing.Point(414, 247);
+            this.cButton.Location = new System.Drawing.Point(400, 362);
             this.cButton.Name = "cButton";
             this.cButton.PulseSpeed = 0.2F;
             this.cButton.Size = new System.Drawing.Size(230, 101);
@@ -78,7 +80,7 @@
             this.printButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.printButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.printButton.Location = new System.Drawing.Point(108, 247);
+            this.printButton.Location = new System.Drawing.Point(94, 362);
             this.printButton.Name = "printButton";
             this.printButton.PulseSpeed = 0.2F;
             this.printButton.Size = new System.Drawing.Size(230, 101);
@@ -90,7 +92,7 @@
             // scanFormBox
             // 
             this.scanFormBox.FormattingEnabled = true;
-            this.scanFormBox.Location = new System.Drawing.Point(33, 177);
+            this.scanFormBox.Location = new System.Drawing.Point(33, 286);
             this.scanFormBox.Name = "scanFormBox";
             this.scanFormBox.Size = new System.Drawing.Size(708, 33);
             this.scanFormBox.TabIndex = 20;
@@ -99,17 +101,37 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 135);
+            this.label2.Location = new System.Drawing.Point(28, 244);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(182, 25);
             this.label2.TabIndex = 21;
             this.label2.Text = "Select Scan Form";
             // 
+            // aCombo
+            // 
+            this.aCombo.FormattingEnabled = true;
+            this.aCombo.Location = new System.Drawing.Point(33, 176);
+            this.aCombo.Name = "aCombo";
+            this.aCombo.Size = new System.Drawing.Size(708, 33);
+            this.aCombo.TabIndex = 22;
+            this.aCombo.SelectedIndexChanged += new System.EventHandler(this.ArcherCombo_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 135);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(141, 25);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Select Archer";
+            // 
             // PrintScannerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 375);
+            this.ClientSize = new System.Drawing.Size(784, 494);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.aCombo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.scanFormBox);
             this.Controls.Add(this.printButton);
@@ -133,5 +155,7 @@
         private PulseButton printButton;
         private System.Windows.Forms.ComboBox scanFormBox;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox aCombo;
+        private System.Windows.Forms.Label label3;
     }
 }

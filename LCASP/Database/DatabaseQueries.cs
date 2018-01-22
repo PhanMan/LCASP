@@ -118,6 +118,42 @@ namespace Lcasp
            theConnection.Close();
         }
 
+        public List<Archer> GetSchoolArcher(int s_id, int a_id, string form)
+        {
+            List<Archer> theList = new List<Archer>();
+
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            string cmd = "Select * from archers where school_id = " + s_id + " and archer_id = " + a_id + " order by archer_id asc";
+
+
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+
+            SqlDataReader theReader = theCmd.ExecuteReader();
+
+            if (theReader.HasRows)
+            {
+                while (theReader.Read())
+                {
+                    Archer theArcher = new Archer(s_id,
+                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                  theReader["archer_name"].ToString(),
+                                                  theReader["archer_sex"].ToString(),
+                                                  form);
+
+                    theList.Add(theArcher);
+                }
+            }
+
+            theReader.Close();
+            theConnection.Close();
+
+            return theList;
+        }
+
         public List<Archer> GetSchoolArchers(int s_id, string form)
         {
             List<Archer> theList = new List<Archer>();
