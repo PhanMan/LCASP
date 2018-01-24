@@ -85,7 +85,7 @@
             this.smButton.PulseWidth = 20;
             this.smButton.Size = new System.Drawing.Size(368, 195);
             this.smButton.TabIndex = 27;
-            this.smButton.Text = "Process Match";
+            this.smButton.Text = "Print Final";
             this.smButton.UseVisualStyleBackColor = true;
             this.smButton.Click += new System.EventHandler(this.ScoreMatch_Button);
             // 
