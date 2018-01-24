@@ -32,6 +32,7 @@
             this.DataListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.smButton = new Lcasp.PulseButton();
+            this.ProcessInterimButton = new Lcasp.PulseButton();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -88,11 +89,29 @@
             this.smButton.UseVisualStyleBackColor = true;
             this.smButton.Click += new System.EventHandler(this.ScoreMatch_Button);
             // 
+            // ProcessInterimButton
+            // 
+            this.ProcessInterimButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
+            this.ProcessInterimButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
+            this.ProcessInterimButton.FocusColor = System.Drawing.Color.SpringGreen;
+            this.ProcessInterimButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProcessInterimButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ProcessInterimButton.Location = new System.Drawing.Point(747, 822);
+            this.ProcessInterimButton.Name = "ProcessInterimButton";
+            this.ProcessInterimButton.PulseSpeed = 0.5F;
+            this.ProcessInterimButton.PulseWidth = 20;
+            this.ProcessInterimButton.Size = new System.Drawing.Size(368, 195);
+            this.ProcessInterimButton.TabIndex = 28;
+            this.ProcessInterimButton.Text = "Print Interim";
+            this.ProcessInterimButton.UseVisualStyleBackColor = true;
+            this.ProcessInterimButton.Click += new System.EventHandler(this.ProcessInterimButton_Click);
+            // 
             // MatchScore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1899, 1047);
+            this.Controls.Add(this.ProcessInterimButton);
             this.Controls.Add(this.smButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DataListBox);
@@ -111,5 +130,6 @@
         private System.Windows.Forms.ListBox DataListBox;
         private System.Windows.Forms.Label label1;
         private PulseButton smButton;
+        private PulseButton ProcessInterimButton;
     }
 }

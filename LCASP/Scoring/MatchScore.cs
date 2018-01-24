@@ -282,5 +282,12 @@ namespace Lcasp
 
             return retVal;
         }
+
+        private void ProcessInterimButton_Click(object sender, EventArgs e)
+        {
+            PrintOverallScoreReport();
+
+            PrintTeamScoreReport();
+        }
     }
 }
