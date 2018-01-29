@@ -22,13 +22,18 @@ namespace Lcasp
         {
             InitializeComponent();
 
-            dQ = new DatabaseQueries();
 
             theQueue = new CommQueue();
 
             sc = new ScannerComm(theQueue);
-            sc.Open();
-            sc.InitializeScanner();
+
+            if (sc.scannerExist)
+            {
+                sc.Open();
+                sc.InitializeScanner();
+            }
+
+            dQ = new DatabaseQueries();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

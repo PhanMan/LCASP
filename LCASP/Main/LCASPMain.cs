@@ -96,8 +96,6 @@ namespace Lcasp
 
         private void MeetButton_Click(object sender, EventArgs e)
         {
-            //new DatabaseQueries().StartNewMeet();
-
             new MatchScore().ShowDialog();
         }
 

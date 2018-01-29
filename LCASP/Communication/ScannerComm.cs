@@ -16,6 +16,7 @@ namespace Lcasp
         public ListBox dataBox = null;
         CommQueue theQueue = null;
         private bool dataFlow = false;
+        public bool scannerExist = false;
 
         public ScannerComm(CommQueue aQueue)
         {
@@ -24,7 +25,14 @@ namespace Lcasp
             string com = GetPorts("Silicon Labs");
 
             if (com.Length > 0)
+            {
                 commPort = com;
+                scannerExist = true;
+            }
+            else
+            {
+                MessageBox.Show("Scanner not detected, check connection and retry.");
+            }
 
             _serialPort.BaudRate = 38400;
             _serialPort.DataBits = 8;
@@ -44,23 +52,25 @@ namespace Lcasp
             ManagementObjectCollection collection = searcher.Get();
             foreach (var device in collection)
             {
-                string deviceId = device["DeviceID"].ToString();
-                string port = device["Caption"].ToString();
-                string desc = device["Description"].ToString();
-                string name = device["Name"].ToString();
-
-                // "USB\\VID_10C4&PID_EA60\\1200"
-                // "Silicon Labs CP210x USB to UART Bridge (COM2)"
-
-                if (name.Contains(usbDeviceName))
+                if (device["DeviceID"] != null && device["Caption"] != null && device["Description"] != null && device["Name"] != null)
                 {
-                    int start = name.IndexOf("COM");
-                    int end = name.IndexOf(")");
+                    string deviceId = device["DeviceID"].ToString();
+                    string port = device["Caption"].ToString();
+                    string desc = device["Description"].ToString();
+                    string name = device["Name"].ToString();
 
+                    // "USB\\VID_10C4&PID_EA60\\1200"
+                    // "Silicon Labs CP210x USB to UART Bridge (COM2)"
 
+                    if (name.Contains(usbDeviceName))
+                    {
+                        int start = name.IndexOf("COM");
+                        int end = name.IndexOf(")");
 
-                    retVal = name.Substring(start, (end-start));
-                    return retVal;
+                        retVal = name.Substring(start, (end - start));
+
+                        return retVal;
+                    }
                 }
             }
 
@@ -69,17 +79,19 @@ namespace Lcasp
 
         public void Open()
         {
-            _serialPort.Open();
+            if (scannerExist)
+                _serialPort.Open();
         }
 
         public void Close()
         {
-            _serialPort.Close();
+            if (scannerExist)
+                _serialPort.Close();
         }
 
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            while (_serialPort.BytesToRead > 0)
+            while (scannerExist && _serialPort.BytesToRead > 0)
             {
                 string dataIn = _serialPort.ReadLine();
 
@@ -101,7 +113,8 @@ namespace Lcasp
 
         public void Write(string outBytes)
         {
-            _serialPort.Write(outBytes);
+            if (scannerExist)
+                _serialPort.Write(outBytes);
         }
 
         public bool SendScannerReset()
@@ -152,9 +165,9 @@ namespace Lcasp
             while (theQueue.GetQueueBytes() < 17 && (checkCounter--) > 0)
                 System.Threading.Thread.Sleep(25);
 
-            if(theQueue.InspectQueue(13).Substring(0,3).CompareTo("5.6") != 0)
+            if (theQueue.InspectQueue(13).Substring(0, 3).CompareTo("5.6") != 0)
             {
-                MessageBox.Show("Scanner Firmware 5.6 Required! (Currently " + theQueue.InspectQueue(13).Substring(0,3) + ")");
+                MessageBox.Show("Scanner Firmware 5.6 Required! (Currently " + theQueue.InspectQueue(13).Substring(0, 3) + ")");
             }
 
             theQueue.ClearQueue();
