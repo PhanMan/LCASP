@@ -21,7 +21,7 @@ namespace Lcasp
         {
             theQueue = aQueue;
 
-            string com = getPorts("Silicon Labs");
+            string com = GetPorts("Silicon Labs");
 
             if (com.Length > 0)
                 commPort = com;
@@ -36,7 +36,7 @@ namespace Lcasp
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(_serialPort_DataReceived);
         }
 
-        private string getPorts(string usbDeviceName)
+        private string GetPorts(string usbDeviceName)
         {
             string retVal = "";
 
@@ -54,7 +54,12 @@ namespace Lcasp
 
                 if (name.Contains(usbDeviceName))
                 {
-                    retVal = name.Substring(name.IndexOf("COM"), 4);
+                    int start = name.IndexOf("COM");
+                    int end = name.IndexOf(")");
+
+
+
+                    retVal = name.Substring(start, (end-start));
                     return retVal;
                 }
             }

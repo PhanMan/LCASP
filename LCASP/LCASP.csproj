@@ -28,7 +28,7 @@
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>46</ApplicationRevision>
+    <ApplicationRevision>48</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -54,10 +54,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>019688F6CE266B1B7FFB4CF3A3207DB66C283A3A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0BCD086356D2A3D0D137A8E1D9EF7B85B9618895</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>LCASP_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>mscomputercraft.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -220,7 +220,7 @@
     <EmbeddedResource Include="School\SchoolMaintain.resx">
       <DependentUpon>SchoolMaintain.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="System\LCASP_TemporaryKey.pfx" />
+    <None Include="mscomputercraft.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
