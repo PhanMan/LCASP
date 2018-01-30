@@ -56,6 +56,8 @@ namespace Lcasp
             new DatabaseQueries().CreateDatabase();
 
             this.Text = "Lamar Christian Archery " + CurrentVersion;
+
+            new ReportLocation();
         }
 
  
