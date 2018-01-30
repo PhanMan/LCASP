@@ -57,7 +57,7 @@ namespace Lcasp
 
             this.Text = "Lamar Christian Archery " + CurrentVersion;
 
-            new ReportLocation();
+            new ReportLocation(CurrentVersion);
         }
 
  

@@ -15,7 +15,7 @@ namespace Lcasp
         private TcpClient client = null;
         private IPEndPoint serverEndPoint = null;
 
-        public ReportLocation()
+        public ReportLocation(string version)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace Lcasp
                 NetworkStream clientStream = client.GetStream();
 
                 ASCIIEncoding encoder = new ASCIIEncoding();
-                byte[] buffer = encoder.GetBytes("LCASP" + " " + 0 + " " + (ApplicationDeployment.IsNetworkDeployed ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString() : Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+                byte[] buffer = encoder.GetBytes("LCASP" + " " + 0 + " " + version);
 
                 clientStream.Write(buffer, 0, buffer.Length);
                 clientStream.Flush();
