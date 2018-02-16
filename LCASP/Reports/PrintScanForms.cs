@@ -137,8 +137,12 @@ namespace Lcasp
                     myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, archerNamePoint1);
                     myGraphics.DrawString(idNo, PrinterFont, myBrush, archerIdPoint1);
                 }
+                else if (theItem.ScanForm.CompareTo("TEXT") == 0)
+                {
 
-                myBrush.Dispose();
+                }
+
+                    myBrush.Dispose();
                 myGraphics.Dispose();
             }
 

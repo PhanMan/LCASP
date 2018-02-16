@@ -30,6 +30,7 @@ namespace Lcasp
 
             scanFormBox.Items.Add(new { Text = "NASP", Value = "NASP" });// new KeyValuePair<string, string>("NASP", "NASP"));
             scanFormBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
+            scanFormBox.Items.Add(new { Text = "TEXT", Value = "TEXT" });
 
         }
 
@@ -109,28 +110,36 @@ namespace Lcasp
         {
             PrintDialog printDlg = null;
 
-            PrintScanForms scp = new PrintScanForms(theArchers);
-            scp.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom", 500, 1100);
-
-            if (Properties.Settings.Default.PrintDialog)
+            if (theArchers[0].ScanForm.CompareTo("TEXT") == 0)
             {
-                printDlg = new PrintDialog();
-                PrintPreviewDialog printPrvDlg = new PrintPreviewDialog()
+                PrintOverallScoreReport(theArchers);
+            }
+            else
+            {
+                PrintScanForms scp = new PrintScanForms(theArchers);
+
+                scp.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Custom", 500, 1100);
+
+                if (Properties.Settings.Default.PrintDialog)
                 {
+                    printDlg = new PrintDialog();
+                    PrintPreviewDialog printPrvDlg = new PrintPreviewDialog()
+                    {
 
-                    // preview the assigned document or you can create a different previewButton for it
-                    Document = scp
-                };
-                printPrvDlg.ShowDialog(); // this shows the preview and then show the Printer Dlg below
+                        // preview the assigned document or you can create a different previewButton for it
+                        Document = scp
+                    };
+                    printPrvDlg.ShowDialog(); // this shows the preview and then show the Printer Dlg below
+                }
+
+                if (Properties.Settings.Default.PrintDialog && printDlg.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+
+                scp.Print();
             }
-
-            if (Properties.Settings.Default.PrintDialog && printDlg.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-
-
-            scp.Print();
         }
 
         private void ScanFormBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -142,5 +151,18 @@ namespace Lcasp
         {
 
         }
+
+        private void PrintOverallScoreReport(List<Archer> theArchers)
+        {
+            Scoring theScore = new Scoring(true);
+
+            OverallScoreReport osr = new OverallScoreReport(theScore.OverallList, theArchers[0].SchoolID);
+            osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+            osr.Print();
+
+            theScore = null;
+        }
+
     }
 }

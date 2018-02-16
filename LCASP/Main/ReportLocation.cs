@@ -32,7 +32,7 @@ namespace Lcasp
 
                 clientStream.Write(buffer, 0, buffer.Length);
                 clientStream.Flush();
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 // Do nothing.
             }

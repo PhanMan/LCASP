@@ -48,7 +48,7 @@ namespace Lcasp
             return theList;
         }
 
-        public List<KeyValuePair<int, string>> GetParticipatingSchoolList()
+        public List<KeyValuePair<int, string>> GetParticipatingSchoolList(Boolean showAllShooters)
         {
             List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
 
@@ -56,7 +56,12 @@ namespace Lcasp
 
             theConnection.Open();
 
-            string cmd = "Select school_id, school_name from schools where school_id in (select distinct (a.school_id) from archers a, archer_data ad where a.archer_id = ad.archer_id)";
+            string cmd = "";
+            
+            if(showAllShooters)
+                cmd = "Select school_id, school_name from schools where school_id in (select distinct school_id from archers)";
+            else
+                cmd = "Select school_id, school_name from schools where school_id in (select distinct (a.school_id) from archers a, archer_data ad where a.archer_id = ad.archer_id)";
 
             SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 
@@ -189,7 +194,7 @@ namespace Lcasp
             return theList;
         }
 
-        public List<Archer> GetParticipatingSchoolArchers(int s_id, string form)
+        public List<Archer> GetParticipatingSchoolArchers(Boolean allShooters, int s_id, string form)
         {
             List<Archer> theList = new List<Archer>();
 
@@ -197,7 +202,17 @@ namespace Lcasp
 
             theConnection.Open();
 
-            string cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a, archer_data ad where a.archer_id = ad.archer_id and school_id = " + s_id + " order by a.archer_id asc";
+            string cmd = "";
+
+            if(allShooters)
+            {
+                cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a where school_id = " + s_id + " order by a.archer_id asc";
+            }
+            else
+            {
+                cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a, archer_data ad where a.archer_id = ad.archer_id and school_id = " + s_id + " order by a.archer_id asc";
+            }
+
 
             SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 
@@ -219,7 +234,7 @@ namespace Lcasp
             }
 
             theReader.Close();
-           theConnection.Close();
+            theConnection.Close();
 
             return theList;
         }

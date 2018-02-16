@@ -16,19 +16,27 @@ namespace Lcasp
             StandingList = new List<SchoolStanding>();
             OverallList = new SortedList<int, int>(new ScoreComparer<int>());
 
-            ScoreMatch();
+            ScoreMatch(false);
         }
 
-        private void ScoreMatch()
+        public Scoring(Boolean showAllShooters)
         {
-            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetParticipatingSchoolList();
+            StandingList = new List<SchoolStanding>();
+            OverallList = new SortedList<int, int>(new ScoreComparer<int>());
+
+            ScoreMatch(showAllShooters);
+        }
+
+        private void ScoreMatch(Boolean showAllShooters)
+        {
+            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetParticipatingSchoolList(showAllShooters);
 
             foreach (KeyValuePair<int, string> kvp in schoolList)
             {
 
                 SchoolStanding theStanding = new SchoolStanding(Convert.ToInt32(kvp.Key), kvp.Value);
 
-                List<Archer> schoolArchers = new DatabaseQueries().GetParticipatingSchoolArchers(Convert.ToInt32(kvp.Key), "XXXX");
+                List<Archer> schoolArchers = new DatabaseQueries().GetParticipatingSchoolArchers(showAllShooters, Convert.ToInt32(kvp.Key), "XXXX");
 
                 foreach (Archer theArcher in schoolArchers)
                 {
@@ -47,6 +55,11 @@ namespace Lcasp
                         {
                             theStanding.Female.Add(theData.ArcherScore, theArcher.ArcherID);
                         }
+                    }
+                    else
+                    {
+                        OverallList.Add(0, theArcher.ArcherID);
+                        theStanding.TeamWide.Add(0, theArcher.ArcherID);
                     }
                 }
                 StandingList.Add(theStanding);

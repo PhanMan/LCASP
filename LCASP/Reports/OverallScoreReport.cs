@@ -17,12 +17,20 @@ namespace Lcasp
         int txtheight = 0;
         int archerCount = 0;
         int page = 1;
+        int schoolLimited = 0;
+
         private SortedList<int, int> printList = null;
 
         public OverallScoreReport(SortedList<int, int> theList)
         {
             printList = theList;
             printItems = printList.GetEnumerator();
+        }
+        public OverallScoreReport(SortedList<int, int> theList, int school_id)
+        {
+            printList = theList;
+            printItems = printList.GetEnumerator();
+            schoolLimited = school_id;
         }
 
         protected override void OnBeginPrint(System.Drawing.Printing.PrintEventArgs e)
@@ -65,50 +73,72 @@ namespace Lcasp
                 theItem = (KeyValuePair<int, int>)printItems.Current;
 
                 Archer theArcher = new DatabaseQueries().GetArcher(theItem.Value);
-                ArcherData theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
-                
-                if(prevScore != theArcherData.ArcherScore)
+
+                ArcherData theArcherData = null;
+                if (schoolLimited == 0)
                 {
-                    prevScore = theArcherData.ArcherScore;
-                    archerCount++;
+                    theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
+
+                    if (prevScore != theArcherData.ArcherScore)
+                    {
+                        prevScore = theArcherData.ArcherScore;
+                        archerCount++;
+                    }
                 }
 
-                string printString = archerCount.ToString().PadRight(3) + " " + theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
-                                     theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +
-                                     theArcher.ArcherAIMSID.ToString().PadLeft(10) + sepString +
-                                     theArcherData.ArcherScore.ToString().PadLeft(3) + sepString +
-                                     theArcherData.EndOne.ShotOne.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndOne.ShotTwo.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndOne.ShotThree.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndOne.ShotFour.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndOne.ShotFive.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndTwo.ShotOne.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndTwo.ShotTwo.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndTwo.ShotThree.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndTwo.ShotFour.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndTwo.ShotFive.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndThree.ShotOne.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndThree.ShotTwo.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndThree.ShotThree.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndThree.ShotFour.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndThree.ShotFive.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFour.ShotOne.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFour.ShotTwo.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFour.ShotThree.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFour.ShotFour.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFour.ShotFive.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFive.ShotOne.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFive.ShotTwo.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFive.ShotThree.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFive.ShotFour.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndFive.ShotFive.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndSix.ShotOne.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndSix.ShotTwo.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndSix.ShotThree.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndSix.ShotFour.ToString().PadLeft(2) + sepString +
-                                     theArcherData.EndSix.ShotFive.ToString().PadLeft(2) + "\r\n";
 
-                DrawLine(myGraphics, myBrush, thePen, printString);
+                string printString = "";
+
+                if (theArcherData != null)
+                {
+                    printString = archerCount.ToString().PadRight(3) + " " + theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
+                                         theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +
+                                         theArcher.ArcherAIMSID.ToString().PadLeft(10) + sepString +
+                                         theArcherData.ArcherScore.ToString().PadLeft(3) + sepString +
+                                         theArcherData.EndOne.ShotOne.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndOne.ShotTwo.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndOne.ShotThree.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndOne.ShotFour.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndOne.ShotFive.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndTwo.ShotOne.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndTwo.ShotTwo.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndTwo.ShotThree.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndTwo.ShotFour.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndTwo.ShotFive.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndThree.ShotOne.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndThree.ShotTwo.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndThree.ShotThree.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndThree.ShotFour.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndThree.ShotFive.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFour.ShotOne.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFour.ShotTwo.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFour.ShotThree.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFour.ShotFour.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFour.ShotFive.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFive.ShotOne.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFive.ShotTwo.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFive.ShotThree.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFive.ShotFour.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndFive.ShotFive.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndSix.ShotOne.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndSix.ShotTwo.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndSix.ShotThree.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndSix.ShotFour.ToString().PadLeft(2) + sepString +
+                                         theArcherData.EndSix.ShotFive.ToString().PadLeft(2) + "\r\n";
+                    DrawLine(myGraphics, myBrush, thePen, printString);
+                }
+                else
+                {
+                    if (schoolLimited != 0 && theArcher.SchoolID == schoolLimited)
+                    {
+                        printString = theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
+                                                             theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +
+                                                             theArcher.ArcherAIMSID.ToString().PadLeft(10) + "\r\n";
+                        DrawLine(myGraphics, myBrush, thePen, printString);
+                    }
+                }
+
+                
                 //myGraphics.DrawRectangle(thePen, 5, offset * txtheight, 800, txtheight+10);
                 //myGraphics.DrawString(printString, PrinterFont, myBrush, 10, (offset+=2 * txtheight)+5);
                 //offset += txtheight + 10;
