@@ -34,53 +34,64 @@ namespace Lcasp
 
             string[] lines = System.IO.File.ReadAllLines(fileName);
 
-            switch(importType)
+            try
             {
-                case 1:
-                    {
-                        foreach (string s in lines)
+                switch (importType)
+                {
+                    case 1:
                         {
-                            string[] items = s.Split(',');
-                            //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
-                            dq.AddArcher(items[0], 0, items[1], school_id);
+                            foreach (string s in lines)
+                            {
+                                string[] items = s.Split(',');
+                                //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
+                                dq.AddArcher(items[0], 0, items[1], school_id);
+                            }
+
+                            MessageBox.Show("Archers Imported.");
+
                         }
-
-                        MessageBox.Show("Archers Imported.");
-
-                    }
-                    break;
-                case 2:
-                    {
-                        foreach (string s in lines)
+                        break;
+                    /*
+                    case 2:
                         {
-                            string[] items = s.Split(',');
-                            //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
-                            dq.AddArcher(items[0], Convert.ToInt32(items[2]), items[1], school_id);
+                            foreach (string s in lines)
+                            {
+                                string[] items = s.Split(',');
+                                //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
+                                dq.AddArcher(items[0], Convert.ToInt32(items[2]), items[1], school_id);
+                            }
+
+                            MessageBox.Show("Archers Imported.");
+
                         }
-
-                        MessageBox.Show("Archers Imported.");
-
-                    }
-                    break;
-                case 3:
-                    {
-                        lines = lines.Where(w => w != lines[0]).ToArray();
-
-                        foreach (string s in lines)
+                        break;
+                        */
+                    case 3:
                         {
-                            string[] items = s.Split(',');
-                            //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
-                            dq.AddArcher(items[1], Convert.ToInt32(items[0]), items[2], school_id);
-                        }
+                            lines = lines.Where(w => w != lines[0]).ToArray();
 
-                        MessageBox.Show("Archers Imported.");
-                    }
-                    break;
+                            foreach (string s in lines)
+                            {
+                                string[] items = s.Split(',');
+                                //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
+                                dq.AddArcher(items[1], Convert.ToInt32(items[0]), items[2], school_id);
+                            }
+
+                            MessageBox.Show("Archers Imported.");
+                        }
+                        break;
+                }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error processing data file!" + "\n" + ex.Message);
+            }
+            
             dq = null;
 
             this.Close();
+
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
