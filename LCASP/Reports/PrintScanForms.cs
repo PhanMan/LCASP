@@ -18,19 +18,22 @@ namespace Lcasp
         // Form 980
         private int[] xDim = { 80, 110, 140, 170, 200, 230, 260, 290, 320, 350 }; //{ 355, 325, 295, 265, 235, 205, 175, 145, 115, 85 };
         private int[] yDim = { 755, 775, 795, 815, 835 }; //840, 820, 800, 780, 760 };
-        private Point archerNamePoint = new Point(65, 905);
-        private Point archerIdPoint = new Point(360, 902);
+        private Point archerNamePoint = new Point(65 + Properties.Settings.Default.HoroAdjust, 905 + Properties.Settings.Default.VerticalAdjust);
+        private Point archerIdPoint = new Point(360 + Properties.Settings.Default.HoroAdjust, 902 + Properties.Settings.Default.VerticalAdjust);
 
         // State Form
         private int[] xDim1 = { 51, 81, 111, 141, 171, 201, 231, 261, 291 };
         private int[] yDim1 = { 795, 815, 835, 855, 875, 895, 915, 935, 955, 975 };
-        private Point archerNamePoint1 = new Point(60, 1030);
-        private Point archerIdPoint1 = new Point(360, 1030);
-        private Point archerSexPointMale1 = new Point(380, 772);
-        private Point archerSexPointFemale1 = new Point(380, 796);
+
+        private Point archerNamePoint1 = new Point(60+ Properties.Settings.Default.HoroAdjust, 1030+ Properties.Settings.Default.VerticalAdjust);
+        private Point archerIdPoint1 = new Point(360 + Properties.Settings.Default.HoroAdjust, 1030 + Properties.Settings.Default.VerticalAdjust);
+        private Point archerSexPointMale1 = new Point(380 + Properties.Settings.Default.HoroAdjust, 772 + Properties.Settings.Default.VerticalAdjust);
+        private Point archerSexPointFemale1 = new Point(380 + Properties.Settings.Default.HoroAdjust, 796 + Properties.Settings.Default.VerticalAdjust);
 
         private List<Archer> printArchers = null;
         private IEnumerator printItems = null;
+
+
 
         public Font PrinterFont { get; set; }
 
@@ -97,7 +100,7 @@ namespace Lcasp
                     {
                         int digit = Convert.ToInt32(idNo[counter].ToString());
 
-                        myGraphics.FillEllipse(myBrush, xDim[digit], yDim[counter], 20, 15);
+                        myGraphics.FillEllipse(myBrush, xDim[digit] + Properties.Settings.Default.HoroAdjust, yDim[counter] + Properties.Settings.Default.VerticalAdjust, 20, 15);
                     }
 
                     myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, archerNamePoint);
@@ -122,7 +125,7 @@ namespace Lcasp
                     {
                         int digit = Convert.ToInt32(idNo[counter].ToString());
 
-                        myGraphics.FillEllipse(myBrush, xDim1[counter], yDim1[digit], 20, 15);
+                        myGraphics.FillEllipse(myBrush, xDim1[counter] + Properties.Settings.Default.HoroAdjust, yDim1[digit] + Properties.Settings.Default.VerticalAdjust, 20, 15);
                     }
 
                     if (theItem.ArcherSex.CompareTo("M") == 0)
@@ -143,7 +146,7 @@ namespace Lcasp
                 }
 
                     myBrush.Dispose();
-                myGraphics.Dispose();
+                    myGraphics.Dispose();
             }
 
             //Detemine if there is more text to print, if

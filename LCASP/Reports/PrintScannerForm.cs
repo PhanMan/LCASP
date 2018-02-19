@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -32,6 +33,9 @@ namespace Lcasp
             scanFormBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
             scanFormBox.Items.Add(new { Text = "TEXT", Value = "TEXT" });
 
+            HoroText.Text = Properties.Settings.Default.HoroAdjust.ToString();
+
+            VerticalAdjust.Text = Properties.Settings.Default.VerticalAdjust.ToString();
         }
 
         private void PrintScannerForm_Load(object sender, EventArgs e)
@@ -84,6 +88,8 @@ namespace Lcasp
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
+            SaveConfigValues();
+
             if (scanFormBox.SelectedIndex != -1 && aCombo.SelectedIndex != -1 && sCombo.SelectedIndex != -1)
             {
                 List<Archer> theArchers = null;
@@ -164,5 +170,22 @@ namespace Lcasp
             theScore = null;
         }
 
+        private void HoroText_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VerticalAdjust_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveConfigValues()
+        {
+            Properties.Settings.Default.HoroAdjust = Convert.ToInt32(HoroText.Text);
+            Properties.Settings.Default.VerticalAdjust = Convert.ToInt32(VerticalAdjust.Text);
+
+            Properties.Settings.Default.Save();
+        }
     }
 }

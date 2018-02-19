@@ -28,7 +28,7 @@
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>58</ApplicationRevision>
+    <ApplicationRevision>59</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -73,6 +73,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
@@ -223,7 +224,7 @@
     </EmbeddedResource>
     <None Include="mscomputercraft.pfx" />
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">

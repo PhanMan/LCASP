@@ -36,6 +36,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.aCombo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.HoroText = new System.Windows.Forms.TextBox();
+            this.VerticalAdjust = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // sCombo
@@ -63,7 +69,7 @@
             this.cButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.cButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cButton.Location = new System.Drawing.Point(400, 362);
+            this.cButton.Location = new System.Drawing.Point(393, 489);
             this.cButton.Name = "cButton";
             this.cButton.PulseSpeed = 0.2F;
             this.cButton.Size = new System.Drawing.Size(230, 101);
@@ -80,7 +86,7 @@
             this.printButton.FocusColor = System.Drawing.Color.SpringGreen;
             this.printButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.printButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.printButton.Location = new System.Drawing.Point(94, 362);
+            this.printButton.Location = new System.Drawing.Point(104, 489);
             this.printButton.Name = "printButton";
             this.printButton.PulseSpeed = 0.2F;
             this.printButton.Size = new System.Drawing.Size(230, 101);
@@ -125,11 +131,61 @@
             this.label3.TabIndex = 23;
             this.label3.Text = "Select Archer";
             // 
+            // HoroText
+            // 
+            this.HoroText.Location = new System.Drawing.Point(118, 63);
+            this.HoroText.Name = "HoroText";
+            this.HoroText.Size = new System.Drawing.Size(100, 31);
+            this.HoroText.TabIndex = 24;
+            this.HoroText.Text = "0";
+            this.HoroText.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.HoroText.TextChanged += new System.EventHandler(this.HoroText_TextChanged);
+            // 
+            // VerticalAdjust
+            // 
+            this.VerticalAdjust.Location = new System.Drawing.Point(411, 63);
+            this.VerticalAdjust.Name = "VerticalAdjust";
+            this.VerticalAdjust.Size = new System.Drawing.Size(100, 31);
+            this.VerticalAdjust.TabIndex = 25;
+            this.VerticalAdjust.Text = "0";
+            this.VerticalAdjust.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.VerticalAdjust.TextChanged += new System.EventHandler(this.VerticalAdjust_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(78, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(182, 25);
+            this.label4.TabIndex = 26;
+            this.label4.Text = "Horozontal Adjust";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(381, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(150, 25);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Vertical Adjust";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.VerticalAdjust);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.HoroText);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Location = new System.Drawing.Point(63, 347);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(635, 106);
+            this.panel1.TabIndex = 28;
+            // 
             // PrintScannerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 494);
+            this.ClientSize = new System.Drawing.Size(784, 647);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.aCombo);
             this.Controls.Add(this.label2);
@@ -142,6 +198,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Print Scanner Form";
             this.Load += new System.EventHandler(this.PrintScannerForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -157,5 +215,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox aCombo;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox HoroText;
+        private System.Windows.Forms.TextBox VerticalAdjust;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel1;
     }
 }
