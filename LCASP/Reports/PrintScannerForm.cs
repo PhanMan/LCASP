@@ -19,19 +19,19 @@ namespace Lcasp
         {
             InitializeComponent();
 
-            sCombo.DisplayMember = "Text";
-            sCombo.ValueMember = "Value";
+            SchoolComboBox.DisplayMember = "Text";
+            SchoolComboBox.ValueMember = "Value";
 
-            scanFormBox.DisplayMember = "Text";
-            scanFormBox.ValueMember = "Value";
+            ScanFormComboBox.DisplayMember = "Text";
+            ScanFormComboBox.ValueMember = "Value";
 
-            aCombo.DisplayMember = "Text";
-            aCombo.ValueMember = "Value";
+            ArcherComboBox.DisplayMember = "Text";
+            ArcherComboBox.ValueMember = "Value";
 
 
-            scanFormBox.Items.Add(new { Text = "NASP", Value = "NASP" });// new KeyValuePair<string, string>("NASP", "NASP"));
-            scanFormBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
-            scanFormBox.Items.Add(new { Text = "TEXT", Value = "TEXT" });
+            ScanFormComboBox.Items.Add(new { Text = "NASP", Value = "NASP" });// new KeyValuePair<string, string>("NASP", "NASP"));
+            ScanFormComboBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
+            ScanFormComboBox.Items.Add(new { Text = "TEXT", Value = "TEXT" });
 
             HoroText.Text = Properties.Settings.Default.HoroAdjust.ToString();
 
@@ -45,34 +45,34 @@ namespace Lcasp
 
         private void ReloadSchoolBox()
         {
-            sCombo.Items.Clear();
+            SchoolComboBox.Items.Clear();
 
             List<KeyValuePair<int, string>> theList = new DatabaseQueries().GetSchoolList();
 
             foreach (KeyValuePair<int, string> kvp in theList)
             {
-                sCombo.Items.Add(new { Text = kvp.Value, Value = kvp.Key });
+                SchoolComboBox.Items.Add(new { Text = kvp.Value, Value = kvp.Key });
             }
 
-            sCombo.SelectedIndex = -1;
-            sCombo.ResetText();
+            SchoolComboBox.SelectedIndex = -1;
+            SchoolComboBox.ResetText();
         }
 
         private void ReloadArcherBox()
         {
-            aCombo.Items.Clear();
+            ArcherComboBox.Items.Clear();
 
-            List<Archer> theList = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), "XXXX");
+            List<Archer> theList = new DatabaseQueries().GetSchoolArchers((int)SchoolComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(SchoolComboBox.SelectedItem), "XXXX");
 
-            aCombo.Items.Add(new { Text = "All", Value = "All" });
+            ArcherComboBox.Items.Add(new { Text = "All", Value = "All" });
 
             foreach (Archer archer in theList)
             {
-                aCombo.Items.Add(new { Text = archer.ArcherName, Value = archer.ArcherID });
+                ArcherComboBox.Items.Add(new { Text = archer.ArcherName, Value = archer.ArcherID });
             }
 
-            aCombo.SelectedIndex = -1;
-            aCombo.ResetText();
+            ArcherComboBox.SelectedIndex = -1;
+            ArcherComboBox.ResetText();
         }
 
 
@@ -90,20 +90,26 @@ namespace Lcasp
         {
             SaveConfigValues();
 
-            if (scanFormBox.SelectedIndex != -1 && aCombo.SelectedIndex != -1 && sCombo.SelectedIndex != -1)
+            if (ScanFormComboBox.SelectedIndex != -1 && ArcherComboBox.SelectedIndex != -1 && SchoolComboBox.SelectedIndex != -1)
             {
                 List<Archer> theArchers = null;
 
-                if(aCombo.SelectedItem.GetType().GetProperty("Text").GetValue(aCombo.SelectedItem).ToString().CompareTo("All")==0)
+                if(ArcherComboBox.SelectedItem.GetType().GetProperty("Text").GetValue(ArcherComboBox.SelectedItem).ToString().CompareTo("All")==0)
                 {
-                    theArchers = new DatabaseQueries().GetSchoolArchers((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), (string)scanFormBox.SelectedItem.GetType().GetProperty("Value").GetValue(scanFormBox.SelectedItem));
+                    theArchers = new DatabaseQueries().GetSchoolArchers((int)SchoolComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(SchoolComboBox.SelectedItem), (string)ScanFormComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(ScanFormComboBox.SelectedItem));
                 }
                 else
                 {
-                    theArchers = new DatabaseQueries().GetSchoolArcher((int)sCombo.SelectedItem.GetType().GetProperty("Value").GetValue(sCombo.SelectedItem), (int)aCombo.SelectedItem.GetType().GetProperty("Value").GetValue(aCombo.SelectedItem), (string)scanFormBox.SelectedItem.GetType().GetProperty("Value").GetValue(scanFormBox.SelectedItem));
+                    theArchers = new DatabaseQueries().GetSchoolArcher((int)SchoolComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(SchoolComboBox.SelectedItem), (int)ArcherComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(ArcherComboBox.SelectedItem), (string)ScanFormComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(ScanFormComboBox.SelectedItem));
                 }
 
                 PrintDocument(theArchers);
+
+
+                SchoolComboBox.SelectedIndex = -1;
+                ArcherComboBox.SelectedIndex = -1;
+                ScanFormComboBox.SelectedIndex = -1;
+                PrintButton.Enabled = false;
             }
             else
             {
@@ -150,7 +156,7 @@ namespace Lcasp
 
         private void ScanFormBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            printButton.Enabled = true;
+            PrintButton.Enabled = true;
         }
 
         private void ArcherCombo_SelectedIndexChanged(object sender, EventArgs e)
