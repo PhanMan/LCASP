@@ -117,6 +117,7 @@
             this.Controls.Add(this.DataListBox);
             this.Controls.Add(this.cancelButton);
             this.Name = "MatchScore";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Match Scoring";
             this.Load += new System.EventHandler(this.MatchScore_Load);
             this.ResumeLayout(false);

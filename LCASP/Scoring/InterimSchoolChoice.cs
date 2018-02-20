@@ -11,101 +11,55 @@ using System.Windows.Forms;
 
 namespace Lcasp
 {
-    public partial class MatchScore : Form
+    public partial class InterimSchoolChoice : Form
     {
-        ScannerComm sc = null;
-        Timer aTimer = new Timer();
-        public CommQueue theQueue = null;
         private DatabaseQueries dQ = null;
 
-        public MatchScore()
+        public InterimSchoolChoice()
         {
             InitializeComponent();
 
+            dQ = new DatabaseQueries();
 
-            theQueue = new CommQueue();
+            SchoolComboBox.DisplayMember = "Text";
+            SchoolComboBox.ValueMember = "Value";
 
-            sc = new ScannerComm(theQueue);
+            List<KeyValuePair<int, string>> schoolList = dQ.GetParticipatingSchoolList(false);
 
-            if (sc.scannerExist)
+
+            SchoolComboBox.Items.Add(new { Value = "ALL", Text = "ALL" });
+
+            foreach (KeyValuePair<int, string> kvp in schoolList)
             {
-                sc.Open();
-                sc.InitializeScanner();
+                SchoolComboBox.Items.Add(new { Value = kvp.Key, Text = kvp.Value });
             }
 
-            dQ = new DatabaseQueries();
+
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            dQ = null;
-            aTimer.Stop();
-            aTimer = null;
-            sc.Close();
             this.Close();
         }
 
-        private void DataListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void MatchScore_Load(object sender, EventArgs e)
-        {
-            aTimer.Tick += new EventHandler(Timer_Tick); // Everytime timer ticks, timer_Tick will be called
-            aTimer.Interval = 250;          // Timer will tick evert 10 seconds
-            aTimer.Enabled = true;                       // Enable the timer
-            aTimer.Start();                              // Start the timer
-        }
-
-        void Timer_Tick(object sender, EventArgs e)
-        {
-            string dataLine = null;
-            string sep = "   ";
-
-            while ((dataLine = theQueue.DeQueue()) != null)
-            {
-                ArcherData ad = new ArcherData(dataLine);
-                Archer a = dQ.GetArcher(ad.ArcherID);
-
-                label1.Font = new Font("Courier new", 10);
-                DataListBox.Font = new Font("Courier new", 10, FontStyle.Bold);
-
-
-                string lstr = "Archer Name".PadRight(20) + "          " + "SCORE" + sep + "10s" + sep + "9s" + sep + "8s" + sep + "7s" + sep + "6s" + sep + "5s" + sep + "4s" + sep + "3s" + sep + "2s" + sep + "1s" + sep + "0s";
-                label1.Text = lstr;
-                string str = a.ArcherName.PadRight(20).Substring(0, 20) + "           " + ad.ArcherScore.ToString("000 ") + sep +
-                                                                                       ad.ArcherTens.ToString(" 00") + sep +
-                                                                                       ad.ArcherNines.ToString("00") + sep +
-                                                                                       ad.ArcherEights.ToString("00") + sep +
-                                                                                       ad.ArcherSevens.ToString("00") + sep +
-                                                                                       ad.ArcherSixes.ToString("00") + sep +
-                                                                                       ad.ArcherFives.ToString("00") + sep +
-                                                                                       ad.ArcherFours.ToString("00") + sep +
-                                                                                       ad.ArcherThrees.ToString("00") + sep +
-                                                                                       ad.ArcherTwos.ToString("00") + sep +
-                                                                                       ad.ArcherOnes.ToString("00") + sep +
-                                                                                       ad.ArcherZeros.ToString("00");
-
-                DataListBox.Items.Add(str);
-                DataListBox.SelectedIndex = DataListBox.Items.Count - 1;
-
-            }
-        }
 
         private void ScoreMatch_Button(object sender, EventArgs e)
         {
+            int selectedSchool = 0;
 
-            PrintOverallScoreReport();
+            if (SchoolComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(SchoolComboBox.SelectedItem).ToString().CompareTo("ALL") == 0)
+            {
+                selectedSchool = 0;
+            }
+            else
+            {
+                selectedSchool = Convert.ToInt32(SchoolComboBox.SelectedItem.GetType().GetProperty("Value").GetValue(SchoolComboBox.SelectedItem).ToString());
+            }  
+            
+            PrintMatchResultsReport(selectedSchool);
 
-            PrintTeamScoreReport();
-
-            PrintMatchResultsReport();
-
-            ExportMatchResult();
-
-            ExportTeamData();
-
-            MessageBox.Show("Match Processed : All Data Exported.");
+            SchoolComboBox.SelectedIndex = -1;
+            PrintButton.Enabled = false;
         }
 
         private void PrintTeamScoreReport()
@@ -121,6 +75,25 @@ namespace Lcasp
                 osr.Print();
 
                 theScore = null;
+            }
+        }
+
+        private void PrintTeamScoreReport(int school_id)
+        {
+            Scoring theScore = new Scoring();
+
+            foreach (SchoolStanding school in theScore.StandingList)
+            {
+                if (school.School_ID == school_id)
+                {
+                    TeamScoreReport osr = new TeamScoreReport(school.School_Name, school.TeamWide);
+
+                    osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+                    osr.Print();
+
+                    theScore = null;
+                }
             }
         }
 
@@ -150,25 +123,30 @@ namespace Lcasp
         {
             Scoring theScore = new Scoring();
 
-            SortedList<int, int> theSortedList = new SortedList<int, int>(new ScoreComparer<int>());
+            //SortedList<int, int> theSortedList = new SortedList<int, int>(new ScoreComparer<int>());
 
             for (int counter = 0; counter < theScore.StandingList.Count; counter++)
             {
-                if (theScore.StandingList[counter].School_ID == school_id)
+                SortedList<int, int> theSortedList = new SortedList<int, int>(new ScoreComparer<int>());
+
+                if (school_id == 0 || theScore.StandingList[counter].School_ID == school_id)
                 {
                     theSortedList.Add(theScore.StandingList[counter].TeamMatchScore, counter);
-                    break;
+
+                    MatchResultsReport osr = new MatchResultsReport(theScore, theSortedList);
+
+                    osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+                    osr.Print();
+
+                    PrintTeamScoreReport(theScore.StandingList[counter].School_ID);
+
+                    theSortedList = null;
+                    GC.Collect();
                 }
+
             }
-
-            MatchResultsReport osr = new MatchResultsReport(theScore, theSortedList);
-
-            osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
-
-            osr.Print();
-
             theScore = null;
-
             GC.Collect();
         }
 
@@ -316,11 +294,14 @@ namespace Lcasp
 
         private void ProcessInterimButton_Click(object sender, EventArgs e)
         {
-            new InterimSchoolChoice().ShowDialog();
+            PrintOverallScoreReport();
 
-            //PrintOverallScoreReport();
+            PrintTeamScoreReport();
+        }
 
-            //PrintTeamScoreReport();
+        private void SchoolComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PrintButton.Enabled = true;
         }
     }
 }
