@@ -28,7 +28,7 @@
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>61</ApplicationRevision>
+    <ApplicationRevision>64</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -95,6 +95,12 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Main\ReportLocation.cs" />
+    <Compile Include="RealTimeDisplay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RealTimeDisplay.Designer.cs">
+      <DependentUpon>RealTimeDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Scoring\InterimSchoolChoice.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     </Compile>
     <EmbeddedResource Include="Archer\ImportType.resx">
       <DependentUpon>ImportType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RealTimeDisplay.resx">
+      <DependentUpon>RealTimeDisplay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Scoring\InterimSchoolChoice.resx">
       <DependentUpon>InterimSchoolChoice.cs</DependentUpon>

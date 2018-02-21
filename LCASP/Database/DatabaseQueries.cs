@@ -194,6 +194,54 @@ namespace Lcasp
             return theList;
         }
 
+        public List<string> GetAllParticipatingArchers()
+        {
+            List<string> theList = new List<string>();
+
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            string cmd = 
+            "Select distinct(a.archer_id), ad.archer_data_id, a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score " +
+            "from archers a, archer_data ad " +
+            "where " +
+            "a.archer_id = ad.archer_id and " +
+            "ad.archer_data_id = (SELECT " +
+            "MAX(ad.archer_data_id) " +
+            "FROM archer_data ad where ad.archer_id = a.archer_id) " +
+            "order by ad.archer_score desc";
+            
+           // cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score from archers a, archer_data ad where a.archer_id = ad.archer_id and max(ad.archer_data_id) order by ad.archer_score desc";
+
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+
+            SqlDataReader theReader = theCmd.ExecuteReader();
+
+            if (theReader.HasRows)
+            {
+                while (theReader.Read())
+                {
+                    string dataLine = theReader["archer_raw_data"].ToString();
+
+                    /*
+                    Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
+                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                  theReader["archer_name"].ToString(),
+                                                  theReader["archer_sex"].ToString(),
+                                                  "XXXX");
+                                                  */
+                    theList.Add(dataLine);
+                }
+            }
+
+            theReader.Close();
+            theConnection.Close();
+
+            return theList;
+        }
+
         public List<Archer> GetParticipatingSchoolArchers(Boolean allShooters, int s_id, string form)
         {
             List<Archer> theList = new List<Archer>();

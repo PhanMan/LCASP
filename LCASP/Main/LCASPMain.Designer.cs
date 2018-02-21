@@ -38,6 +38,9 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meetButton = new Lcasp.PulseButton();
             this.psButton = new Lcasp.PulseButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.projectScoresMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,17 +105,20 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1558, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1558, 42);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.projectScoresMenuItem,
+            this.toolStripSeparator1,
             this.clearDatabaseToolStripMenuItem,
+            this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // clearDatabaseToolStripMenuItem
@@ -132,7 +138,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 36);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 38);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -171,6 +177,24 @@
             this.psButton.UseVisualStyleBackColor = false;
             this.psButton.Click += new System.EventHandler(this.PsButton_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(270, 6);
+            // 
+            // projectScoresMenuItem
+            // 
+            this.projectScoresMenuItem.CheckOnClick = true;
+            this.projectScoresMenuItem.Name = "projectScoresMenuItem";
+            this.projectScoresMenuItem.Size = new System.Drawing.Size(273, 38);
+            this.projectScoresMenuItem.Text = "Project Scores";
+            this.projectScoresMenuItem.Click += new System.EventHandler(this.projectScoresMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(270, 6);
+            // 
             // LCASPMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -206,6 +230,9 @@
         private System.Windows.Forms.ToolStripMenuItem clearDatabaseToolStripMenuItem;
         private PulseButton meetButton;
         private PulseButton psButton;
+        private System.Windows.Forms.ToolStripMenuItem projectScoresMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

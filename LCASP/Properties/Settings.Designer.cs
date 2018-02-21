@@ -104,5 +104,17 @@ namespace Lcasp.Properties {
                 this["VerticalAdjust"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ProjectScores {
+            get {
+                return ((bool)(this["ProjectScores"]));
+            }
+            set {
+                this["ProjectScores"] = value;
+            }
+        }
     }
 }

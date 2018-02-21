@@ -64,6 +64,8 @@ namespace Lcasp
 
             while ((dataLine = theQueue.DeQueue()) != null)
             {
+                LCASPMain.archerQueue.Enqueue(dataLine);
+
                 ArcherData ad = new ArcherData(dataLine);
                 Archer a = dQ.GetArcher(ad.ArcherID);
 

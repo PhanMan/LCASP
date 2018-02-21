@@ -10,12 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Management;
 using System.Windows.Forms;
-
+using System.Collections.Concurrent;
 
 namespace Lcasp
 {
     public partial class LCASPMain : Form
     {
+        private RealTimeDisplay theProjector = null;
+        public  static ConcurrentQueue<string> archerQueue { get; set; }
+
         public LCASPMain()
         {
             InitializeComponent();
@@ -53,13 +56,27 @@ namespace Lcasp
             // ArcherData s22 = new DatabaseQueries().SetArcherData(a2);
             //new DatabaseQueries().CheckDatabaseVersion();
 
+            archerQueue = new ConcurrentQueue<string>();
+
             new DatabaseQueries().CreateDatabase();
 
             this.Text = "Lamar Christian Archery " + CurrentVersion;
 
             new ReportLocation(CurrentVersion);
+
+            if(Properties.Settings.Default.ProjectScores)
+                OpenRealTimeScoringForm();
         }
 
+        private void OpenRealTimeScoringForm()
+        {
+            theProjector = new RealTimeDisplay();
+            Screen[] screens = Screen.AllScreens;
+            Rectangle bounds = screens[1].Bounds;
+            theProjector.SetBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+            theProjector.StartPosition = FormStartPosition.Manual;
+            theProjector.Show();
+        }
  
         private void ASchoolButton_Click(object sender, EventArgs e)
         {
@@ -73,6 +90,8 @@ namespace Lcasp
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
+            if(theProjector != null)
+                theProjector.Close();
             this.Close();
         }
 
@@ -112,6 +131,20 @@ namespace Lcasp
                 return ApplicationDeployment.IsNetworkDeployed
                        ? ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString()
                        : Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+
+        private void projectScoresMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ProjectScores = !Properties.Settings.Default.ProjectScores;
+
+            if (Properties.Settings.Default.ProjectScores)
+                OpenRealTimeScoringForm();
+            else
+            {
+                if (theProjector != null)
+                    theProjector.Close();
+                theProjector = null;
             }
         }
     }

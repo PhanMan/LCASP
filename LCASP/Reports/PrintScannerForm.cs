@@ -106,9 +106,9 @@ namespace Lcasp
                 PrintDocument(theArchers);
 
 
-                SchoolComboBox.SelectedIndex = -1;
-                ArcherComboBox.SelectedIndex = -1;
-                ScanFormComboBox.SelectedIndex = -1;
+               // SchoolComboBox.SelectedIndex = -1;
+               // ArcherComboBox.SelectedIndex = -1;
+               // ScanFormComboBox.SelectedIndex = -1;
                 PrintButton.Enabled = false;
             }
             else
