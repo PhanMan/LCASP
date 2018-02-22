@@ -44,5 +44,8 @@
     <Setting Name="ProjectScores" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="DatabaseBackup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:/DatabaseBackup/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

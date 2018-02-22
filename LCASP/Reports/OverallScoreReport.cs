@@ -133,7 +133,8 @@ namespace Lcasp
                     {
                         printString = theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
                                                              theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +
-                                                             theArcher.ArcherAIMSID.ToString().PadLeft(10) + "\r\n";
+                                                             theArcher.ArcherAIMSID.ToString().PadLeft(10) + sepString + 
+                                                             theArcher.ArcherID.ToString() + "\r\n";
                         DrawLine(myGraphics, myBrush, thePen, printString);
                     }
                 }

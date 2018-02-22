@@ -147,5 +147,29 @@ namespace Lcasp
                 theProjector = null;
             }
         }
+
+        private void backupDatabaseMenuClick(object sender, EventArgs e)
+        {
+ 
+
+            new DatabaseQueries().BackupDatabase();
+        }
+
+        private void restoreDatabaseMenuClick(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.DatabaseBackup;
+            openFileDialog1.Filter = "Database files (*.bak)|*.bak";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFileName = openFileDialog1.FileName;
+
+                new DatabaseQueries().RestoreDatabase(selectedFileName);
+            }
+        }
     }
 }

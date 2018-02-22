@@ -116,5 +116,17 @@ namespace Lcasp.Properties {
                 this["ProjectScores"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:/DatabaseBackup/")]
+        public string DatabaseBackup {
+            get {
+                return ((string)(this["DatabaseBackup"]));
+            }
+            set {
+                this["DatabaseBackup"] = value;
+            }
+        }
     }
 }
