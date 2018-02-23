@@ -60,6 +60,8 @@ namespace Lcasp
 
             new DatabaseQueries().CreateDatabase();
 
+           // new DatabaseQueries().CheckForDBUpdates();
+
             this.Text = "Lamar Christian Archery " + CurrentVersion;
 
             new ReportLocation(CurrentVersion);

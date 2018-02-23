@@ -18,6 +18,7 @@ namespace Lcasp
         int archerCount = 0;
         int page = 1;
         int schoolLimited = 0;
+        string schoolName = "";
 
         private SortedList<int, int> printList = null;
 
@@ -31,6 +32,9 @@ namespace Lcasp
             printList = theList;
             printItems = printList.GetEnumerator();
             schoolLimited = school_id;
+
+            schoolName = new DatabaseQueries().GetSchoolName(schoolLimited);
+
         }
 
         protected override void OnBeginPrint(System.Drawing.Printing.PrintEventArgs e)
@@ -65,7 +69,7 @@ namespace Lcasp
             Pen thePen = new Pen(myBrush);
             txtheight = TextRenderer.MeasureText("x", PrinterFont).Height;
 
-            DrawPageHeader(myGraphics, myBrush, thePen, "Overall Archer Report / Page " + page++.ToString().PadLeft(2));
+            DrawPageHeader(myGraphics, myBrush, thePen, schoolName + " Archer Report / Page " + page++.ToString().PadLeft(2));
 
 
             do

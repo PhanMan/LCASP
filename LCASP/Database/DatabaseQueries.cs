@@ -8,6 +8,10 @@ namespace Lcasp
 {
     public class DatabaseQueries
     {
+        private string dbFileOne = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.mdf";
+        private string dbFileTwo = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.ldf";
+
+
         string connectionString = Properties.Settings.Default.SqlServerExpress;// .lcasp_dataConnectionString
 
         public void ClearDatabase()
@@ -20,13 +24,28 @@ namespace Lcasp
             }
         }
 
+        public string GetSchoolName(int school_id)
+        {
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            string cmd = "Select school_name from schools where school_id = " + school_id.ToString() ;
+
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+
+            string schoolName = (string)theCmd.ExecuteScalar();
+
+            return schoolName;
+        }
+
         public List<KeyValuePair<int, string>> GetSchoolList()
         {
             List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
 
             SqlConnection theConnection = new SqlConnection(connectionString);
 
-           theConnection.Open();
+            theConnection.Open();
 
             string cmd = "Select school_id, school_name from schools order by school_name asc";
 
@@ -57,8 +76,8 @@ namespace Lcasp
             theConnection.Open();
 
             string cmd = "";
-            
-            if(showAllShooters)
+
+            if (showAllShooters)
                 cmd = "Select school_id, school_name from schools where school_id in (select distinct school_id from archers)";
             else
                 cmd = "Select school_id, school_name from schools where school_id in (select distinct (a.school_id) from archers a, archer_data ad where a.archer_id = ad.archer_id)";
@@ -120,7 +139,7 @@ namespace Lcasp
 
             int result = (int)theCmd.ExecuteNonQuery();
 
-           theConnection.Close();
+            theConnection.Close();
         }
 
         public List<Archer> GetSchoolArcher(int s_id, int a_id, string form)
@@ -202,7 +221,7 @@ namespace Lcasp
 
             theConnection.Open();
 
-            string cmd = 
+            string cmd =
             "Select distinct(a.archer_id), ad.archer_data_id, a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score " +
             "from archers a, archer_data ad " +
             "where " +
@@ -211,8 +230,8 @@ namespace Lcasp
             "MAX(ad.archer_data_id) " +
             "FROM archer_data ad where ad.archer_id = a.archer_id) " +
             "order by ad.archer_score desc";
-            
-           // cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score from archers a, archer_data ad where a.archer_id = ad.archer_id and max(ad.archer_data_id) order by ad.archer_score desc";
+
+            // cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score from archers a, archer_data ad where a.archer_id = ad.archer_id and max(ad.archer_data_id) order by ad.archer_score desc";
 
             SqlCommand theCmd = new SqlCommand(cmd, theConnection);
 
@@ -252,7 +271,7 @@ namespace Lcasp
 
             string cmd = "";
 
-            if(allShooters)
+            if (allShooters)
             {
                 cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a where school_id = " + s_id + " order by a.archer_id asc";
             }
@@ -346,20 +365,20 @@ namespace Lcasp
 
             SqlCommand theCmd = new SqlCommand(scoreData.GetSqlInsert(), theConnection);
 
-                 int result = (int)theCmd.ExecuteNonQuery();
+            int result = (int)theCmd.ExecuteNonQuery();
 
-                if (result == 1)
-                {
-                    theCmd.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.ArcherID + " order by archer_data_id desc";
+            if (result == 1)
+            {
+                theCmd.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.ArcherID + " order by archer_data_id desc";
 
-                    int id = (int)theCmd.ExecuteScalar();
+                int id = (int)theCmd.ExecuteScalar();
 
-                    scoreData.ArcherDataID = id;
-                }
-                else
-                {
-                    scoreData.ArcherDataID = -1;
-                }
+                scoreData.ArcherDataID = id;
+            }
+            else
+            {
+                scoreData.ArcherDataID = -1;
+            }
 
 
             theConnection.Close();
@@ -375,7 +394,7 @@ namespace Lcasp
 
             SqlConnection theConnection = new SqlConnection(connectionString);
 
-           theConnection.Open();
+            theConnection.Open();
 
             SqlCommand theCmd = new SqlCommand(sql, theConnection);
 
@@ -399,7 +418,7 @@ namespace Lcasp
             int result = (int)theCmd.ExecuteScalar();
 
 
-            if(aims_id == 0 && result != 0)
+            if (aims_id == 0 && result != 0)
             {
                 string updateStr = "Update archers set archer_state_id = " + result.ToString() + " where archer_id = " + result.ToString();
 
@@ -440,11 +459,40 @@ namespace Lcasp
             return retData;
         }
 
+        public void CheckForDBUpdates()
+        {
+            string sql = "select database_version from lcasp_version";
+
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            SqlCommand theCmd = new SqlCommand(sql, theConnection);
+
+            int result = 0;
+
+            try
+            {
+                result = (int)theCmd.ExecuteScalar();
+
+                if (result != Properties.Settings.Default.DataVersion)
+                {
+                    if (result == 10 && Properties.Settings.Default.DataVersion == 16)
+                    {
+                        RunDBScript("10to16.sql");
+                    }
+                }
+            }
+            catch (Exception)
+            { }
+        }
+
+
         public void CheckDatabaseVersion()
         {
             string sql = "select database_version from lcasp_version";
 
-           SqlConnection theConnection = new SqlConnection(connectionString);
+            SqlConnection theConnection = new SqlConnection(connectionString);
 
             theConnection.Open();
 
@@ -464,7 +512,7 @@ namespace Lcasp
 
             theConnection.Close();
 
-            if(result != Properties.Settings.Default.DataVersion)
+            if (result != Properties.Settings.Default.DataVersion)
             {
                 DropDatabase();
 
@@ -498,6 +546,10 @@ namespace Lcasp
                 }
 
                 theConnection.Close();
+
+                File.Delete(dbFileOne);
+                File.Delete(dbFileTwo);
+
             }
             catch (Exception)
             {
@@ -531,7 +583,7 @@ namespace Lcasp
         public void BackupDatabase()
         {
             var sqlConStrBuilder = new SqlConnectionStringBuilder(connectionString);
-            string backupFolder = Properties.Settings.Default.DatabaseBackup; 
+            string backupFolder = Properties.Settings.Default.DatabaseBackup;
 
             // set backupfilename (you will get something like: "C:/temp/MyDatabase-2013-12-07.bak")
             var backupFileName = String.Format("{0}{1}-{2}.bak",
@@ -548,6 +600,36 @@ namespace Lcasp
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
+            }
+        }
+
+        public void RunDBScript(string scriptName)
+        {
+            try
+            {
+                SqlConnection theConnection = new SqlConnection(connectionString);
+                theConnection.Open();
+                string script = File.ReadAllText(scriptName);
+
+                // split script on GO command
+                IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
+                                         System.Text.RegularExpressions.RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+
+                foreach (string commandString in commandStrings)
+                {
+                    if (commandString.Trim() != "")
+                    {
+                        using (var command = new SqlCommand(commandString, theConnection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                theConnection.Close();
+            }
+            catch (Exception ex)
+            {
             }
         }
 

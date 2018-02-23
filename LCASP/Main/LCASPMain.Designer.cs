@@ -43,6 +43,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meetButton = new Lcasp.PulseButton();
             this.psButton = new Lcasp.PulseButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,6 +115,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator4,
             this.projectScoresMenuItem,
             this.toolStripSeparator1,
             this.clearDatabaseToolStripMenuItem,
@@ -129,43 +131,43 @@
             // 
             this.projectScoresMenuItem.CheckOnClick = true;
             this.projectScoresMenuItem.Name = "projectScoresMenuItem";
-            this.projectScoresMenuItem.Size = new System.Drawing.Size(298, 38);
+            this.projectScoresMenuItem.Size = new System.Drawing.Size(296, 38);
             this.projectScoresMenuItem.Text = "Project Scores";
             this.projectScoresMenuItem.Click += new System.EventHandler(this.projectScoresMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(295, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(293, 6);
             // 
             // clearDatabaseToolStripMenuItem
             // 
             this.clearDatabaseToolStripMenuItem.Name = "clearDatabaseToolStripMenuItem";
-            this.clearDatabaseToolStripMenuItem.Size = new System.Drawing.Size(298, 38);
+            this.clearDatabaseToolStripMenuItem.Size = new System.Drawing.Size(296, 38);
             this.clearDatabaseToolStripMenuItem.Text = "Clear Database";
             this.clearDatabaseToolStripMenuItem.Click += new System.EventHandler(this.ClearDatabaseToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(295, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(293, 6);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(298, 38);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(296, 38);
             this.toolStripMenuItem1.Text = "Backup Database";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.backupDatabaseMenuClick);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(295, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(293, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(298, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(296, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -211,6 +213,11 @@
             this.psButton.UseVisualStyleBackColor = false;
             this.psButton.Click += new System.EventHandler(this.PsButton_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(293, 6);
+            // 
             // LCASPMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -251,6 +258,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

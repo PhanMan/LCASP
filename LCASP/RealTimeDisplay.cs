@@ -29,6 +29,7 @@ namespace Lcasp
 
         void BTimer_Tick(object sender, EventArgs e)
         {
+            string sep = "   ";
             string dataLine = null;
 
             if (listIndex >= myPrivateList.Count)
@@ -55,7 +56,7 @@ namespace Lcasp
 
                 //string lstr = "Archer Name".PadRight(20) + "          " + "SCORE"; // + sep + "10s" + sep + "9s" + sep + "8s" + sep + "7s" + sep + "6s" + sep + "5s" + sep + "4s" + sep + "3s" + sep + "2s" + sep + "1s" + sep + "0s";
 
-                string str = a.ArcherName.PadRight(30).Substring(0, 30) + "           " + ad.ArcherScore.ToString("000 ");
+                string str = a.ArcherName.PadRight(25).Substring(0, 25) + " " + ad.ArcherScore.ToString("000 ");
                 /*+ sep +
                                                                                        ad.ArcherTens.ToString(" 00") + sep +
                                                                                        ad.ArcherNines.ToString("00") + sep +
@@ -96,7 +97,7 @@ namespace Lcasp
             aTimer.Start();
 
             bTimer.Tick += new EventHandler(BTimer_Tick); // Everytime timer ticks, timer_Tick will be called
-            bTimer.Interval = 1500;          // Timer will tick evert 10 seconds
+            bTimer.Interval = 2000;          // Timer will tick evert 10 seconds
             bTimer.Enabled = true;                       // Enable the timer
             bTimer.Start();
         }
@@ -108,7 +109,6 @@ namespace Lcasp
             aTimer = null;
             bTimer.Stop();
             bTimer = null;
-
         }
     }
 }
