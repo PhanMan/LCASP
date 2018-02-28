@@ -29,7 +29,6 @@ namespace Lcasp
 
         void BTimer_Tick(object sender, EventArgs e)
         {
-            string sep = "   ";
             string dataLine = null;
 
             if (listIndex >= myPrivateList.Count)

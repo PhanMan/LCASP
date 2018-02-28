@@ -178,6 +178,24 @@ namespace Lcasp
             return theList;
         }
 
+        public bool ArcherExists(int archer_id)
+        {
+            SqlConnection theConnection = new SqlConnection(connectionString);
+
+            theConnection.Open();
+
+            string cmd = "select archer_id from archers where archer_id = " + archer_id.ToString() + " or archer_state_id = " + archer_id.ToString();
+
+            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
+
+            object x = theCmd.ExecuteScalar();
+
+            if (x == null)
+                return false;
+            else
+                return true;
+        }
+
         public List<Archer> GetSchoolArchers(int s_id, string form)
         {
             List<Archer> theList = new List<Archer>();
@@ -628,7 +646,7 @@ namespace Lcasp
                 }
                 theConnection.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

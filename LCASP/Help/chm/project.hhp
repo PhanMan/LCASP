@@ -1,0 +1,37 @@
+[OPTIONS]
+Compatibility=1.1
+Compiled file=D:\Documents\Visual Studio 2017\Projects\LCASP\LCASP\Help\chm\LCASP.chm
+Contents file=toc.hhc
+Default Window=Main
+Default topic=Introduction.htm
+Display compile progress=No
+Index file=keywords.hhk
+Auto Index=No
+Full-text search=Yes
+Language=0x0409
+Title=LCASP
+Error log file=project.log
+[WINDOWS]
+Main="LCASP","toc.hhc","keywords.hhk","Introduction.htm","Introduction.htm","","","","",0x61520,200,0x304E,[-1,-1,-1,-1],0xB0000,,,0,0,0,0
+[FILES]
+introduction.htm
+welcome.htm
+whatsnew.htm
+gettingstarted.htm
+systemrequirements.htm
+gettinghelp.htm
+helpwithcontrols.htm
+maintainschools.htm
+css\base.css
+css\ielte8.css
+css\reset.css
+img\arrow_left.png
+img\arrow_right.png
+img\arrow_up.png
+img\footer-bg.png
+img\header-bg.png
+js\chmRelative.js
+[ALIAS]
+#include .\alias.h
+[MAP]
+#include .\contextnb.h
