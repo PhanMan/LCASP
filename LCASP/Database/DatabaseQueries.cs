@@ -39,6 +39,33 @@ namespace Lcasp
             return schoolName;
         }
 
+        public int GetArcherSortingFactor(int archer_id, int section)
+        {
+            ArcherData ad = GetArcherData(archer_id);
+
+            switch (section)
+            {
+                case 10:
+                    return ad.ArcherTens;
+
+              case 9:
+                    return ad.ArcherNines;
+
+                case 8:
+                    return ad.ArcherEights;
+
+                case 7:
+                    return ad.ArcherSevens;
+
+                case 6:
+                    return ad.ArcherSixes;
+
+                default:
+                    return 0;
+            }
+        }
+
+
         public List<KeyValuePair<int, string>> GetSchoolList()
         {
             List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
@@ -112,7 +139,6 @@ namespace Lcasp
 
             theConnection.Close();
             return a_id;
-
         }
 
         public void DeleteArcher(int a_id)

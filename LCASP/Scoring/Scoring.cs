@@ -10,6 +10,7 @@ namespace Lcasp
     {
         public List<SchoolStanding> StandingList { get; set; }
         public SortedList<int, int> OverallList { get; set; }
+        
 
         public Scoring()
         {
@@ -25,6 +26,41 @@ namespace Lcasp
             OverallList = new SortedList<int, int>(new ScoreComparer<int>());
 
             ScoreMatch(showAllShooters);
+        }
+
+        private void ProcessTieRule()
+        {
+            DatabaseQueries dQ = new DatabaseQueries();
+
+            foreach (SchoolStanding ss in StandingList)
+            {
+                foreach (KeyValuePair<int, int> top12 in ss.Top12)
+                {
+                    ss.FinalList.Add(top12);
+                }
+
+                for(int counter=1; counter<ss.FinalList.Count-1; counter++)
+                {
+                    if(ss.FinalList[counter-1].Key == ss.FinalList[counter].Key)
+                    {
+                        for(int sections=10; sections>5; sections--)
+                        {
+                            if(dQ.GetArcherSortingFactor(ss.FinalList[counter-1].Value, sections) < dQ.GetArcherSortingFactor(ss.FinalList[counter].Value, sections))
+                            {
+                                // Swap needs to occur.
+                                KeyValuePair<int, int> tempItem = new KeyValuePair<int, int>();
+
+                                tempItem = ss.FinalList[counter];
+
+                                ss.FinalList[counter] = ss.FinalList[counter - 1];
+                                ss.FinalList[counter - 1] = tempItem;
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void ScoreMatch(Boolean showAllShooters)
@@ -69,7 +105,7 @@ namespace Lcasp
             {
                 if (ss.Female.Count > 4)
                 {
-                    int fCount = ss.Female.Count-1;
+                    int fCount = ss.Female.Count - 1;
 
                     for (int count = fCount; count >= 4; count--)
                     {
@@ -89,7 +125,7 @@ namespace Lcasp
 
                 if (ss.Male.Count > 4)
                 {
-                    int mCount = ss.Male.Count-1;
+                    int mCount = ss.Male.Count - 1;
 
                     for (int count = mCount; count >= 4; count--)
                     {
@@ -121,7 +157,24 @@ namespace Lcasp
                     for (int count = ss.Overall.Count; count < 4; count++)
                         ss.Overall.Add(0, 0);
                 }
+
+                // Add to top 12 list in order of score.
+                foreach (KeyValuePair<int, int> male in ss.Male)
+                {
+                    ss.Top12.Add(male.Key, male.Value);
+                }
+
+                foreach (KeyValuePair<int, int> female in ss.Female)
+                {
+                    ss.Top12.Add(female.Key, female.Value);
+                }
+
+                foreach (KeyValuePair<int, int> overall in ss.Overall)
+                {
+                    ss.Top12.Add(overall.Key, overall.Value);
+                }
             }
+            ProcessTieRule();
         }
     }
 }

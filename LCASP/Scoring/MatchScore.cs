@@ -98,16 +98,17 @@ namespace Lcasp
 
         private void ScoreMatch_Button(object sender, EventArgs e)
         {
+            PrintMatchResultsReport();
 
-            PrintOverallScoreReport();
+            //PrintOverallScoreReport();
 
             PrintTeamScoreReport();
 
-            PrintMatchResultsReport();
 
-            ExportMatchResult();
 
-            ExportTeamData();
+            //ExportMatchResult();
+
+           // ExportTeamData();
 
             MessageBox.Show("Match Processed : All Data Exported.");
         }

@@ -62,12 +62,19 @@ namespace Lcasp
 
             do
             {
+                archerCount = 1;
+
                 theItem = (KeyValuePair<int, int>)printItems.Current;
 
                 string printString = theScore.StandingList[theItem.Value].School_Name.PadRight(50) + "     " + theScore.StandingList[theItem.Value].TeamMatchScore.ToString().PadLeft(6);
 
                 DrawPageHeader(myGraphics, myBrush, thePen, printString);
 
+                foreach (KeyValuePair<int, int> top12 in theScore.StandingList[theItem.Value].FinalList)
+                {
+                    DrawLine(myGraphics, myBrush, thePen, GetArcherPrintString(top12));
+                }
+                /*
                 foreach (KeyValuePair<int, int> male in theScore.StandingList[theItem.Value].Male)
                 {
                     DrawLine(myGraphics, myBrush, thePen, GetArcherPrintString(male));
@@ -82,6 +89,7 @@ namespace Lcasp
                 {
                     DrawLine(myGraphics, myBrush, thePen, GetArcherPrintString(overall));
                 }
+                */
              } while ((offset < 900) && printItems.MoveNext());
 
             // Print Scores by Team

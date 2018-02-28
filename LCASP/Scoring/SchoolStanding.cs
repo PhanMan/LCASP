@@ -14,6 +14,9 @@ namespace Lcasp
         public SortedList<int, int> Male { get; set; }
         public SortedList<int, int> Female { get; set; }
         public SortedList<int, int> TeamWide { get; set; }
+        public SortedList<int, int> Top12 { get; set; }
+        public List<KeyValuePair<int, int>> FinalList { get; set; }
+
         public int TeamMatchScore
         {
             get
@@ -41,6 +44,8 @@ namespace Lcasp
             Male = new SortedList<int, int>(new ScoreComparer<int>());
             Female = new SortedList<int, int>(new ScoreComparer<int>());
             TeamWide = new SortedList<int, int>(new ScoreComparer<int>());
+            Top12 = new SortedList<int, int>(new ScoreComparer<int>());
+            FinalList = new List<KeyValuePair<int, int>>();
         }
     }
 }
