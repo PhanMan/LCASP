@@ -23,12 +23,22 @@ namespace Lcasp
             {
                 int result = 0;
 
-                for(int count=0; count<4; count++)
+
+                for (int mCount = 0; mCount < Male.Keys.Count; mCount++)
+                    result += Male.Keys[mCount];
+                for (int fCount = 0; fCount < Female.Keys.Count; fCount++)
+                    result += Female.Keys[fCount];
+                for (int oCount = 0; oCount < Overall.Keys.Count; oCount++)
+                    result += Overall.Keys[oCount];
+
+                /*
+                for (int count=0; count<4; count++)
                 {
                     result += Male.Keys[count];
                     result += Female.Keys[count];
                     result += Overall.Keys[count];
                 }
+                */
 
                 return result;
             }

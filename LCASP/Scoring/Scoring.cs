@@ -39,21 +39,23 @@ namespace Lcasp
                     ss.FinalList.Add(top12);
                 }
 
-                for(int counter=1; counter<ss.FinalList.Count-1; counter++)
+                for(int counter=0; counter<ss.FinalList.Count-1; counter++)
                 {
-                    if(ss.FinalList[counter-1].Key != 0 && ss.FinalList[counter-1].Key == ss.FinalList[counter].Key)
+                    if(ss.FinalList[counter].Value != 0 && ss.FinalList[counter].Key == ss.FinalList[counter+1].Key)
                     {
                         for(int sections=10; sections>5; sections--)
                         {
-                            if(dQ.GetArcherSortingFactor(ss.FinalList[counter-1].Value, sections) < dQ.GetArcherSortingFactor(ss.FinalList[counter].Value, sections))
+                            int current = dQ.GetArcherSortingFactor(ss.FinalList[counter].Value, sections);
+                            int ahead = dQ.GetArcherSortingFactor(ss.FinalList[counter+1].Value, sections);
+
+                            if (current > ahead)
+                                break;
+                            else
+                            if (current < ahead)
                             {
-                                // Swap needs to occur.
-                                KeyValuePair<int, int> tempItem = new KeyValuePair<int, int>();
-
-                                tempItem = ss.FinalList[counter];
-
-                                ss.FinalList[counter] = ss.FinalList[counter - 1];
-                                ss.FinalList[counter - 1] = tempItem;
+                                KeyValuePair<int, int> tItem = ss.FinalList[counter + 1];
+                                ss.FinalList[counter + 1] = ss.FinalList[counter];
+                                ss.FinalList[counter] = tItem;
 
                                 break;
                             }
@@ -103,11 +105,23 @@ namespace Lcasp
 
             foreach (SchoolStanding ss in StandingList)
             {
-                if (ss.Female.Count > 4)
+                int femaleCount = 4;
+                int maleCount = 4;
+                int overallCount = 4;
+
+                if (ss.Male.Count == 0)
+                {
+                    femaleCount = 12;
+                    maleCount = 0;
+                    overallCount = 0;
+                }
+
+
+                if (ss.Female.Count > femaleCount)
                 {
                     int fCount = ss.Female.Count - 1;
 
-                    for (int count = fCount; count >= 4; count--)
+                    for (int count = fCount; count >= femaleCount; count--)
                     {
                         int keyVal = ss.Female.Keys[count];
                         int valVal = ss.Female.Values[count];
@@ -117,17 +131,17 @@ namespace Lcasp
                         ss.Female.RemoveAt(count);
                     }
                 }
-                else if (ss.Female.Count < 4)
+                else if (ss.Female.Count < femaleCount)
                 {
-                    for (int count = ss.Female.Count; count < 4; count++)
+                    for (int count = ss.Female.Count; count < femaleCount; count++)
                         ss.Female.Add(0, 0);
                 }
 
-                if (ss.Male.Count > 4)
+                if (ss.Male.Count > maleCount)
                 {
                     int mCount = ss.Male.Count - 1;
 
-                    for (int count = mCount; count >= 4; count--)
+                    for (int count = mCount; count >= maleCount; count--)
                     {
                         int keyVal = ss.Male.Keys[count];
                         int valVal = ss.Male.Values[count];
@@ -137,24 +151,24 @@ namespace Lcasp
                         ss.Male.RemoveAt(count);
                     }
                 }
-                else if (ss.Male.Count < 4)
+                else if (ss.Male.Count < maleCount)
                 {
-                    for (int count = ss.Male.Count; count < 4; count++)
+                    for (int count = ss.Male.Count; count < maleCount; count++)
                         ss.Male.Add(0, 0);
                 }
 
-                if (ss.Overall.Count > 4)
+                if (ss.Overall.Count > overallCount)
                 {
                     int mCount = ss.Overall.Count - 1;
 
-                    for (int count = mCount; count >= 4; count--)
+                    for (int count = mCount; count >= overallCount; count--)
                     {
                         ss.Overall.RemoveAt(count);
                     }
                 }
-                else if (ss.Overall.Count < 4)
+                else if (ss.Overall.Count < overallCount)
                 {
-                    for (int count = ss.Overall.Count; count < 4; count++)
+                    for (int count = ss.Overall.Count; count < overallCount; count++)
                         ss.Overall.Add(0, 0);
                 }
 
