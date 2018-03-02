@@ -19,6 +19,7 @@ namespace Lcasp
         int page = 1;
         int schoolLimited = 0;
         string schoolName = "";
+        DatabaseQueries dQ = new DatabaseQueries();
 
         private SortedList<int, int> printList = null;
 
@@ -33,7 +34,7 @@ namespace Lcasp
             printItems = printList.GetEnumerator();
             schoolLimited = school_id;
 
-            schoolName = new DatabaseQueries().GetSchoolName(schoolLimited);
+            schoolName = dQ.GetSchoolName(schoolLimited);
 
         }
 
@@ -76,12 +77,12 @@ namespace Lcasp
             {
                 theItem = (KeyValuePair<int, int>)printItems.Current;
 
-                Archer theArcher = new DatabaseQueries().GetArcher(theItem.Value);
+                Archer theArcher = dQ.GetArcher(theItem.Value);
 
                 ArcherData theArcherData = null;
                 if (schoolLimited == 0)
                 {
-                    theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
+                    theArcherData = dQ.GetArcherData(theItem.Value);
 
                     if (prevScore != theArcherData.ArcherScore)
                     {

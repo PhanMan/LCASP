@@ -101,6 +101,9 @@
     <Compile Include="RealTimeDisplay.Designer.cs">
       <DependentUpon>RealTimeDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\GenderScoreReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Scoring\InterimSchoolChoice.cs">
       <SubType>Form</SubType>
     </Compile>

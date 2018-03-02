@@ -20,6 +20,7 @@ namespace Lcasp
         private SortedList<int, int> printList = null;
         private Scoring theScore = null;
         string sepString = " ";
+        DatabaseQueries dQ = new DatabaseQueries();
 
         public MatchResultsReport(Scoring s, SortedList<int, int> theList)
         {
@@ -113,8 +114,8 @@ namespace Lcasp
 
         private String GetArcherPrintString(KeyValuePair<int, int> theItem)
         {
-            Archer theArcher = new DatabaseQueries().GetArcher(theItem.Value);
-            ArcherData theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
+            Archer theArcher = dQ.GetArcher(theItem.Value);
+            ArcherData theArcherData = dQ.GetArcherData(theItem.Value);
             string printString = "";
 
             if (theArcher == null && theArcherData == null)

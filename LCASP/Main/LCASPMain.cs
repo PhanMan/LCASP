@@ -173,5 +173,34 @@ namespace Lcasp
                 new DatabaseQueries().RestoreDatabase(selectedFileName);
             }
         }
+
+
+        private void PrintGenderScoreReport(bool genderFemale)
+        {
+            Scoring theScore = new Scoring();
+
+            GenderScoreReport osr = null;
+
+            if (genderFemale)
+                osr = new GenderScoreReport(theScore.FemaleFinalList, true);
+            else
+                osr = new GenderScoreReport(theScore.MaleFinalList, true);
+
+            osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
+
+            osr.Print();
+
+            theScore = null;
+        }
+
+        private void femaleScoreReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintGenderScoreReport(true);
+        }
+
+        private void maleScoreReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintGenderScoreReport(false);
+        }
     }
 }

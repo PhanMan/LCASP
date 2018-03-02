@@ -17,15 +17,69 @@ namespace Lcasp
         int txtheight = 0;
         int archerCount = 0;
         int page = 1;
-        private SortedList<int, int> printList = null;
+        //private SortedList<int, int> printList = null;
         private string printTeamName = "";
+        private List<KeyValuePair<int, int>> processedList = new List<KeyValuePair<int, int>>();
 
         public TeamScoreReport(string teamName, SortedList<int, int> theList)
         {
-            printList = theList;
+            //printList = theList;
             printTeamName = teamName;
 
-            printItems = printList.GetEnumerator();
+            ProcessTieRule(theList);
+
+            printItems = processedList.GetEnumerator();
+        }
+
+        private void ProcessTieRule(SortedList<int,int> theList)
+        {
+            int duplicateIndex = 0, prevItem = 0, tempIndex = 0;
+
+            DatabaseQueries dQ = new DatabaseQueries();
+
+            foreach (KeyValuePair<int, int> item in theList)
+            {
+                if (item.Key != 0 && item.Key == prevItem)
+                    tempIndex++;
+                else
+                {
+                    if (tempIndex > duplicateIndex)
+                        duplicateIndex = tempIndex;
+
+                    tempIndex = 0;
+
+                    prevItem = item.Key;
+                }
+
+                processedList.Add(item);
+            }
+
+            for (int duplicateRun = 0; duplicateRun < duplicateIndex; duplicateRun++)
+            {
+                for (int counter = 0; counter < processedList.Count - 1; counter++)
+                {
+                    if (processedList[counter].Value != 0 && processedList[counter].Key == processedList[counter + 1].Key)
+                    {
+                        for (int sections = 10; sections > 5; sections--)
+                        {
+                            int current = dQ.GetArcherSortingFactor(processedList[counter].Value, sections);
+                            int ahead = dQ.GetArcherSortingFactor(processedList[counter + 1].Value, sections);
+
+                            if (current > ahead)
+                                break;
+                            else
+                            if (current < ahead)
+                            {
+                                KeyValuePair<int, int> tItem = processedList[counter + 1];
+                                processedList[counter + 1] = processedList[counter];
+                                processedList[counter] = tItem;
+
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         protected override void OnBeginPrint(System.Drawing.Printing.PrintEventArgs e)

@@ -150,7 +150,6 @@ namespace Lcasp
             GC.Collect();
         }
 
-
         private void PrintOverallScoreReport()
         {
             Scoring theScore = new Scoring();
