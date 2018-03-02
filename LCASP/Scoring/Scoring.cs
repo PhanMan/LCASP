@@ -41,7 +41,7 @@ namespace Lcasp
 
                 for(int counter=1; counter<ss.FinalList.Count-1; counter++)
                 {
-                    if(ss.FinalList[counter-1].Key == ss.FinalList[counter].Key)
+                    if(ss.FinalList[counter-1].Key != 0 && ss.FinalList[counter-1].Key == ss.FinalList[counter].Key)
                     {
                         for(int sections=10; sections>5; sections--)
                         {
