@@ -124,12 +124,8 @@ namespace Lcasp
 
                 Archer theArcher = new DatabaseQueries().GetArcher(theItem.Value);
                 ArcherData theArcherData = new DatabaseQueries().GetArcherData(theItem.Value);
+                archerCount++;
 
-                if(prevScore != theArcherData.ArcherScore)
-                {
-                    prevScore = theArcherData.ArcherScore;
-                    archerCount++;
-                }
 
                 string printString = archerCount.ToString().PadRight(3) + " " + theArcher.ArcherName.PadRight(17).Substring(0, 17) + sepString +
                                      theArcher.ArcherSex.Substring(0, 1).PadLeft(1) + sepString +

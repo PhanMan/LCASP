@@ -31,6 +31,10 @@ namespace Lcasp
         {
             StandingList = new List<SchoolStanding>();
             OverallList = new SortedList<int, int>(new ScoreComparer<int>());
+            FemaleList = new SortedList<int, int>(new ScoreComparer<int>());
+            FemaleFinalList = new List<KeyValuePair<int, int>>();
+            MaleList = new SortedList<int, int>(new ScoreComparer<int>());
+            MaleFinalList = new List<KeyValuePair<int, int>>();
 
             ScoreMatch(showAllShooters);
         }
