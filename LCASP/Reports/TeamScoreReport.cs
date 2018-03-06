@@ -80,6 +80,7 @@ namespace Lcasp
                     }
                 }
             }
+            dQ.Close();
         }
 
         protected override void OnBeginPrint(System.Drawing.Printing.PrintEventArgs e)

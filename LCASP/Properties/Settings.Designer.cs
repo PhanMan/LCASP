@@ -27,7 +27,7 @@ namespace Lcasp.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=lcasp;password=archery;persistsecurityinfo=True;database" +
-            "=lcasp_data")]
+            "=lcasp_data;Max Pool Size=1000")]
         public string lcasp_dataConnectionString {
             get {
                 return ((string)(this["lcasp_dataConnectionString"]));
@@ -37,7 +37,8 @@ namespace Lcasp.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=LCASP;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=LCASP;Integrated Security=True;M" +
+            "ax Pool Size=1000")]
         public string SqlServerExpress {
             get {
                 return ((string)(this["SqlServerExpress"]));

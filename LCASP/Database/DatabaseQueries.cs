@@ -11,8 +11,15 @@ namespace Lcasp
         private string dbFileOne = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.mdf";
         private string dbFileTwo = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.ldf";
 
-
         string connectionString = Properties.Settings.Default.SqlServerExpress;// .lcasp_dataConnectionString
+
+        public DatabaseQueries()
+        {
+        }
+
+        public void Close()
+        {
+        }
 
         public void ClearDatabase()
         {
@@ -26,17 +33,21 @@ namespace Lcasp
 
         public string GetSchoolName(int school_id)
         {
-            SqlConnection theConnection = new SqlConnection(connectionString);
+            string schoolName = "";
 
-            theConnection.Open();
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
+                    sqlCmd.CommandText = "Select school_name from schools where school_id = " + school_id.ToString();
 
-            string cmd = "Select school_name from schools where school_id = " + school_id.ToString() ;
+                    schoolName = (string)sqlCmd.ExecuteScalar();
 
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            string schoolName = (string)theCmd.ExecuteScalar();
-
-            return schoolName;
+                    return schoolName;
+                }
+            }
         }
 
         public int GetArcherSortingFactor(int archer_id, int section)
@@ -48,7 +59,7 @@ namespace Lcasp
                 case 10:
                     return ad.ArcherTens;
 
-              case 9:
+                case 9:
                     return ad.ArcherNines;
 
                 case 8:
@@ -70,26 +81,26 @@ namespace Lcasp
         {
             List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd = "Select school_id, school_name from schools order by school_name asc";
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    theList.Add(new KeyValuePair<int, string>(Convert.ToInt32(theReader["school_id"].ToString()), theReader["school_name"].ToString()));
+                    sqlCmd.Connection = dbConn;
+                    sqlCmd.CommandText = "Select school_id, school_name from schools order by school_name asc";
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                theList.Add(new KeyValuePair<int, string>(Convert.ToInt32(theReader["school_id"].ToString()), theReader["school_name"].ToString()));
+                            }
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
 
             return theList;
         }
@@ -98,124 +109,138 @@ namespace Lcasp
         {
             List<KeyValuePair<int, string>> theList = new List<KeyValuePair<int, string>>();
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd = "";
-
-            if (showAllShooters)
-                cmd = "Select school_id, school_name from schools where school_id in (select distinct school_id from archers)";
-            else
-                cmd = "Select school_id, school_name from schools where school_id in (select distinct (a.school_id) from archers a, archer_data ad where a.archer_id = ad.archer_id)";
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    theList.Add(new KeyValuePair<int, string>(Convert.ToInt32(theReader["school_id"].ToString()), theReader["school_name"].ToString()));
+                    sqlCmd.Connection = dbConn;
+
+                    if (showAllShooters)
+                        sqlCmd.CommandText = "Select school_id, school_name from schools where school_id in (select distinct school_id from archers)";
+                    else
+                        sqlCmd.CommandText = "Select school_id, school_name from schools where school_id in (select distinct (a.school_id) from archers a, archer_data ad where a.archer_id = ad.archer_id)";
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                theList.Add(new KeyValuePair<int, string>(Convert.ToInt32(theReader["school_id"].ToString()), theReader["school_name"].ToString()));
+                            }
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
 
             return theList;
         }
 
         public int GetArcherID(int a_aims_id)
         {
-            SqlConnection theConnection = new SqlConnection(connectionString);
+            int archerID = 0;
 
-            theConnection.Open();
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
 
-            SqlCommand theCmd = new SqlCommand("select archer_id from archers where archer_state_id = " + a_aims_id, theConnection);
+                    sqlCmd.CommandText = "select archer_id from archers where archer_state_id = " + a_aims_id;
 
-            int a_id = (int)theCmd.ExecuteScalar();
-
-            theConnection.Close();
-            return a_id;
+                    archerID = (int)sqlCmd.ExecuteScalar();
+                }
+            }
+            return archerID;
         }
 
         public void DeleteArcher(int a_id)
         {
-            SqlConnection theConnection = new SqlConnection(connectionString);
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
 
-            theConnection.Open();
+                    sqlCmd.CommandText = "delete from archers where archer_id = " + a_id;
 
-            SqlCommand theCmd = new SqlCommand("delete from archers where archer_id = " + a_id, theConnection);
 
-            int result = (int)theCmd.ExecuteNonQuery();
-
-            theConnection.Close();
+                    int result = (int)sqlCmd.ExecuteNonQuery();
+                }
+            }
         }
-
 
         public void DeleteSchool(int s_id)
         {
-            SqlConnection theConnection = new SqlConnection(connectionString);
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
 
-            theConnection.Open();
+                    sqlCmd.CommandText = "delete from schools where school_id = " + s_id;
 
-            SqlCommand theCmd = new SqlCommand("delete from schools where school_id = " + s_id, theConnection);
-
-            int result = (int)theCmd.ExecuteNonQuery();
-
-            theConnection.Close();
+                    int result = (int)sqlCmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public List<Archer> GetSchoolArcher(int s_id, int a_id, string form)
         {
             List<Archer> theList = new List<Archer>();
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd = "Select * from archers where school_id = " + s_id + " and archer_id = " + a_id + " order by archer_id asc";
-
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    Archer theArcher = new Archer(s_id,
-                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
-                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
-                                                  theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString(),
-                                                  form);
+                    sqlCmd.Connection = dbConn;
 
-                    theList.Add(theArcher);
+                    sqlCmd.CommandText = "Select * from archers where school_id = " + s_id + " and archer_id = " + a_id + " order by archer_id asc";
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                Archer theArcher = new Archer(s_id,
+                                                              Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                              Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                              theReader["archer_name"].ToString(),
+                                                              theReader["archer_sex"].ToString(),
+                                                              form);
+
+                                theList.Add(theArcher);
+                            }
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
 
             return theList;
         }
 
         public bool ArcherExists(int archer_id)
         {
-            SqlConnection theConnection = new SqlConnection(connectionString);
+            object x = null;
 
-            theConnection.Open();
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
 
-            string cmd = "select archer_id from archers where archer_id = " + archer_id.ToString() + " or archer_state_id = " + archer_id.ToString();
+                    sqlCmd.CommandText = "select archer_id from archers where archer_id = " + archer_id.ToString() + " or archer_state_id = " + archer_id.ToString();
 
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            object x = theCmd.ExecuteScalar();
-
+                    x = sqlCmd.ExecuteScalar();
+                }
+            }
             if (x == null)
                 return false;
             else
@@ -226,34 +251,35 @@ namespace Lcasp
         {
             List<Archer> theList = new List<Archer>();
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd = "Select * from archers where school_id = " + s_id + " order by archer_id asc";
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    Archer theArcher = new Archer(s_id,
-                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
-                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
-                                                  theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString(),
-                                                  form);
+                    sqlCmd.Connection = dbConn;
 
-                    theList.Add(theArcher);
+                    sqlCmd.CommandText = "Select * from archers where school_id = " + s_id + " order by archer_id asc";
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                Archer theArcher = new Archer(s_id,
+                                                              Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                              Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                              theReader["archer_name"].ToString(),
+                                                              theReader["archer_sex"].ToString(),
+                                                              form);
+
+                                theList.Add(theArcher);
+                            }
+
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
-
             return theList;
         }
 
@@ -261,47 +287,45 @@ namespace Lcasp
         {
             List<string> theList = new List<string>();
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd =
-            "Select distinct(a.archer_id), ad.archer_data_id, a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score " +
-            "from archers a, archer_data ad " +
-            "where " +
-            "a.archer_id = ad.archer_id and " +
-            "ad.archer_data_id = (SELECT " +
-            "MAX(ad.archer_data_id) " +
-            "FROM archer_data ad where ad.archer_id = a.archer_id) " +
-            "order by ad.archer_score desc";
-
-            // cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score from archers a, archer_data ad where a.archer_id = ad.archer_id and max(ad.archer_data_id) order by ad.archer_score desc";
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    string dataLine = theReader["archer_raw_data"].ToString();
+                    sqlCmd.Connection = dbConn;
 
-                    /*
-                    Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
-                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
-                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
-                                                  theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString(),
-                                                  "XXXX");
-                                                  */
-                    theList.Add(dataLine);
+                    sqlCmd.CommandText =
+                          "Select distinct(a.archer_id), ad.archer_data_id, a.archer_state_id, a.archer_name, a.archer_sex, a.school_id, ad.archer_raw_data, ad.archer_score " +
+                          "from archers a, archer_data ad " +
+                          "where " +
+                          "a.archer_id = ad.archer_id and " +
+                          "ad.archer_data_id = (SELECT " +
+                          "MAX(ad.archer_data_id) " +
+                          "FROM archer_data ad where ad.archer_id = a.archer_id) " +
+                           "order by ad.archer_score desc";
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                string dataLine = theReader["archer_raw_data"].ToString();
+
+                                /*
+                                Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
+                                                              Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                              Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                              theReader["archer_name"].ToString(),
+                                                              theReader["archer_sex"].ToString(),
+                                                              "XXXX");
+                                                              */
+                                theList.Add(dataLine);
+                            }
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
-
             return theList;
         }
 
@@ -309,44 +333,41 @@ namespace Lcasp
         {
             List<Archer> theList = new List<Archer>();
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd = "";
-
-            if (allShooters)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a where school_id = " + s_id + " order by a.archer_id asc";
-            }
-            else
-            {
-                cmd = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a, archer_data ad where a.archer_id = ad.archer_id and school_id = " + s_id + " order by a.archer_id asc";
-            }
-
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
-            {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    Archer theArcher = new Archer(s_id,
-                                                  Convert.ToInt32(theReader["archer_id"].ToString()),
-                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
-                                                  theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString(),
-                                                  form);
+                    sqlCmd.Connection = dbConn;
 
-                    theList.Add(theArcher);
+                    if (allShooters)
+                    {
+                        sqlCmd.CommandText = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a where school_id = " + s_id + " order by a.archer_id asc";
+                    }
+                    else
+                    {
+                        sqlCmd.CommandText = "Select distinct(a.archer_id), a.archer_state_id, a.archer_name, a.archer_sex from archers a, archer_data ad where a.archer_id = ad.archer_id and school_id = " + s_id + " order by a.archer_id asc";
+                    }
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                Archer theArcher = new Archer(s_id,
+                                                              Convert.ToInt32(theReader["archer_id"].ToString()),
+                                                              Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                              theReader["archer_name"].ToString(),
+                                                              theReader["archer_sex"].ToString(),
+                                                              form);
+
+                                theList.Add(theArcher);
+                            }
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
-
             return theList;
         }
 
@@ -354,274 +375,152 @@ namespace Lcasp
         {
             Archer retArcher = null;
 
-
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            string cmd = "Select * from archers where archer_id = " + a_id;
-
-            SqlCommand theCmd = new SqlCommand(cmd, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
-                                                  a_id,
-                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
-                                                  theReader["archer_name"].ToString(),
-                                                  theReader["archer_sex"].ToString(),
-                                                  "XXXX");
+                    sqlCmd.Connection = dbConn;
 
-                    retArcher = theArcher;
+                    sqlCmd.CommandText = "Select * from archers where archer_id = " + a_id;
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    {
+                        if (theReader.HasRows)
+                        {
+                            while (theReader.Read())
+                            {
+                                Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
+                                                              a_id,
+                                                              Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                              theReader["archer_name"].ToString(),
+                                                              theReader["archer_sex"].ToString(),
+                                                              "XXXX");
+
+                                retArcher = theArcher;
+                            }
+                        }
+                    }
                 }
             }
-
-            theReader.Close();
-            theConnection.Close();
-
             return retArcher;
         }
 
-
-        public void StartNewMeet()
-        {
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            SqlCommand theCmd = new SqlCommand("truncate table archer_data", theConnection);
-
-            int result = (int)theCmd.ExecuteNonQuery();
-
-            theConnection.Close();
-        }
-
-
         public ArcherData SetArcherData(ArcherData scoreData)
         {
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            SqlCommand theCmd = new SqlCommand(scoreData.GetSqlInsert(), theConnection);
-
-            int result = (int)theCmd.ExecuteNonQuery();
-
-            if (result == 1)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                theCmd.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.ArcherID + " order by archer_data_id desc";
+                dbConn.Open();
+                using (SqlCommand sqlCmd1 = new SqlCommand())
+                {
+                    sqlCmd1.Connection = dbConn;
 
-                int id = (int)theCmd.ExecuteScalar();
+                    sqlCmd1.CommandText = scoreData.GetSqlInsert();
 
-                scoreData.ArcherDataID = id;
+                    int result = (int)sqlCmd1.ExecuteNonQuery();
+
+                    if (result == 1)
+                    {
+                        using (SqlCommand sqlCmd2 = new SqlCommand())
+                        {
+                            sqlCmd2.Connection = dbConn;
+                            sqlCmd2.CommandText = "select top 1 archer_data_id from archer_data where archer_id = " + scoreData.ArcherID + " order by archer_data_id desc";
+
+                            int id = (int)sqlCmd2.ExecuteScalar();
+
+                            scoreData.ArcherDataID = id;
+                        }
+                    }
+                    else
+                    {
+                        scoreData.ArcherDataID = -1;
+                    }
+
+                }
             }
-            else
-            {
-                scoreData.ArcherDataID = -1;
-            }
-
-
-            theConnection.Close();
-
             return scoreData;
         }
 
         public void AddSchool(string s_name)
         {
-            string sql = "insert into schools (school_name) " +
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
+
+                    sqlCmd.CommandText = "insert into schools (school_name) " +
                          " values " +
                          "('" + s_name + "')";
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
 
-            theConnection.Open();
-
-            SqlCommand theCmd = new SqlCommand(sql, theConnection);
-
-            int result = (int)theCmd.ExecuteNonQuery();
-
-            theConnection.Close();
+                    int result = (int)sqlCmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public void AddArcher(string a_name, int aims_id, string a_sex, int s_id)
         {
-            string sql = "insert into archers (school_id, archer_state_id, archer_name, archer_sex) " +
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            {
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
+                {
+                    sqlCmd.Connection = dbConn;
+
+                    sqlCmd.CommandText = "insert into archers (school_id, archer_state_id, archer_name, archer_sex) " +
              " values " +
              "(" + s_id + ", " + aims_id + ", '" + a_name + "', '" + a_sex + "'); SELECT CAST(scope_identity() AS int);";
 
-            SqlConnection theConnection = new SqlConnection(connectionString);
+                    int result = (int)sqlCmd.ExecuteScalar();
 
-            theConnection.Open();
+                    if (aims_id == 0 && result != 0)
+                    {
+                        using (SqlCommand sqlCmd1 = new SqlCommand())
+                        {
+                            sqlCmd1.Connection = dbConn;
 
-            SqlCommand theCmd = new SqlCommand(sql, theConnection);
+                            sqlCmd1.CommandText =
+                                    "Update archers set archer_state_id = " + result.ToString() + " where archer_id = " + result.ToString();
 
-            int result = (int)theCmd.ExecuteScalar();
+                            sqlCmd1.ExecuteNonQuery();
+                        }
 
-
-            if (aims_id == 0 && result != 0)
-            {
-                string updateStr = "Update archers set archer_state_id = " + result.ToString() + " where archer_id = " + result.ToString();
-
-                SqlCommand cmd = new SqlCommand(updateStr, theConnection);
-
-                cmd.ExecuteNonQuery();
+                    }
+                }
             }
-
-            theConnection.Close();
         }
 
         public ArcherData GetArcherData(int a_id)
         {
             ArcherData retData = null;
-            string sql = "select top 1 archer_data_id, archer_raw_data from archer_data where archer_id = " + a_id + " order by archer_data_id desc";
 
-
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            SqlCommand theCmd = new SqlCommand(sql, theConnection);
-
-            SqlDataReader theReader = theCmd.ExecuteReader();
-
-            if (theReader.HasRows)
+            using (SqlConnection dbConn = new SqlConnection(connectionString))
             {
-                while (theReader.Read())
+                dbConn.Open();
+                using (SqlCommand sqlCmd = new SqlCommand())
                 {
-                    retData = new ArcherData(theReader["archer_raw_data"].ToString())
+                    sqlCmd.Connection = dbConn;
+
+                    sqlCmd.CommandText = "select top 1 archer_data_id, archer_raw_data from archer_data where archer_id = " + a_id + " order by archer_data_id desc";
+
+                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
                     {
-                        ArcherDataID = Convert.ToInt32(theReader["archer_data_id"].ToString())
-                    };
-                }
-            }
-
-            theConnection.Close();
-            return retData;
-        }
-
-        public void CheckForDBUpdates()
-        {
-            string sql = "select database_version from lcasp_version";
-
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            SqlCommand theCmd = new SqlCommand(sql, theConnection);
-
-            int result = 0;
-
-            try
-            {
-                result = (int)theCmd.ExecuteScalar();
-
-                if (result != Properties.Settings.Default.DataVersion)
-                {
-                    if (result == 10 && Properties.Settings.Default.DataVersion == 16)
-                    {
-                        RunDBScript("10to16.sql");
-                    }
-                }
-            }
-            catch (Exception)
-            { }
-        }
-
-
-        public void CheckDatabaseVersion()
-        {
-            string sql = "select database_version from lcasp_version";
-
-            SqlConnection theConnection = new SqlConnection(connectionString);
-
-            theConnection.Open();
-
-            SqlCommand theCmd = new SqlCommand(sql, theConnection);
-
-            int result = 0;
-
-            try
-            {
-                result = (int)theCmd.ExecuteScalar();
-            }
-            catch (Exception)
-            {
-                DropDatabase();
-                CreateDatabase();
-            }
-
-            theConnection.Close();
-
-            if (result != Properties.Settings.Default.DataVersion)
-            {
-                DropDatabase();
-
-                CreateDatabase();
-            }
-        }
-
-        public void DropDatabase()
-        {
-            try
-            {
-                SqlConnection theConnection = new SqlConnection("Data Source = localhost\\sqlexpress; initial catalog=master; Integrated Security = True");
-                theConnection.Open();
-
-                string script = File.ReadAllText(@"drop.sql");
-
-                // split script on GO command
-                IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
-                                         System.Text.RegularExpressions.RegexOptions.Multiline | RegexOptions.IgnoreCase);
-
-
-                foreach (string commandString in commandStrings)
-                {
-                    if (commandString.Trim() != "")
-                    {
-                        using (var command = new SqlCommand(commandString, theConnection))
+                        if (theReader.HasRows)
                         {
-                            command.ExecuteNonQuery();
+                            while (theReader.Read())
+                            {
+                                retData = new ArcherData(theReader["archer_raw_data"].ToString())
+                                {
+                                    ArcherDataID = Convert.ToInt32(theReader["archer_data_id"].ToString())
+                                };
+                            }
                         }
                     }
                 }
-
-                theConnection.Close();
-
-                File.Delete(dbFileOne);
-                File.Delete(dbFileTwo);
-
             }
-            catch (Exception)
-            {
-            }
-        }
-
-        public void RestoreDatabase(string backupFileName)
-        {
-            var sqlConStrBuilder = new SqlConnectionStringBuilder(connectionString);
-            string backupFolder = Properties.Settings.Default.DatabaseBackup;
-
-            // set backupfilename (you will get something like: "C:/temp/MyDatabase-2013-12-07.bak")
-            //var backupFileName = String.Format("{0}{1}-{2}.bak",
-            //    backupFolder, sqlConStrBuilder.InitialCatalog,
-            //    DateTime.Now.ToString("yyyy-MM-dd"));
-
-            using (var connection = new SqlConnection(sqlConStrBuilder.ConnectionString))
-            {
-                //RESTORE DATABASE[data] FROM DISK = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\Backup\data.bak' WITH FILE = 1, NOUNLOAD, REPLACE, STATS = 10
-                var query = String.Format("RESTORE DATABASE {0} FROM DISK='{1}'",
-                    sqlConStrBuilder.InitialCatalog, backupFileName);
-
-                using (var command = new SqlCommand(query, connection))
-                {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-            }
+            return retData;
         }
 
         public void BackupDatabase()
@@ -644,36 +543,6 @@ namespace Lcasp
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
-            }
-        }
-
-        public void RunDBScript(string scriptName)
-        {
-            try
-            {
-                SqlConnection theConnection = new SqlConnection(connectionString);
-                theConnection.Open();
-                string script = File.ReadAllText(scriptName);
-
-                // split script on GO command
-                IEnumerable<string> commandStrings = Regex.Split(script, @"^\s*GO\s*$",
-                                         System.Text.RegularExpressions.RegexOptions.Multiline | RegexOptions.IgnoreCase);
-
-
-                foreach (string commandString in commandStrings)
-                {
-                    if (commandString.Trim() != "")
-                    {
-                        using (var command = new SqlCommand(commandString, theConnection))
-                        {
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-                theConnection.Close();
-            }
-            catch (Exception)
-            {
             }
         }
 

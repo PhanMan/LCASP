@@ -86,8 +86,10 @@ namespace Lcasp
             {
                 MessageBox.Show("Error processing data file!" + "\n" + ex.Message);
             }
-            
+
+            dq.Close();
             dq = null;
+
 
             this.Close();
 

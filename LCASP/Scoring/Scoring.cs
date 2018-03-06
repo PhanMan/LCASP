@@ -88,6 +88,7 @@ namespace Lcasp
                     }
                 }
             }
+            dQ.Close();
         }
 
         private void ProcessFemaleTieRule()
@@ -139,11 +140,13 @@ namespace Lcasp
                     }
                 }
             }
+            dQ.Close();
         }
 
         private void ProcessTieRule()
         {
             ProcessFemaleTieRule();
+
             ProcessMaleTieRule();
 
             DatabaseQueries dQ = new DatabaseQueries();
@@ -196,21 +199,24 @@ namespace Lcasp
                     }
                 }
             }
+            dQ.Close();
         }
 
         private void ScoreMatch(Boolean showAllShooters)
         {
-            List<KeyValuePair<int, string>> schoolList = new DatabaseQueries().GetParticipatingSchoolList(showAllShooters);
+            DatabaseQueries dQ = new DatabaseQueries();
+
+            List<KeyValuePair<int, string>> schoolList = dQ.GetParticipatingSchoolList(showAllShooters);
 
             foreach (KeyValuePair<int, string> kvp in schoolList)
             {
                 SchoolStanding theStanding = new SchoolStanding(Convert.ToInt32(kvp.Key), kvp.Value);
 
-                List<Archer> schoolArchers = new DatabaseQueries().GetParticipatingSchoolArchers(showAllShooters, Convert.ToInt32(kvp.Key), "XXXX");
+                List<Archer> schoolArchers = dQ.GetParticipatingSchoolArchers(showAllShooters, Convert.ToInt32(kvp.Key), "XXXX");
 
                 foreach (Archer theArcher in schoolArchers)
                 {
-                    ArcherData theData = new DatabaseQueries().GetArcherData(theArcher.ArcherID);
+                    ArcherData theData = dQ.GetArcherData(theArcher.ArcherID);
 
                     if (theData != null)
                     {
@@ -322,6 +328,9 @@ namespace Lcasp
                     ss.Top12.Add(overall.Key, overall.Value);
                 }
             }
+
+            dQ.Close();
+
             ProcessTieRule();
         }
     }

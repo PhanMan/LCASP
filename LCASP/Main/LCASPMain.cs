@@ -23,6 +23,8 @@ namespace Lcasp
         {
             InitializeComponent();
 
+            Properties.Settings.Default.ProjectScores = false;
+
             /*
             string iData1 = "       ,180,0980,0000,            ,            ,            ,004, 02 01 02 01 03 03 04 03 03 04 04       ,       ,2,3,4,5,6,6,7,8,9,10,9,7,6,5,4,4,5,6,7,8,8,9,9,10,10,2,1,0,0,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
 
@@ -170,7 +172,7 @@ namespace Lcasp
             {
                 string selectedFileName = openFileDialog1.FileName;
 
-                new DatabaseQueries().RestoreDatabase(selectedFileName);
+                //new DatabaseQueries().RestoreDatabase(selectedFileName);
             }
         }
 
@@ -184,7 +186,7 @@ namespace Lcasp
             if (genderFemale)
                 osr = new GenderScoreReport(theScore.FemaleFinalList, true);
             else
-                osr = new GenderScoreReport(theScore.MaleFinalList, true);
+                osr = new GenderScoreReport(theScore.MaleFinalList, false);
 
             osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
 
