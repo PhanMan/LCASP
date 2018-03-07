@@ -103,8 +103,6 @@ namespace Lcasp
         protected override void OnPrintPage(System.Drawing.Printing.PrintPageEventArgs e)
         {
             string sepString = " ";
-            int prevScore = 0;
-
 
             KeyValuePair<int, int> theItem = new KeyValuePair<int, int>();
             // Run base code

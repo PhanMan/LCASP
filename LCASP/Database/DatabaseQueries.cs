@@ -8,8 +8,8 @@ namespace Lcasp
 {
     public class DatabaseQueries
     {
-        private string dbFileOne = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.mdf";
-        private string dbFileTwo = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.ldf";
+        //private string dbFileOne = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.mdf";
+        //private string dbFileTwo = "C:\\Program Files\\Microsoft SQL Server\\MSSQL11.SQLEXPRESS\\MSSQL\\DATA\\LCASP.ldf";
 
         string connectionString = Properties.Settings.Default.SqlServerExpress;// .lcasp_dataConnectionString
 

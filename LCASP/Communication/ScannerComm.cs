@@ -99,15 +99,24 @@ namespace Lcasp
 
                 if (dataFlow)
                 {
-                    ArcherData a1 = new ArcherData(dataIn);
+                    ArcherData a1 = null;
 
-                    if (a1 != null && new DatabaseQueries().ArcherExists(a1.ArcherID))
-                    { 
-                        new DatabaseQueries().SetArcherData(a1);
-                    }
-                    else
+                    try
                     {
-                        MessageBox.Show("Invalid card scanned!,  Shooter ID was not located in database!");
+                        a1 = new ArcherData(dataIn);
+
+                        if (a1 != null && new DatabaseQueries().ArcherExists(a1.ArcherID))
+                        {
+                            new DatabaseQueries().SetArcherData(a1);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid card scanned!,  Shooter ID was not located in database!");
+                        }
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("Invalid scan data.  Try card again!", "SCAN ERROR");
                     }
                 }
             }
