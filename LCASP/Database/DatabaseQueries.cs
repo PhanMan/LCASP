@@ -469,9 +469,8 @@ namespace Lcasp
                 {
                     sqlCmd.Connection = dbConn;
 
-                    sqlCmd.CommandText = "insert into archers (school_id, archer_state_id, archer_name, archer_sex) " +
-             " values " +
-             "(" + s_id + ", " + aims_id + ", '" + a_name + "', '" + a_sex + "'); SELECT CAST(scope_identity() AS int);";
+                    sqlCmd.CommandText = "insert into archers (school_id, archer_state_id, archer_name, archer_sex) values " +
+                                         "(" + s_id + ", " + aims_id + ", '" + a_name + "', '" + a_sex + "'); SELECT CAST(scope_identity() AS int);";
 
                     int result = (int)sqlCmd.ExecuteScalar();
 

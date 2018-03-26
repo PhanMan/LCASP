@@ -29,6 +29,7 @@ namespace Lcasp
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            string[] test;
 
             DatabaseQueries dq = new DatabaseQueries();
 
@@ -43,6 +44,7 @@ namespace Lcasp
                             foreach (string s in lines)
                             {
                                 string[] items = s.Split(',');
+                                test = items;
                                 //dq.AddArcher(items[2], Convert.ToInt32(items[1]), items[3], school_id);
                                 dq.AddArcher(items[0], 0, items[1], school_id);
                             }
@@ -117,6 +119,11 @@ namespace Lcasp
         {
             okButton.Enabled = true;
             importType = 3;
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

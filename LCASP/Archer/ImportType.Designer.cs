@@ -30,12 +30,12 @@
         {
             this.nsButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.InsButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.okButton = new Lcasp.PulseButton();
             this.cancelButton = new Lcasp.PulseButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +62,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(354, 209);
             this.panel1.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(77, 162);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(239, 25);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "AIMS ID, First Last, Sex";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(77, 73);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "First Last,Sex";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // InsButton
             // 
@@ -116,24 +135,6 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "First Last, Sex";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 162);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(239, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "AIMS ID, First Last, Sex";
             // 
             // ImportType
             // 
