@@ -108,14 +108,17 @@ namespace Lcasp
                         if (a1 != null && new DatabaseQueries().ArcherExists(a1.ArcherID))
                         {
                             new DatabaseQueries().SetArcherData(a1);
+
                         }
                         else
                         {
+                            System.Media.SystemSounds.Beep.Play();
                             MessageBox.Show("Invalid card scanned!,  Shooter ID was not located in database!");
                         }
                     }
                     catch(Exception)
                     {
+                        System.Media.SystemSounds.Beep.Play();
                         MessageBox.Show("Invalid scan data.  Try card again!", "SCAN ERROR");
                     }
                 }
