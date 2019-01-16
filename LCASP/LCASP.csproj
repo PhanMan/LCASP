@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>Y:\Repositories\LCASPUpdate\</PublishUrl>
+    <PublishUrl>D:\Documents\Visual Studio 2017\Projects\LCASP\Publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -27,8 +27,7 @@
     <PublisherName>Mississippi Computer Craft</PublisherName>
     <SuiteName>Lamar Christian Archery for Schools</SuiteName>
     <WebPage>publish.htm</WebPage>
-    <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>21</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -116,6 +115,12 @@
     <Compile Include="Reports\OverallScoreReport.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SetCommPort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetCommPort.Designer.cs">
+      <DependentUpon>SetCommPort.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\About.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Scoring\InterimSchoolChoice.resx">
       <DependentUpon>InterimSchoolChoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetCommPort.resx">
+      <DependentUpon>SetCommPort.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\About.resx">
       <DependentUpon>About.cs</DependentUpon>

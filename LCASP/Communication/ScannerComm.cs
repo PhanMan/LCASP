@@ -21,8 +21,18 @@ namespace Lcasp
         public ScannerComm(CommQueue aQueue)
         {
             theQueue = aQueue;
+            string com = "";
 
-            string com = GetPorts("Silicon Labs");
+            if (commPort.Length > 0)
+            {
+                // Non standard scanner MANUAL
+                com = commPort;
+            }
+            else
+            {
+                // Normal scanner
+                com = GetPorts("Silicon Labs");
+            }
 
             if (com.Length > 0)
             {

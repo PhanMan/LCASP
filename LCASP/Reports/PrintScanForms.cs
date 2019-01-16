@@ -92,7 +92,21 @@ namespace Lcasp
         }
         */
 
-                if (theItem.ScanForm.CompareTo("NASP") == 0)
+                if (theItem.ScanForm.CompareTo("NASP4") == 0)
+                {
+                    string idNo = theItem.ArcherID.ToString("0000");
+
+                    for (int counter = 0; counter < 4; counter++)
+                    {
+                        int digit = Convert.ToInt32(idNo[counter].ToString());
+
+                        myGraphics.FillEllipse(myBrush, xDim[digit] + Properties.Settings.Default.HoroAdjust, yDim[counter] + Properties.Settings.Default.VerticalAdjust, 20, 15);
+                    }
+
+                    myGraphics.DrawString(theItem.ArcherName, PrinterFont, myBrush, archerNamePoint);
+                    myGraphics.DrawString(theItem.ArcherID.ToString("0000"), PrinterFont, myBrush, archerIdPoint);
+                }
+                else if (theItem.ScanForm.CompareTo("NASP5") == 0)
                 {
                     string idNo = theItem.ArcherID.ToString("00000");
 

@@ -55,12 +55,15 @@ namespace Lcasp.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string COM {
             get {
                 return ((string)(this["COM"]));
+            }
+            set {
+                this["COM"] = value;
             }
         }
         

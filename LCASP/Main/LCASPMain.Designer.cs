@@ -40,14 +40,18 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.femaleScoreReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.maleScoreReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.setComPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meetButton = new Lcasp.PulseButton();
             this.psButton = new Lcasp.PulseButton();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.femaleScoreReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.maleScoreReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualCOMSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,7 +132,10 @@
             this.toolStripSeparator3,
             this.toolStripMenuItem2,
             this.toolStripSeparator5,
-            this.exitToolStripMenuItem});
+            this.setComPortToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.exitToolStripMenuItem,
+            this.toolStripSeparator6});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
             this.fileToolStripMenuItem.Text = "File";
@@ -175,12 +182,59 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(293, 6);
             // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.femaleScoreReportToolStripMenuItem,
+            this.maleScoreReportToolStripMenuItem});
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(296, 38);
+            this.toolStripMenuItem2.Text = "Print";
+            // 
+            // femaleScoreReportToolStripMenuItem
+            // 
+            this.femaleScoreReportToolStripMenuItem.Name = "femaleScoreReportToolStripMenuItem";
+            this.femaleScoreReportToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.femaleScoreReportToolStripMenuItem.Text = "Female Score Report";
+            this.femaleScoreReportToolStripMenuItem.Click += new System.EventHandler(this.femaleScoreReportToolStripMenuItem_Click);
+            // 
+            // maleScoreReportToolStripMenuItem
+            // 
+            this.maleScoreReportToolStripMenuItem.Name = "maleScoreReportToolStripMenuItem";
+            this.maleScoreReportToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.maleScoreReportToolStripMenuItem.Text = "Male Score Report";
+            this.maleScoreReportToolStripMenuItem.Click += new System.EventHandler(this.maleScoreReportToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(293, 6);
+            // 
+            // setComPortToolStripMenuItem
+            // 
+            this.setComPortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manualCOMSetupToolStripMenuItem});
+            this.setComPortToolStripMenuItem.Name = "setComPortToolStripMenuItem";
+            this.setComPortToolStripMenuItem.Size = new System.Drawing.Size(296, 38);
+            this.setComPortToolStripMenuItem.Text = "Manual Setup";
+            this.setComPortToolStripMenuItem.Click += new System.EventHandler(this.setComPortToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(293, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(296, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(293, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -224,33 +278,12 @@
             this.psButton.UseVisualStyleBackColor = false;
             this.psButton.Click += new System.EventHandler(this.PsButton_Click);
             // 
-            // toolStripMenuItem2
+            // manualCOMSetupToolStripMenuItem
             // 
-            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.femaleScoreReportToolStripMenuItem,
-            this.maleScoreReportToolStripMenuItem});
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(296, 38);
-            this.toolStripMenuItem2.Text = "Print";
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(293, 6);
-            // 
-            // femaleScoreReportToolStripMenuItem
-            // 
-            this.femaleScoreReportToolStripMenuItem.Name = "femaleScoreReportToolStripMenuItem";
-            this.femaleScoreReportToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
-            this.femaleScoreReportToolStripMenuItem.Text = "Female Score Report";
-            this.femaleScoreReportToolStripMenuItem.Click += new System.EventHandler(this.femaleScoreReportToolStripMenuItem_Click);
-            // 
-            // maleScoreReportToolStripMenuItem
-            // 
-            this.maleScoreReportToolStripMenuItem.Name = "maleScoreReportToolStripMenuItem";
-            this.maleScoreReportToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
-            this.maleScoreReportToolStripMenuItem.Text = "Male Score Report";
-            this.maleScoreReportToolStripMenuItem.Click += new System.EventHandler(this.maleScoreReportToolStripMenuItem_Click);
+            this.manualCOMSetupToolStripMenuItem.Name = "manualCOMSetupToolStripMenuItem";
+            this.manualCOMSetupToolStripMenuItem.Size = new System.Drawing.Size(324, 38);
+            this.manualCOMSetupToolStripMenuItem.Text = "Manual COM Setup";
+            this.manualCOMSetupToolStripMenuItem.Click += new System.EventHandler(this.manualCOMSetupToolStripMenuItem_Click);
             // 
             // LCASPMain
             // 
@@ -297,6 +330,10 @@
         private System.Windows.Forms.ToolStripMenuItem femaleScoreReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem maleScoreReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem setComPortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem manualCOMSetupToolStripMenuItem;
     }
 }
 

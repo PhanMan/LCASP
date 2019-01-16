@@ -204,5 +204,15 @@ namespace Lcasp
         {
             PrintGenderScoreReport(false);
         }
+
+        private void setComPortToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manualCOMSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SetCommPort().ShowDialog();
+        }
     }
 }
