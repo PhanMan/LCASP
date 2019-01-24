@@ -51,7 +51,7 @@
             this.SexBox.Location = new System.Drawing.Point(885, 78);
             this.SexBox.Name = "SexBox";
             this.SexBox.Size = new System.Drawing.Size(170, 31);
-            this.SexBox.TabIndex = 1;
+            this.SexBox.TabIndex = 2;
             this.SexBox.TextChanged += new System.EventHandler(this.SexBox_TextChanged);
             // 
             // label1
@@ -60,7 +60,7 @@
             this.label1.Location = new System.Drawing.Point(54, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 25);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 50;
             this.label1.Text = "Archer Name";
             // 
             // label2
@@ -83,7 +83,7 @@
             this.saveButton.Name = "saveButton";
             this.saveButton.PulseSpeed = 0.2F;
             this.saveButton.Size = new System.Drawing.Size(230, 101);
-            this.saveButton.TabIndex = 22;
+            this.saveButton.TabIndex = 4;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
@@ -99,7 +99,7 @@
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.PulseSpeed = 0.2F;
             this.cancelButton.Size = new System.Drawing.Size(230, 101);
-            this.cancelButton.TabIndex = 23;
+            this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Close";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
@@ -115,7 +115,7 @@
             this.importButton.Name = "importButton";
             this.importButton.PulseSpeed = 0.2F;
             this.importButton.Size = new System.Drawing.Size(230, 101);
-            this.importButton.TabIndex = 24;
+            this.importButton.TabIndex = 5;
             this.importButton.Text = "Import";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
@@ -125,7 +125,7 @@
             this.StateIDBox.Location = new System.Drawing.Point(697, 78);
             this.StateIDBox.Name = "StateIDBox";
             this.StateIDBox.Size = new System.Drawing.Size(170, 31);
-            this.StateIDBox.TabIndex = 25;
+            this.StateIDBox.TabIndex = 1;
             this.StateIDBox.TextChanged += new System.EventHandler(this.StateIDBox_TextChanged);
             // 
             // label3

@@ -1,135 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Lcasp
 {
-    public partial class MatchScore : Form
+    public class ScoringRoutines : IDisposable
     {
-        ScannerComm sc = null;
-        Timer aTimer = new Timer();
-        public CommQueue theQueue = null;
         private DatabaseQueries dQ = null;
 
-        public MatchScore()
+        public ScoringRoutines()
         {
-            InitializeComponent();
-
-
-            theQueue = new CommQueue();
-
-            sc = new ScannerComm(theQueue);
-
-            if (sc.scannerExist)
-            {
-                sc.Open();
-                sc.InitializeScanner();
-            }
-
             dQ = new DatabaseQueries();
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        public void Dispose()
         {
             dQ.Close();
             dQ = null;
-            aTimer.Stop();
-            aTimer = null;
-            sc.Close();
-            sc = null;
-
             GC.Collect();
-
-            this.Close();
         }
 
-        private void MatchScore_Load(object sender, EventArgs e)
-        {
-            aTimer.Tick += new EventHandler(Timer_Tick); // Everytime timer ticks, timer_Tick will be called
-            aTimer.Interval = 250;          // Timer will tick evert 10 seconds
-            aTimer.Enabled = true;                       // Enable the timer
-            aTimer.Start();                              // Start the timer
-        }
-
-        void Timer_Tick(object sender, EventArgs e)
-        {
-            string dataLine = null;
-            string sep = "   ";
-
-            while ((dataLine = theQueue.DeQueue()) != null)
-            {
-                ArcherData ad = new ArcherData(dataLine);
-                Archer a = dQ.GetArcher(ad.ArcherID);
-
-                if (a != null)
-                {
-                    LCASPMain.archerQueue.Enqueue(dataLine);
-
-                    label1.Font = new Font("Courier new", 10);
-                    DataListBox.Font = new Font("Courier new", 10, FontStyle.Bold);
-
-
-                    string lstr = "Archer Name".PadRight(20) + "          " + "SCORE" + sep + "10s" + sep + "9s" + sep + "8s" + sep + "7s" + sep + "6s" + sep + "5s" + sep + "4s" + sep + "3s" + sep + "2s" + sep + "1s" + sep + "0s";
-                    label1.Text = lstr;
-                    string str = a.ArcherName.PadRight(20).Substring(0, 20) + "           " + ad.ArcherScore.ToString("000 ") + sep +
-                                                                                           ad.ArcherTens.ToString(" 00") + sep +
-                                                                                           ad.ArcherNines.ToString("00") + sep +
-                                                                                           ad.ArcherEights.ToString("00") + sep +
-                                                                                           ad.ArcherSevens.ToString("00") + sep +
-                                                                                           ad.ArcherSixes.ToString("00") + sep +
-                                                                                           ad.ArcherFives.ToString("00") + sep +
-                                                                                           ad.ArcherFours.ToString("00") + sep +
-                                                                                           ad.ArcherThrees.ToString("00") + sep +
-                                                                                           ad.ArcherTwos.ToString("00") + sep +
-                                                                                           ad.ArcherOnes.ToString("00") + sep +
-                                                                                           ad.ArcherZeros.ToString("00");
-
-                    DataListBox.Items.Add(str);
-                    DataListBox.SelectedIndex = DataListBox.Items.Count - 1;
-                }
-            }
-        }
-
-        private void ScoreMatch_Button(object sender, EventArgs e)
-        {
-            using (ScoringRoutines sr = new ScoringRoutines())
-            {
-                sr.PrintMatchResultsReport();
-                sr.PrintTeamScoreReport();
-            }
-            MessageBox.Show("Match Processed");
-        }
-
-        private void ProcessInterimButton_Click(object sender, EventArgs e)
-        {
-            new InterimSchoolChoice().ShowDialog();
-        }
-
-#if false
-        private void PrintTeamScoreReport()
+        public void PrintTeamScoreReport()
         {
             Scoring theScore = new Scoring();
-            
-            foreach(SchoolStanding school in theScore.StandingList)
+
+            foreach (SchoolStanding school in theScore.StandingList)
             {
                 TeamScoreReport osr = new TeamScoreReport(school.School_Name, school.TeamWide);
 
                 osr.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("Letter", 850, 1100);
 
                 osr.Print();
-
-                theScore = null;
             }
+
+            theScore = null;
+            GC.Collect();
         }
 
-        private void PrintMatchResultsReport()
+        public void PrintMatchResultsReport()
         {
             Scoring theScore = new Scoring();
 
@@ -147,11 +58,10 @@ namespace Lcasp
             osr.Print();
 
             theScore = null;
-
             GC.Collect();
         }
 
-        private void PrintMatchResultsReport(int school_id)
+        public void PrintMatchResultsReport(int school_id)
         {
             Scoring theScore = new Scoring();
 
@@ -173,12 +83,11 @@ namespace Lcasp
             osr.Print();
 
             theScore = null;
-
             GC.Collect();
         }
 
 
-        private void PrintOverallScoreReport()
+        public void PrintOverallScoreReport()
         {
             Scoring theScore = new Scoring();
 
@@ -188,9 +97,10 @@ namespace Lcasp
             osr.Print();
 
             theScore = null;
+            GC.Collect();
         }
 
-        private void ExportMatchResult()
+        public void ExportMatchResult()
         {
             Scoring theScore = new Scoring();
 
@@ -232,11 +142,15 @@ namespace Lcasp
 
             sw.Close();
 
+            sw = null;
+            theSortedList = null;
+
+            theScore = null;
             GC.Collect();
         }
 
 
-        private void ExportTeamData()
+        public void ExportTeamData()
         {
             Scoring theScore = new Scoring();
 
@@ -277,10 +191,11 @@ namespace Lcasp
                 sw.Close();
             }
 
+            theScore = null;
             GC.Collect();
         }
 
-        private string GenerateCSVString(string sex, KeyValuePair<int, int> archer)
+        public string GenerateCSVString(string sex, KeyValuePair<int, int> archer)
         {
             string retVal = "";
             string sepString = ",";
@@ -318,6 +233,5 @@ namespace Lcasp
 
             return retVal;
         }
-#endif
     }
 }

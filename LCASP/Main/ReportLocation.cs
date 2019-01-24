@@ -28,7 +28,18 @@ namespace Lcasp
                 NetworkStream clientStream = client.GetStream();
 
                 ASCIIEncoding encoder = new ASCIIEncoding();
-                byte[] buffer = encoder.GetBytes("LCASP" + " " + 0 + " " + version);
+
+                string[] mmV = version.Substring(4, version.Length-4).Split('.');
+
+                string mVersion = version.Substring(0, 3);
+
+                foreach(string x in mmV)
+                {
+                    mVersion = mVersion + x;
+                }
+
+
+                byte[] buffer = encoder.GetBytes(Properties.Settings.Default.SiteName + " " + 0 + " " + mVersion);
 
                 clientStream.Write(buffer, 0, buffer.Length);
                 clientStream.Flush();

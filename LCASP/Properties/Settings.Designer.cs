@@ -132,5 +132,17 @@ namespace Lcasp.Properties {
                 this["DatabaseBackup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Default")]
+        public string SiteName {
+            get {
+                return ((string)(this["SiteName"]));
+            }
+            set {
+                this["SiteName"] = value;
+            }
+        }
     }
 }

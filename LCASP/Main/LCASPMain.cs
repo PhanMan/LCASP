@@ -62,6 +62,9 @@ namespace Lcasp
 
             new DatabaseQueries().CreateDatabase();
 
+            if (Properties.Settings.Default.SiteName.Length == 0 || Properties.Settings.Default.SiteName.CompareTo("Default") == 0)
+                new SiteNameForm().ShowDialog();
+
            // new DatabaseQueries().CheckForDBUpdates();
 
             this.Text = "Lamar Christian Archery " + CurrentVersion;
@@ -80,11 +83,6 @@ namespace Lcasp
             theProjector.SetBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
             theProjector.StartPosition = FormStartPosition.Manual;
             theProjector.Show();
-        }
- 
-        private void ASchoolButton_Click(object sender, EventArgs e)
-        {
-            new SchoolMaintain().ShowDialog();
         }
 
         private void ASchool_Button(object sender, EventArgs e)
@@ -114,11 +112,6 @@ namespace Lcasp
             Application.Exit();
         }
 
-        private void ClearDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new Confirm().ShowDialog();
-        }
-
         private void MeetButton_Click(object sender, EventArgs e)
         {
             new MatchScore().ShowDialog();
@@ -128,6 +121,7 @@ namespace Lcasp
         {
             new PrintScannerForm().ShowDialog();
         }
+
         public string CurrentVersion
         {
             get
@@ -150,13 +144,6 @@ namespace Lcasp
                     theProjector.Close();
                 theProjector = null;
             }
-        }
-
-        private void backupDatabaseMenuClick(object sender, EventArgs e)
-        {
- 
-
-            new DatabaseQueries().BackupDatabase();
         }
 
         private void restoreDatabaseMenuClick(object sender, EventArgs e)
@@ -195,24 +182,49 @@ namespace Lcasp
             theScore = null;
         }
 
-        private void femaleScoreReportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void manualCOMSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SetCommPort().ShowDialog();
+        }
+
+        private void printInterimScoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new InterimSchoolChoice().ShowDialog();
+        }
+
+        private void printFinalScoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ScoringRoutines sr = new ScoringRoutines())
+            {
+                sr.PrintMatchResultsReport();
+
+                sr.PrintTeamScoreReport();
+            }
+        }
+
+        private void FemaleScoreReportClick(object sender, EventArgs e)
         {
             PrintGenderScoreReport(true);
         }
 
-        private void maleScoreReportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MaleScoreReportClick(object sender, EventArgs e)
         {
             PrintGenderScoreReport(false);
         }
 
-        private void setComPortToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClearDatabaseClick(object sender, EventArgs e)
         {
-
+            new Confirm().ShowDialog();
         }
 
-        private void manualCOMSetupToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BackupDatabaseClick(object sender, EventArgs e)
         {
-            new SetCommPort().ShowDialog();
+            new DatabaseQueries().BackupDatabase();
+        }
+
+        private void OverallScoreClick(object sender, EventArgs e)
+        {
+            new ScoringRoutines().PrintOverallScoreReport();
         }
     }
 }

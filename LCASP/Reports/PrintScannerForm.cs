@@ -29,8 +29,8 @@ namespace Lcasp
             ArcherComboBox.ValueMember = "Value";
 
 
-            ScanFormComboBox.Items.Add(new { Text = "NASP4", Value = "NASP4" });// new KeyValuePair<string, string>("NASP", "NASP"));
-            ScanFormComboBox.Items.Add(new { Text = "NASP5", Value = "NASP5" });// new KeyValuePair<string, string>("NASP", "NASP"));
+            ScanFormComboBox.Items.Add(new { Text = "NASP 4 Digit ID", Value = "NASP4" });// new KeyValuePair<string, string>("NASP", "NASP"));
+            ScanFormComboBox.Items.Add(new { Text = "NASP 5 Digit ID", Value = "NASP5" });// new KeyValuePair<string, string>("NASP", "NASP"));
             ScanFormComboBox.Items.Add(new { Text = "AIMS", Value = "AIMS" });// new KeyValuePair<string, string>("AIMS", "AIMS"));
             ScanFormComboBox.Items.Add(new { Text = "TEXT", Value = "TEXT" });
 

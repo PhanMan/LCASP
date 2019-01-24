@@ -47,5 +47,8 @@
     <Setting Name="DatabaseBackup" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:/DatabaseBackup/</Value>
     </Setting>
+    <Setting Name="SiteName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

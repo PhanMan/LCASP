@@ -60,7 +60,6 @@
             this.DataListBox.Name = "DataListBox";
             this.DataListBox.Size = new System.Drawing.Size(1821, 729);
             this.DataListBox.TabIndex = 25;
-            this.DataListBox.SelectedIndexChanged += new System.EventHandler(this.DataListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -110,6 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1899, 1047);
             this.Controls.Add(this.ProcessInterimButton);
             this.Controls.Add(this.smButton);

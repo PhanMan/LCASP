@@ -38,20 +38,21 @@ namespace Lcasp
             {
                 commPort = com;
                 scannerExist = true;
+
+                _serialPort.BaudRate = 38400;
+                _serialPort.DataBits = 8;
+                _serialPort.Handshake = Handshake.None;
+                _serialPort.Parity = Parity.None;
+                _serialPort.PortName = commPort;
+                _serialPort.StopBits = StopBits.One;
+
+                _serialPort.DataReceived += new SerialDataReceivedEventHandler(_serialPort_DataReceived);
             }
             else
             {
                 MessageBox.Show("Scanner not detected, check connection and retry.");
+                return;
             }
-
-            _serialPort.BaudRate = 38400;
-            _serialPort.DataBits = 8;
-            _serialPort.Handshake = Handshake.None;
-            _serialPort.Parity = Parity.None;
-            _serialPort.PortName = commPort;
-            _serialPort.StopBits = StopBits.One;
-
-            _serialPort.DataReceived += new SerialDataReceivedEventHandler(_serialPort_DataReceived);
         }
 
         private string GetPorts(string usbDeviceName)
@@ -95,8 +96,16 @@ namespace Lcasp
 
         public void Close()
         {
-            if (scannerExist)
+
+            if (true)//scannerExist)
+            {
                 _serialPort.Close();
+                _serialPort.Dispose();
+            }
+
+            _serialPort = null;
+
+            GC.Collect();
         }
 
         void _serialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
