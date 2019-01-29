@@ -226,5 +226,17 @@ namespace Lcasp
         {
             new ScoringRoutines().PrintOverallScoreReport();
         }
+
+        private void exportTeamDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ScoringRoutines().ExportTeamData();
+            MessageBox.Show("Team Data Exported to Desktop.");
+        }
+
+        private void exportMatchDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ScoringRoutines().ExportMatchResult();
+            MessageBox.Show("Match Results Exported to Desktop.");
+        }
     }
 }

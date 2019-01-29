@@ -40,9 +40,9 @@
             this.scoringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printInterimScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.printFinalScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printOverallScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.femaleScoreReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.maleScoreReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.printOverallScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.setComPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualCOMSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +55,8 @@
             this.aArcherButton = new Lcasp.PulseButton();
             this.exitButton = new Lcasp.PulseButton();
             this.aSchoolButton = new Lcasp.PulseButton();
+            this.exportTeamDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMatchDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +68,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1558, 40);
+            this.menuStrip1.Size = new System.Drawing.Size(1558, 42);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,7 +87,7 @@
             this.exitToolStripMenuItem,
             this.toolStripSeparator6});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // toolStripSeparator4
@@ -141,7 +143,9 @@
             this.printFinalScoresToolStripMenuItem,
             this.printOverallScoresToolStripMenuItem,
             this.femaleScoreReportToolStripMenuItem1,
-            this.maleScoreReportToolStripMenuItem1});
+            this.maleScoreReportToolStripMenuItem1,
+            this.exportTeamDataToolStripMenuItem,
+            this.exportMatchDataToolStripMenuItem});
             this.scoringToolStripMenuItem.Name = "scoringToolStripMenuItem";
             this.scoringToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
             this.scoringToolStripMenuItem.Text = "Scoring";
@@ -160,6 +164,13 @@
             this.printFinalScoresToolStripMenuItem.Text = "Print Final Scores";
             this.printFinalScoresToolStripMenuItem.Click += new System.EventHandler(this.printFinalScoresToolStripMenuItem_Click);
             // 
+            // printOverallScoresToolStripMenuItem
+            // 
+            this.printOverallScoresToolStripMenuItem.Name = "printOverallScoresToolStripMenuItem";
+            this.printOverallScoresToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.printOverallScoresToolStripMenuItem.Text = "Print Overall Scores";
+            this.printOverallScoresToolStripMenuItem.Click += new System.EventHandler(this.OverallScoreClick);
+            // 
             // femaleScoreReportToolStripMenuItem1
             // 
             this.femaleScoreReportToolStripMenuItem1.Name = "femaleScoreReportToolStripMenuItem1";
@@ -173,13 +184,6 @@
             this.maleScoreReportToolStripMenuItem1.Size = new System.Drawing.Size(334, 38);
             this.maleScoreReportToolStripMenuItem1.Text = "Male Score Report";
             this.maleScoreReportToolStripMenuItem1.Click += new System.EventHandler(this.MaleScoreReportClick);
-            // 
-            // printOverallScoresToolStripMenuItem
-            // 
-            this.printOverallScoresToolStripMenuItem.Name = "printOverallScoresToolStripMenuItem";
-            this.printOverallScoresToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
-            this.printOverallScoresToolStripMenuItem.Text = "Print Overall Scores";
-            this.printOverallScoresToolStripMenuItem.Click += new System.EventHandler(this.OverallScoreClick);
             // 
             // toolStripSeparator5
             // 
@@ -221,7 +225,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 36);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 38);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -313,6 +317,20 @@
             this.aSchoolButton.UseVisualStyleBackColor = false;
             this.aSchoolButton.Click += new System.EventHandler(this.ASchool_Button);
             // 
+            // exportTeamDataToolStripMenuItem
+            // 
+            this.exportTeamDataToolStripMenuItem.Name = "exportTeamDataToolStripMenuItem";
+            this.exportTeamDataToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.exportTeamDataToolStripMenuItem.Text = "Export Team Data";
+            this.exportTeamDataToolStripMenuItem.Click += new System.EventHandler(this.exportTeamDataToolStripMenuItem_Click);
+            // 
+            // exportMatchDataToolStripMenuItem
+            // 
+            this.exportMatchDataToolStripMenuItem.Name = "exportMatchDataToolStripMenuItem";
+            this.exportMatchDataToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.exportMatchDataToolStripMenuItem.Text = "Export Match Data";
+            this.exportMatchDataToolStripMenuItem.Click += new System.EventHandler(this.exportMatchDataToolStripMenuItem_Click);
+            // 
             // LCASPMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -365,6 +383,8 @@
         private System.Windows.Forms.ToolStripMenuItem clearDatabaseToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem backupDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printOverallScoresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportTeamDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportMatchDataToolStripMenuItem;
     }
 }
 
