@@ -29,15 +29,18 @@ namespace Lcasp
 
                 ASCIIEncoding encoder = new ASCIIEncoding();
 
-                string[] mmV = version.Substring(4, version.Length-4).Split('.');
+                string[] mmV = version.Split('.');
 
-                string mVersion = version.Substring(0, 3);
+                string mVersion = "";
 
+                int c = 0;
                 foreach(string x in mmV)
                 {
                     mVersion = mVersion + x;
+                    c++;
+                    if (c == 1)
+                        mVersion = mVersion + ".";
                 }
-
 
                 byte[] buffer = encoder.GetBytes(Properties.Settings.Default.SiteName + " " + 0 + " " + mVersion);
 

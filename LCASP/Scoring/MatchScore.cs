@@ -13,9 +13,9 @@ namespace Lcasp
 {
     public partial class MatchScore : Form
     {
-        ScannerComm sc = null;
+        //ScannerComm sc = null;
         Timer aTimer = new Timer();
-        public CommQueue theQueue = null;
+        //public CommQueue theQueue = null;
         private DatabaseQueries dQ = null;
 
         public MatchScore()
@@ -23,15 +23,6 @@ namespace Lcasp
             InitializeComponent();
 
 
-            theQueue = new CommQueue();
-
-            sc = new ScannerComm(theQueue);
-
-            if (sc.scannerExist)
-            {
-                sc.Open();
-                sc.InitializeScanner();
-            }
 
             dQ = new DatabaseQueries();
         }
@@ -42,8 +33,6 @@ namespace Lcasp
             dQ = null;
             aTimer.Stop();
             aTimer = null;
-            sc.Close();
-            sc = null;
 
             GC.Collect();
 
@@ -63,7 +52,7 @@ namespace Lcasp
             string dataLine = null;
             string sep = "   ";
 
-            while ((dataLine = theQueue.DeQueue()) != null)
+            while ((dataLine = LCASPMain.theQueue.DeQueue()) != null)
             {
                 ArcherData ad = new ArcherData(dataLine);
                 Archer a = dQ.GetArcher(ad.ArcherID);

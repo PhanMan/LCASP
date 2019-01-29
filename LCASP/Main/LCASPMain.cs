@@ -17,7 +17,10 @@ namespace Lcasp
     public partial class LCASPMain : Form
     {
         private RealTimeDisplay theProjector = null;
-        public  static ConcurrentQueue<string> archerQueue { get; set; }
+        public static ConcurrentQueue<string> archerQueue { get; set; }
+
+        public static ScannerComm sc = null;
+        public static CommQueue theQueue = null;
 
         public LCASPMain()
         {
@@ -71,7 +74,17 @@ namespace Lcasp
 
             new ReportLocation(CurrentVersion);
 
-            if(Properties.Settings.Default.ProjectScores)
+            theQueue = new CommQueue();
+
+            sc = new ScannerComm(theQueue);
+
+            if (sc.scannerExist)
+            {
+                sc.Open();
+                sc.InitializeScanner();
+            }
+
+            if (Properties.Settings.Default.ProjectScores)
                 OpenRealTimeScoringForm();
         }
 
@@ -94,7 +107,10 @@ namespace Lcasp
         {
             if(theProjector != null)
                 theProjector.Close();
-            this.Close();
+
+            Application.Exit();
+
+            //this.Close();
         }
 
         private void ArcherButton_CLick(object sender, EventArgs e)

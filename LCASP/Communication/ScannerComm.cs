@@ -4,12 +4,13 @@ using System.IO.Ports;
 using System.Linq;
 using System.Management;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lcasp
 {
-    public class ScannerComm
+    public class ScannerComm : IDisposable
     {
         string commPort = Properties.Settings.Default.COM;
         private System.IO.Ports.SerialPort _serialPort = new System.IO.Ports.SerialPort();
@@ -91,13 +92,34 @@ namespace Lcasp
         public void Open()
         {
             if (scannerExist)
-                _serialPort.Open();
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    try
+                    {
+                        _serialPort.Open();
+                        if (_serialPort.IsOpen)
+                            break;
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        {
+                            _serialPort.Close();
+                        }
+                        catch (Exception)
+                        {
+                        }
+                        Thread.Sleep(300);
+                    }
+                }
+            }
         }
 
         public void Close()
         {
 
-            if (true)//scannerExist)
+            if (scannerExist)
             {
                 _serialPort.Close();
                 _serialPort.Dispose();
@@ -211,6 +233,12 @@ namespace Lcasp
             theQueue.ClearQueue();
 
             dataFlow = true;
+        }
+
+        void IDisposable.Dispose()
+        {
+            _serialPort.Close();
+            _serialPort = null;
         }
     }
 }
