@@ -51,7 +51,7 @@
             this.SaveButton.UseVisualStyleBackColor = true;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // CancelButton
+            // MyCancelButton
             // 
             this.MyCancelButton.ButtonColorBottom = System.Drawing.Color.SeaGreen;
             this.MyCancelButton.ButtonColorTop = System.Drawing.Color.LimeGreen;
@@ -59,7 +59,7 @@
             this.MyCancelButton.Font = new System.Drawing.Font("Times New Roman", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MyCancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.MyCancelButton.Location = new System.Drawing.Point(489, 304);
-            this.MyCancelButton.Name = "CancelButton";
+            this.MyCancelButton.Name = "MyCancelButton";
             this.MyCancelButton.PulseSpeed = 0.5F;
             this.MyCancelButton.PulseWidth = 20;
             this.MyCancelButton.Size = new System.Drawing.Size(368, 195);
@@ -71,11 +71,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(215, 172);
+            this.label1.Location = new System.Drawing.Point(215, 174);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 25);
+            this.label1.Size = new System.Drawing.Size(350, 25);
             this.label1.TabIndex = 30;
-            this.label1.Text = "Enter Site Name";
+            this.label1.Text = "Enter School or Organization Name";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // SiteNameBox
             // 
