@@ -80,8 +80,12 @@ namespace Lcasp
 
             if (sc.scannerExist)
             {
-                sc.Open();
-                sc.InitializeScanner();
+                if (sc.Open())
+                    sc.InitializeScanner();
+                else
+                {
+                    MessageBox.Show("Unable to open Scanner COM port.  Check all connections and restart program.");
+                }
             }
 
             if (Properties.Settings.Default.ProjectScores)

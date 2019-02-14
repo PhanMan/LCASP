@@ -89,31 +89,34 @@ namespace Lcasp
             return retVal;
         }
 
-        public void Open()
+        public Boolean Open()
         {
             if (scannerExist)
             {
-                for (int i = 0; i < 10; i++)
+                try
+                {
+                    _serialPort.Open();
+
+                    if (_serialPort.IsOpen)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception)
                 {
                     try
                     {
-                        _serialPort.Open();
-                        if (_serialPort.IsOpen)
-                            break;
+                        _serialPort.Close();
                     }
                     catch (Exception)
                     {
-                        try
-                        {
-                            _serialPort.Close();
-                        }
-                        catch (Exception)
-                        {
-                        }
-                        Thread.Sleep(300);
+                        return false;
                     }
+                    return false;
                 }
             }
+            else
+                return false;
         }
 
         public void Close()
@@ -157,7 +160,7 @@ namespace Lcasp
                             MessageBox.Show("Invalid card scanned!,  Shooter ID was not located in database!");
                         }
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         System.Media.SystemSounds.Beep.Play();
                         MessageBox.Show("Invalid scan data.  Try card again!", "SCAN ERROR");
@@ -224,6 +227,13 @@ namespace Lcasp
 
             while (theQueue.GetQueueBytes() < 17 && (checkCounter--) > 0)
                 System.Threading.Thread.Sleep(25);
+
+            if(theQueue.GetQueueBytes() < 13)
+            {
+                MessageBox.Show("The scanner is not responding properly.  Check power and USB connections then exit and restart the program.");
+                theQueue.ClearQueue();
+                return;
+            }
 
             if (theQueue.InspectQueue(13).Substring(0, 3).CompareTo("5.6") != 0)
             {
