@@ -72,8 +72,6 @@ namespace Lcasp
 
             this.Text = "Lamar Christian Archery " + CurrentVersion;
 
-            new ReportLocation(CurrentVersion);
-
             theQueue = new CommQueue();
 
             sc = new ScannerComm(theQueue);
@@ -87,6 +85,8 @@ namespace Lcasp
                     MessageBox.Show("Unable to open Scanner COM port.  Check all connections and restart program.");
                 }
             }
+
+            new ReportLocation(CurrentVersion);
 
             if (Properties.Settings.Default.ProjectScores)
                 OpenRealTimeScoringForm();
@@ -120,11 +120,6 @@ namespace Lcasp
         private void ArcherButton_CLick(object sender, EventArgs e)
         {
             new ArcherMaintain().ShowDialog();
-        }
-
-        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            new About().ShowDialog();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -257,6 +252,21 @@ namespace Lcasp
         {
             new ScoringRoutines().ExportMatchResult();
             MessageBox.Show("Match Results Exported to Desktop.");
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new About().ShowDialog();
+        }
+
+        private void LocationTimer_Tick(object sender, EventArgs e)
+        {
+            new ReportLocation(CurrentVersion);
         }
     }
 }

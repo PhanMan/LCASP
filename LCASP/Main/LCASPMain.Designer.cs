@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -43,6 +44,8 @@
             this.printOverallScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.femaleScoreReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.maleScoreReportToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportTeamDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportMatchDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.setComPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualCOMSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,13 +53,14 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.psButton = new Lcasp.PulseButton();
             this.meetButton = new Lcasp.PulseButton();
             this.aArcherButton = new Lcasp.PulseButton();
             this.exitButton = new Lcasp.PulseButton();
             this.aSchoolButton = new Lcasp.PulseButton();
-            this.exportTeamDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportMatchDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocationTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +72,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1558, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1558, 40);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,26 +91,26 @@
             this.exitToolStripMenuItem,
             this.toolStripSeparator6});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 38);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(64, 36);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(260, 6);
             // 
             // projectScoresMenuItem
             // 
             this.projectScoresMenuItem.CheckOnClick = true;
             this.projectScoresMenuItem.Name = "projectScoresMenuItem";
-            this.projectScoresMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.projectScoresMenuItem.Size = new System.Drawing.Size(263, 38);
             this.projectScoresMenuItem.Text = "Project Scores";
             this.projectScoresMenuItem.Click += new System.EventHandler(this.projectScoresMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(260, 6);
             // 
             // databaseToolStripMenuItem
             // 
@@ -114,7 +118,7 @@
             this.clearDatabaseToolStripMenuItem1,
             this.backupDatabaseToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(263, 38);
             this.databaseToolStripMenuItem.Text = "Database";
             // 
             // clearDatabaseToolStripMenuItem1
@@ -134,7 +138,7 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(260, 6);
             // 
             // scoringToolStripMenuItem
             // 
@@ -147,7 +151,7 @@
             this.exportTeamDataToolStripMenuItem,
             this.exportMatchDataToolStripMenuItem});
             this.scoringToolStripMenuItem.Name = "scoringToolStripMenuItem";
-            this.scoringToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.scoringToolStripMenuItem.Size = new System.Drawing.Size(263, 38);
             this.scoringToolStripMenuItem.Text = "Scoring";
             // 
             // printInterimScoresToolStripMenuItem
@@ -185,17 +189,31 @@
             this.maleScoreReportToolStripMenuItem1.Text = "Male Score Report";
             this.maleScoreReportToolStripMenuItem1.Click += new System.EventHandler(this.MaleScoreReportClick);
             // 
+            // exportTeamDataToolStripMenuItem
+            // 
+            this.exportTeamDataToolStripMenuItem.Name = "exportTeamDataToolStripMenuItem";
+            this.exportTeamDataToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.exportTeamDataToolStripMenuItem.Text = "Export Team Data";
+            this.exportTeamDataToolStripMenuItem.Click += new System.EventHandler(this.exportTeamDataToolStripMenuItem_Click);
+            // 
+            // exportMatchDataToolStripMenuItem
+            // 
+            this.exportMatchDataToolStripMenuItem.Name = "exportMatchDataToolStripMenuItem";
+            this.exportMatchDataToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
+            this.exportMatchDataToolStripMenuItem.Text = "Export Match Data";
+            this.exportMatchDataToolStripMenuItem.Click += new System.EventHandler(this.exportMatchDataToolStripMenuItem_Click);
+            // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(260, 6);
             // 
             // setComPortToolStripMenuItem
             // 
             this.setComPortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.manualCOMSetupToolStripMenuItem});
             this.setComPortToolStripMenuItem.Name = "setComPortToolStripMenuItem";
-            this.setComPortToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.setComPortToolStripMenuItem.Size = new System.Drawing.Size(263, 38);
             this.setComPortToolStripMenuItem.Text = "Manual Setup";
             // 
             // manualCOMSetupToolStripMenuItem
@@ -208,26 +226,42 @@
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(260, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(268, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(263, 38);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(265, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(260, 6);
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.aboutToolStripMenuItem1});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 38);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(92, 36);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(179, 38);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(179, 38);
+            this.aboutToolStripMenuItem1.Text = "About";
+            this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
             // psButton
             // 
@@ -317,19 +351,11 @@
             this.aSchoolButton.UseVisualStyleBackColor = false;
             this.aSchoolButton.Click += new System.EventHandler(this.ASchool_Button);
             // 
-            // exportTeamDataToolStripMenuItem
+            // LocationTimer
             // 
-            this.exportTeamDataToolStripMenuItem.Name = "exportTeamDataToolStripMenuItem";
-            this.exportTeamDataToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
-            this.exportTeamDataToolStripMenuItem.Text = "Export Team Data";
-            this.exportTeamDataToolStripMenuItem.Click += new System.EventHandler(this.exportTeamDataToolStripMenuItem_Click);
-            // 
-            // exportMatchDataToolStripMenuItem
-            // 
-            this.exportMatchDataToolStripMenuItem.Name = "exportMatchDataToolStripMenuItem";
-            this.exportMatchDataToolStripMenuItem.Size = new System.Drawing.Size(334, 38);
-            this.exportMatchDataToolStripMenuItem.Text = "Export Match Data";
-            this.exportMatchDataToolStripMenuItem.Click += new System.EventHandler(this.exportMatchDataToolStripMenuItem_Click);
+            this.LocationTimer.Enabled = true;
+            this.LocationTimer.Interval = 600000;
+            this.LocationTimer.Tick += new System.EventHandler(this.LocationTimer_Tick);
             // 
             // LCASPMain
             // 
@@ -385,6 +411,9 @@
         private System.Windows.Forms.ToolStripMenuItem printOverallScoresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportTeamDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportMatchDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.Timer LocationTimer;
     }
 }
 

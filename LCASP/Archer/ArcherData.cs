@@ -30,7 +30,6 @@ namespace Lcasp
 
         private void ProcessScoreData()
         {
-            
             string[] dataItems = ArcherRawData.Split(',');
 
             if (dataItems[8].Substring(0, 1).CompareTo("M") == 0 || dataItems[8].Substring(0, 1).CompareTo("F") == 0)
