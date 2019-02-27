@@ -42,6 +42,9 @@ namespace Lcasp
                         mVersion = mVersion + ".";
                 }
 
+                if (mVersion.Contains("0.0"))
+                    mVersion = "1.4";
+
                 byte[] buffer = encoder.GetBytes(Properties.Settings.Default.SiteName + " " + 0 + " " + mVersion);
 
                 clientStream.Write(buffer, 0, buffer.Length);
