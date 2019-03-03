@@ -68,7 +68,7 @@ namespace Lcasp
             if (Properties.Settings.Default.SiteName.Length == 0 || Properties.Settings.Default.SiteName.CompareTo("Default") == 0)
                 new SiteNameForm().ShowDialog();
 
-           // new DatabaseQueries().CheckForDBUpdates();
+            // new DatabaseQueries().CheckForDBUpdates();
 
             this.Text = "Lamar Christian Archery " + CurrentVersion;
 

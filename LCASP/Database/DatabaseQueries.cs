@@ -141,18 +141,26 @@ namespace Lcasp
         {
             int archerID = 0;
 
-            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            try
             {
-                dbConn.Open();
-                using (SqlCommand sqlCmd = new SqlCommand())
+                using (SqlConnection dbConn = new SqlConnection(connectionString))
                 {
-                    sqlCmd.Connection = dbConn;
+                    dbConn.Open();
+                    using (SqlCommand sqlCmd = new SqlCommand())
+                    {
+                        sqlCmd.Connection = dbConn;
 
-                    sqlCmd.CommandText = "select archer_id from archers where archer_state_id = " + a_aims_id;
+                        sqlCmd.CommandText = "select archer_id from archers where archer_state_id = " + a_aims_id;
 
-                    archerID = (int)sqlCmd.ExecuteScalar();
+                        archerID = (int)sqlCmd.ExecuteScalar();
+                    }
                 }
             }
+            catch(Exception)
+            {
+                archerID = 0;
+            }
+
             return archerID;
         }
 
@@ -375,34 +383,46 @@ namespace Lcasp
         {
             Archer retArcher = null;
 
-            using (SqlConnection dbConn = new SqlConnection(connectionString))
+            // No archer for card scanned.
+            if(a_id == 0)
+                return null;
+
+            try
             {
-                dbConn.Open();
-                using (SqlCommand sqlCmd = new SqlCommand())
+                using (SqlConnection dbConn = new SqlConnection(connectionString))
                 {
-                    sqlCmd.Connection = dbConn;
-
-                    sqlCmd.CommandText = "Select * from archers where archer_id = " + a_id;
-
-                    using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                    dbConn.Open();
+                    using (SqlCommand sqlCmd = new SqlCommand())
                     {
-                        if (theReader.HasRows)
-                        {
-                            while (theReader.Read())
-                            {
-                                Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
-                                                              a_id,
-                                                              Convert.ToInt32(theReader["archer_state_id"].ToString()),
-                                                              theReader["archer_name"].ToString(),
-                                                              theReader["archer_sex"].ToString(),
-                                                              "XXXX");
+                        sqlCmd.Connection = dbConn;
 
-                                retArcher = theArcher;
+                        sqlCmd.CommandText = "Select * from archers where archer_id = " + a_id;
+
+                        using (SqlDataReader theReader = sqlCmd.ExecuteReader())
+                        {
+                            if (theReader.HasRows)
+                            {
+                                while (theReader.Read())
+                                {
+                                    Archer theArcher = new Archer(Convert.ToInt32(theReader["school_id"].ToString()),
+                                                                  a_id,
+                                                                  Convert.ToInt32(theReader["archer_state_id"].ToString()),
+                                                                  theReader["archer_name"].ToString(),
+                                                                  theReader["archer_sex"].ToString(),
+                                                                  "XXXX");
+
+                                    retArcher = theArcher;
+                                }
                             }
                         }
                     }
                 }
             }
+            catch (Exception)
+            {
+                retArcher = null;
+            }
+
             return retArcher;
         }
 

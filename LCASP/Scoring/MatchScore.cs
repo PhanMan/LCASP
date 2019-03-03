@@ -83,6 +83,10 @@ namespace Lcasp
                     DataListBox.Items.Add(str);
                     DataListBox.SelectedIndex = DataListBox.Items.Count - 1;
                 }
+                else
+                {
+                    MessageBox.Show("       Error: Archer on Score Card is not in the Database. \nConsider adding the Archer manually and re-scan the card.\n                               ** Must be AIMS card! **");
+                }
             }
         }
 
