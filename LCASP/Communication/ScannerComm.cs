@@ -156,8 +156,9 @@ namespace Lcasp
                         }
                         else
                         {
-                            System.Media.SystemSounds.Beep.Play();
-                            MessageBox.Show("Invalid card scanned!,  Shooter ID was not located in database!");
+                            // Done elsewhere.
+                            //System.Media.SystemSounds.Beep.Play();
+                            //MessageBox.Show("Invalid card scanned!,  Shooter ID was not located in database!");
                         }
                     }
                     catch (Exception)

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -85,6 +86,7 @@ namespace Lcasp
                 }
                 else
                 {
+                    SystemSounds.Beep.Play();
                     MessageBox.Show("       Error: Archer on Score Card is not in the Database. \nConsider adding the Archer manually and re-scan the card.\n                               ** Must be AIMS card! **");
                 }
             }
